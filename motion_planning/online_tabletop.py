@@ -13,7 +13,7 @@ from sim2real.policy import (
     QD_G015_ACTION_CONTROLLER_CONTRACT_ID,
 )
 from sim2real.contracts.v94 import V94Contract
-from sim2real.v94_kinematics import RH56FingertipKinematics
+from sim2real.observation.kinematics import RH56FingertipKinematics
 from motion_planning.kinematics import (
     _rotation_vector,
     cartesian_joint_correction,

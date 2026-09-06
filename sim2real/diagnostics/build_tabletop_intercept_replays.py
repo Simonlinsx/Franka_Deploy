@@ -21,7 +21,7 @@ from motion_planning.online_tabletop import (
     pose_preserving_joint_target,
 )
 from sim2real.contracts.v94 import V94Contract
-from sim2real.v94_kinematics import RH56FingertipKinematics
+from sim2real.observation.kinematics import RH56FingertipKinematics
 
 WORKSPACE_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE = (

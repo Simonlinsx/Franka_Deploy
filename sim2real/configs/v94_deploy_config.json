@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "bundle": "../data/test_fixtures/sim2real/deploy.zip",
-  "commissioning_profile": "../dexgrasp/configs/fr3_rh56_v94_seq286_20hz_commissioned.json",
+  "bundle": "../../data/test_fixtures/sim2real/deploy.zip",
+  "commissioning_profile": "../../dexgrasp/configs/fr3_rh56_v94_seq286_20hz_commissioned.json",
   "execution": {
     "hardware_writes_enabled": false,
     "full_dr_stress_accepted": false,

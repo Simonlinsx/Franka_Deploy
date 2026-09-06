@@ -2,7 +2,7 @@
 
 Run from the repository root:
 
-    .venv/bin/python -m sim2real.example_franka_shaper_20hz
+    .venv/bin/python -m sim2real.diagnostics.franka_shaper_demo
 
 This program is offline-only.  It does not import or open a robot interface.
 The same integration pattern can be copied into an Isaac Lab environment with

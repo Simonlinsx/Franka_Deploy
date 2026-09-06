@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import importlib.util
 import io
 import json
 import pickle
@@ -50,6 +51,7 @@ CALIBRATION_PATH = (
 DEX_HUMAN_DATA = (
     DEFAULT_DEX_ROOT / "example/profiling/human_joint_right.pkl"
 )
+DEX_RETARGETING_AVAILABLE = importlib.util.find_spec("dex_retargeting") is not None
 
 
 def open_hand_joints() -> np.ndarray:
@@ -248,7 +250,10 @@ class CalibrationTests(unittest.TestCase):
 
 
 class DexRetargetingTests(unittest.TestCase):
-    @unittest.skipUnless(DEFAULT_DEX_ROOT.is_dir(), "local dex-retargeting assets absent")
+    @unittest.skipUnless(
+        DEFAULT_DEX_ROOT.is_dir() and DEX_RETARGETING_AVAILABLE,
+        "optional dex-retargeting package/assets absent",
+    )
     def test_inspire_optimizer_builds_and_returns_safe_six_axis_output(self) -> None:
         calibration = PipelineCalibration.load(CALIBRATION_PATH)
         retargeter = DexInspireRetargeter(calibration)
@@ -259,7 +264,10 @@ class DexRetargetingTests(unittest.TestCase):
         self.assertEqual(len(output.hardware_targets), 6)
         self.assertEqual(output.hardware_targets[5], -1)
 
-    @unittest.skipUnless(DEX_HUMAN_DATA.is_file(), "dex golden data absent")
+    @unittest.skipUnless(
+        DEX_HUMAN_DATA.is_file() and DEX_RETARGETING_AVAILABLE,
+        "optional dex-retargeting package/golden data absent",
+    )
     def test_official_human_frame_matches_inspire_golden_output(self) -> None:
         calibration = PipelineCalibration.load(CALIBRATION_PATH)
         retargeter = DexInspireRetargeter(calibration)

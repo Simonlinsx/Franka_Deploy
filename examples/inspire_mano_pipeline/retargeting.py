@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import deque
+import os
 from pathlib import Path
 from typing import Deque, Optional, Sequence
 
@@ -10,7 +11,10 @@ from .calibration import PipelineCalibration
 from .model import DEX_JOINTS, HARDWARE_JOINTS, ManoDetection, RetargetOutput
 
 
-DEFAULT_DEX_ROOT = Path("/home/qiaoguanren/桌面/brainco/dex-retargeting")
+WORKSPACE_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_DEX_ROOT = Path(
+    os.environ.get("DEX_ROOT", str(WORKSPACE_ROOT / "third_party/dex-retargeting"))
+).expanduser()
 
 
 class TemporalQposFilter:
@@ -126,7 +130,13 @@ class DexInspireRetargeter:
         dex_root: Path = DEFAULT_DEX_ROOT,
         config_path: Optional[Path] = None,
     ) -> None:
-        from dex_retargeting.retargeting_config import RetargetingConfig
+        try:
+            from dex_retargeting.retargeting_config import RetargetingConfig
+        except ImportError as exc:
+            raise RuntimeError(
+                "dex-retargeting is an optional dependency; run "
+                "examples/setup_inspire_mano_env.sh or provide DEX_ROOT"
+            ) from exc
 
         self.calibration = calibration
         dex_root = Path(dex_root).expanduser().resolve()

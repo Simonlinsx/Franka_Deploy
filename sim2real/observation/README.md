@@ -3,6 +3,7 @@
 This package owns the camera-side data path used by sim-to-real execution:
 
 - `model.py`: policy-resolution RGB-D, point-cloud, history, and proprioception;
+- `kinematics.py`: pure transforms, policy-palm feedback, and observation FK;
 - `pointcloud_filters.py`: pure point-cloud and mask candidate geometry;
 - `camera_profile.py`: sealed task camera contracts;
 - `roi_selector.py`: isolated camera-only object selection;

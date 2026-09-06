@@ -1,5 +1,7 @@
 # V94 RH56 action mapping independent audit
 
+This is the canonical mapping audit under `docs/sim2real/`.
+
 Date: 2026-07-22
 
 Result: **software/mathematical mapping PASS; installed-hand physical mapping NOT YET COMMISSIONED**.

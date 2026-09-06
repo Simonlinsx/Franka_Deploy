@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Export a training checkpoint as a compact inference-only checkpoint.
 
+Canonical CLI: ``python -m sim2real.diagnostics.export_inference_checkpoint``.
+
 The supervised runtime deliberately refuses checkpoint files larger than
 64 MiB. PPO checkpoints may exceed that limit because they retain optimizer,
 critic, and replay state even though deployment only consumes the student

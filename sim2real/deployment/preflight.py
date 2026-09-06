@@ -6,7 +6,7 @@ hardware adapter, opens no device, creates no motion authorization and exposes
 no execute/force option.  A PASS means only that the exact bundle, deployment
 configuration, shadow capture and named commissioning artifacts are eligible
 to be presented to the operator-authorization boundary described in
-``CLOSED_LOOP_CONTROL_DESIGN.md``.
+``docs/sim2real/CLOSED_LOOP_CONTROL_DESIGN.md``.
 """
 
 from __future__ import annotations

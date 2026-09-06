@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 from typing import List, Optional, Sequence
@@ -10,7 +11,10 @@ from .camera import PalmDepthStabilizer, estimate_palm_depth
 from .model import CameraFrame, ManoDetection
 
 
-DEFAULT_WILOR_ROOT = Path("/home/qiaoguanren/下载/WiLoR_OL/wilor_mini")
+WORKSPACE_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_WILOR_ROOT = Path(
+    os.environ.get("WILOR_ROOT", str(WORKSPACE_ROOT / "third_party/wilor-mini"))
+).expanduser()
 
 
 def detector_label_for_physical_hand(

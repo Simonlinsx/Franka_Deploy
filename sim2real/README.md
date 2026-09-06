@@ -196,6 +196,7 @@ Use the matching commissioned recovery application and inspect its refusal.
 | `commissioning/` | Explicit calibration, identification, timing, and physical probe tools |
 | `policy/` | NumPy inference, policy-I/O evidence, and policy-rate contracts |
 | `contracts/` | General observations plus V94 action/runtime contracts |
+| `configs/` | Shared sim-to-real defaults and identified dynamics evidence |
 | `perception.py` | Stable camera-only perception command |
 | `action_replay.py` | Safe action/replay parsing and transactional replay policy |
 | `../motion_planning/` | Kinematics, trajectories, and tabletop interception |
@@ -206,7 +207,7 @@ New modules and refactors follow the workspace rules in
 
 ## Design documents
 
-- [`CLOSED_LOOP_CONTROL_DESIGN.md`](CLOSED_LOOP_CONTROL_DESIGN.md)
-- [`COMMISSIONING_PREFLIGHT.md`](COMMISSIONING_PREFLIGHT.md)
-- [`FRANKA_PYLIBFRANKA_BACKEND.md`](FRANKA_PYLIBFRANKA_BACKEND.md)
-- [`V94_RH56_ACTION_MAPPING_AUDIT.md`](V94_RH56_ACTION_MAPPING_AUDIT.md)
+- [`CLOSED_LOOP_CONTROL_DESIGN.md`](../docs/sim2real/CLOSED_LOOP_CONTROL_DESIGN.md)
+- [`COMMISSIONING_PREFLIGHT.md`](../docs/sim2real/COMMISSIONING_PREFLIGHT.md)
+- [`FRANKA_PYLIBFRANKA_BACKEND.md`](../docs/sim2real/FRANKA_PYLIBFRANKA_BACKEND.md)
+- [`V94_RH56_ACTION_MAPPING_AUDIT.md`](../docs/sim2real/V94_RH56_ACTION_MAPPING_AUDIT.md)

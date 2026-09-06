@@ -4,7 +4,7 @@ import numpy as np
 
 from sim2real.deployment.bundle import DeployBundle
 from sim2real.contracts.v94 import V94Contract
-from sim2real.v94_kinematics import (
+from sim2real.observation.kinematics import (
     KinematicVelocityTracker,
     RH56FeedbackMapper,
     RH56FingertipKinematics,

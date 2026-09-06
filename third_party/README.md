@@ -5,6 +5,8 @@ This directory owns external repositories and their project-local environments:
 - `sam2/`: official SAM2 checkout and model checkpoints;
 - `long_vos_clean/`: independent YOLO-World/long-VOS experiment workspace;
 - `brainco-hand-sdk/`: vendor hand SDK checkout.
+- `dex-retargeting/`: optional Inspire/MANO retargeting checkout;
+- `wilor-mini/`: optional WiLoR hand-pose checkout and weights;
 - `dexgrasp/`: AnyDexGrasp and MinkowskiEngine external checkouts used by the
   maintained `dexgrasp` integration;
 - `environments/`: project-specific Python environments that must not be

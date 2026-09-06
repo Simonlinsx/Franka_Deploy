@@ -1,5 +1,7 @@
 # V94 operator-supervised closed-loop control design
 
+This is the canonical design document under `docs/sim2real/`.
+
 This document is an implementation contract, not motion authorization.  The
 public deployment entry point remains hardware-inert unless execution and live
 operator supervision are explicitly requested.  Offline admission, the

@@ -82,7 +82,7 @@ config_overrides:
     temporal_fallback_max_stale_steps: 5
     temporal_fallback_max_image_speed_px_s: 2400.0
   extrinsics:
-    calibration_file: ../../../data/checkpoints/thrown/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/calibration/camera_robot_calibration.yaml
+    calibration_file: ../../data/checkpoints/thrown/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/calibration/camera_robot_calibration.yaml
     require_calibration: true
     require_quality_pass: true
     strict_camera_serial: true

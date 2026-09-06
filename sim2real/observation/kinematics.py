@@ -15,9 +15,9 @@ from sim2real.contracts.v94 import (
     REGISTER_HAND_ORDER,
     V94Contract,
 )
-from .observation.model import _rigid, pose_from_position_quaternion_wxyz
+from .model import _rigid, pose_from_position_quaternion_wxyz
 
-WORKSPACE_ROOT = Path(__file__).resolve().parents[1]
+WORKSPACE_ROOT = Path(__file__).resolve().parents[2]
 ANYDEX_ROOT = WORKSPACE_ROOT / "dexgrasp" / "third_party" / "AnyDexGrasp"
 
 

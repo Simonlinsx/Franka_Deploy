@@ -1,5 +1,7 @@
 # V94 C2 commissioning preflight
 
+This is the canonical commissioning note under `docs/sim2real/`.
+
 `commissioning_preflight.py` is a pure offline evidence gate.  It does not
 import a camera/Franka/RH56 adapter, open a device, create a
 `MotionAuthorization`, or expose an execute/force option.  Its only successful
@@ -8,7 +10,7 @@ authorization boundary:
 
 ```text
 python3 -m sim2real.deployment.preflight SHADOW.npz \
-  --config sim2real/v94_deploy_config.json \
+  --config sim2real/configs/v94_deploy_config.json \
   --evidence COMMISSIONING_EVIDENCE.json
 ```
 

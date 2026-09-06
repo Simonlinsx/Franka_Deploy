@@ -4,8 +4,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BASE_PYTHON="${BASE_PYTHON:-/home/qiaoguanren/anaconda3/envs/dynamic/bin/python}"
 VENV_DIR="$ROOT_DIR/examples/inspire_mano_pipeline/.venv"
-WILOR_ROOT="${WILOR_ROOT:-/home/qiaoguanren/下载/WiLoR_OL/wilor_mini}"
-DEX_ROOT="${DEX_ROOT:-/home/qiaoguanren/桌面/brainco/dex-retargeting}"
+WILOR_ROOT="${WILOR_ROOT:-$ROOT_DIR/third_party/wilor-mini}"
+DEX_ROOT="${DEX_ROOT:-$ROOT_DIR/third_party/dex-retargeting}"
 
 required_assets=(
   "$WILOR_ROOT/pretrained_models/mano_mean_params.npz"

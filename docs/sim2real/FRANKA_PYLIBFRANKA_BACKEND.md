@@ -1,5 +1,7 @@
 # Franka persistent backend audit and boundary
 
+This is the canonical backend note under `docs/sim2real/`.
+
 This document records the hardware-free review behind
 `franka_pylibfranka_backend.py`. It does not authorize motion and is not
 commissioning evidence.

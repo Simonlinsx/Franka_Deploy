@@ -29,7 +29,7 @@ from sim2real.io import FrankaStateReader, InspireStateReader
 from sim2real.observation.live_preview import _Latest, _hand_worker
 from sim2real.policy import RollingStudentPolicy
 from sim2real.contracts.v94 import V94Contract
-from sim2real.v94_kinematics import (
+from sim2real.observation.kinematics import (
     KinematicVelocityTracker,
     RH56FeedbackMapper,
     RH56FingertipKinematics,

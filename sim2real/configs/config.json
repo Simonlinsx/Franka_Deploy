@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "commissioning_profile": "../dexgrasp/configs/fr3_rh56_v94_seq286_20hz_commissioned.json",
+  "commissioning_profile": "../../dexgrasp/configs/fr3_rh56_v94_seq286_20hz_commissioned.json",
   "franka": {
     "enabled": true,
     "enforce_realtime": false
@@ -21,7 +21,7 @@
     "current_shape": [1024, 3],
     "reference_frame": "robot_base",
     "point_frame": "robot_base",
-    "calibration_file": "../perception/configs/calibrations/fr3_d435_eye_to_hand.yaml"
+    "calibration_file": "../../perception/configs/calibrations/fr3_d435_eye_to_hand.yaml"
   },
   "observation": {
     "max_future_skew_s": 0.05,

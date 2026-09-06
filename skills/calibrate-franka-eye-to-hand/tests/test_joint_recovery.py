@@ -143,6 +143,38 @@ def _base_plan(*, authorized: bool = True) -> dict:
 
 
 def _write_plan(tmp_path: Path, plan: dict) -> Path:
+    kinematics = plan["recovery"]["kinematics_provenance"]
+    artifacts = (
+        (
+            "franka_description/robots/fr3/fr3.urdf",
+            "<robot name='joint-recovery-test'/>\n",
+            "urdf_path",
+            "urdf_sha256",
+            "a" * 64,
+        ),
+        (
+            "offline_fr3_fk.py",
+            "# reviewed offline FK fixture\n",
+            "fk_implementation",
+            "fk_implementation_sha256",
+            "b" * 64,
+        ),
+        (
+            "joint-recovery-audit.json",
+            '{"status":"pass"}\n',
+            "audit_artifact_path",
+            "audit_artifact_sha256",
+            None,
+        ),
+    )
+    for relative_path, content, path_key, sha_key, placeholder_sha in artifacts:
+        artifact_path = tmp_path / relative_path
+        artifact_path.parent.mkdir(parents=True, exist_ok=True)
+        artifact_path.write_text(content, encoding="utf-8")
+        if path_key not in kinematics:
+            kinematics[path_key] = relative_path
+        if sha_key not in kinematics or kinematics[sha_key] == placeholder_sha:
+            kinematics[sha_key] = motion._sha256_file(artifact_path)
     path = tmp_path / "joint-recovery.yaml"
     path.write_text(yaml.safe_dump(plan, sort_keys=False), encoding="utf-8")
     return path

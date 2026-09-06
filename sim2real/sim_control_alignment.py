@@ -54,7 +54,9 @@ FRANKA_CONTROLLER_CONFIG_SHA256 = (
 # policy filtering and the checkpoint's semantic per-tick target limit remain
 # exact.
 RH56_SPEED_SET_REGISTER_ORDER = (600, 600, 600, 600, 600, 600)
-RH56_IDENTIFIED_DYNAMICS_PATH = "sim2real/rh56_speed600_identified_dynamics.yaml"
+RH56_IDENTIFIED_DYNAMICS_PATH = (
+    "sim2real/configs/rh56_speed600_identified_dynamics.yaml"
+)
 RH56_IDENTIFIED_DYNAMICS_SHA256 = (
     "85dd9bd93b16d6c810f6ad03523f4b4979c48ca0d2b1be6be64305665cb7e371"
 )

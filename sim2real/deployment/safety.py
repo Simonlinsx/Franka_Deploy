@@ -16,7 +16,7 @@ from sim2real.contracts.v94 import V94Contract
 from .verify import verify_v94_bundle
 
 DEFAULT_DEPLOY_CONFIG = (
-    Path(__file__).resolve().parents[1] / "v94_deploy_config.json"
+    Path(__file__).resolve().parents[1] / "configs" / "v94_deploy_config.json"
 )
 
 

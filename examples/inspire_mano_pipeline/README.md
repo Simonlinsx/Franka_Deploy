@@ -18,9 +18,9 @@ retargeter 驱动真机；Dex 输出尚未完成人体手势语义标定，只�
 ## 已使用的本机资源
 
 - WiLoR-mini 源码和权重：
-  `/home/qiaoguanren/下载/WiLoR_OL/wilor_mini`
+  `third_party/wilor-mini`（可用 `WILOR_ROOT` 覆盖）
 - dex-retargeting 0.5.0 源码、Inspire URDF 和配置：
-  `/home/qiaoguanren/桌面/brainco/dex-retargeting`
+  `third_party/dex-retargeting`（可用 `DEX_ROOT` 覆盖）
 - RH56 直连协议驱动：`examples/inspire_rh56_test.py`
 - 运行环境：模块内 `examples/inspire_mano_pipeline/.venv`，继承 `dynamic` Conda 环境的
   Torch 2.5.1+cu121、OpenCV、NumPy 和 pyrealsense2。
@@ -722,7 +722,7 @@ unittest 数量）。
 ```bash
 examples/run_inspire_mano_pipeline.sh \
   --source image \
-  --image /home/qiaoguanren/下载/WiLoR_OL/assets/bo.jpg \
+  --image /path/to/WiLoR_OL/assets/bo.jpg \
   --retargeter geometric \
   --device cuda:0 --headless --max-frames 5
 ```

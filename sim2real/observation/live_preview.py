@@ -31,7 +31,7 @@ if __package__ in (None, ""):
     from sim2real.policy import RollingStudentPolicy
     from sim2real.contracts.actions import V94ActionMapper
     from sim2real.contracts.v94 import INITIAL_PREVIOUS_ACTION13, V94Contract
-    from sim2real.v94_kinematics import (
+    from sim2real.observation.kinematics import (
         KinematicVelocityTracker,
         RH56FeedbackMapper,
         RH56FingertipKinematics,
@@ -49,7 +49,7 @@ else:
     from sim2real.policy import RollingStudentPolicy
     from sim2real.contracts.actions import V94ActionMapper
     from sim2real.contracts.v94 import INITIAL_PREVIOUS_ACTION13, V94Contract
-    from sim2real.v94_kinematics import (
+    from sim2real.observation.kinematics import (
         KinematicVelocityTracker,
         RH56FeedbackMapper,
         RH56FingertipKinematics,
@@ -2555,7 +2555,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         contract = V94Contract.from_bundle(bundle)
         policy = RollingStudentPolicy(load_checkpoint_safely(bundle.checkpoint_bytes()))
         runtime_config = json.loads(
-            (SIM2REAL_ROOT / "config.json").read_text(
+            (SIM2REAL_ROOT / "configs" / "config.json").read_text(
                 encoding="utf-8"
             )
         )

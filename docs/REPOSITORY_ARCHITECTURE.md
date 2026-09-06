@@ -28,11 +28,11 @@ The September 2026 inventory found:
 
 | Area | Evidence | Maintenance impact |
 | --- | ---: | --- |
-| `sim2real` root | 19 Python modules, about 7,600 lines | Public commands and a smaller set of shared core adapters remain; domain implementations live in subpackages |
+| `sim2real` root | 16 Python modules, about 7,000 lines | Public commands and a smaller set of shared core adapters remain; domain implementations live in subpackages |
 | object point-cloud provider | about 27,300 lines, 249 methods in one class | State, proof objects, mask policy, and I/O are tightly coupled |
 | online tabletop planner | about 3,000 lines after the first kinematics extraction | Phase transitions, safety, and diagnostics still change together |
 | README/runbook | previously over 1,300 lines with repeated shell history | Stale commands could be mistaken for supported workflows |
-| root Git state | virtual-environment files tracked; primary source trees untracked | Reviews and diffs are dominated by generated files |
+| root Git state | maintained source tracked; generated/runtime/external trees ignored | Reviews and diffs now focus on maintained integration code |
 
 These numbers are indicators, not refactoring targets by themselves.  A
 smaller file is useful only when the extracted module has one stable role and

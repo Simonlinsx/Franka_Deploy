@@ -41,9 +41,9 @@ def test_all_v94_deployment_defaults_select_the_evidence_derived_profile() -> No
         / "dexgrasp/configs/fr3_rh56_v94_seq286_20hz_commissioned.json"
     ).resolve()
     assert cli.DEFAULT_PROFILE.resolve() == expected
-    assert _configured_profile(WORKSPACE / "sim2real/config.json") == expected
+    assert _configured_profile(WORKSPACE / "sim2real/configs/config.json") == expected
     assert (
-        _configured_profile(WORKSPACE / "sim2real/v94_deploy_config.json")
+        _configured_profile(WORKSPACE / "sim2real/configs/v94_deploy_config.json")
         == expected
     )
 

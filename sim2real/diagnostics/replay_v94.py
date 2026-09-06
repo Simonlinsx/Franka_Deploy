@@ -18,7 +18,7 @@ if __package__ in (None, ""):
     from sim2real.policy import RollingStudentPolicy
     from sim2real.contracts.actions import V94ActionMapper
     from sim2real.contracts.v94 import INITIAL_PREVIOUS_ACTION13, V94Contract
-    from sim2real.v94_kinematics import RH56FeedbackMapper
+    from sim2real.observation.kinematics import RH56FeedbackMapper
     from sim2real.observation.model import (
         MaskedRGBDProjector,
         PolicyHistory,
@@ -30,7 +30,7 @@ else:
     from sim2real.policy import RollingStudentPolicy
     from sim2real.contracts.actions import V94ActionMapper
     from sim2real.contracts.v94 import INITIAL_PREVIOUS_ACTION13, V94Contract
-    from sim2real.v94_kinematics import RH56FeedbackMapper
+    from sim2real.observation.kinematics import RH56FeedbackMapper
     from sim2real.observation.model import (
         MaskedRGBDProjector,
         PolicyHistory,

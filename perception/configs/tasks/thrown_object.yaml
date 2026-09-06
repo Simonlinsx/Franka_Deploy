@@ -100,7 +100,7 @@ config_overrides:
     temporal_fallback_max_stale_steps: 5
     temporal_fallback_max_image_speed_px_s: 2400.0
   extrinsics:
-    calibration_file: ../calibrations/fr3_d435_342222071785_eye_to_hand_424x240_60hz_reuse_v1.yaml
+    calibration_file: calibrations/fr3_d435_342222071785_eye_to_hand_424x240_60hz_reuse_v1.yaml
     require_calibration: true
     require_quality_pass: true
     strict_camera_serial: true

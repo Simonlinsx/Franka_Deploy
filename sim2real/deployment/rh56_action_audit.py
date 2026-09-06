@@ -48,7 +48,7 @@ if __package__ in (None, ""):
         REGISTER_HAND_ORDER,
         V94Contract,
     )
-    from sim2real.v94_kinematics import (  # type: ignore[no-redef]
+    from sim2real.observation.kinematics import (  # type: ignore[no-redef]
         RH56FeedbackMapper,
     )
 else:
@@ -67,14 +67,14 @@ else:
         REGISTER_HAND_ORDER,
         V94Contract,
     )
-    from sim2real.v94_kinematics import RH56FeedbackMapper
+    from sim2real.observation.kinematics import RH56FeedbackMapper
 
 
 from sim2real.workspace_paths import DEFAULT_V94_DEPLOY_BUNDLE
 
 DEFAULT_BUNDLE = DEFAULT_V94_DEPLOY_BUNDLE
 DEFAULT_DEPLOY_CONFIG = (
-    Path(__file__).resolve().parents[1] / "v94_deploy_config.json"
+    Path(__file__).resolve().parents[1] / "configs" / "v94_deploy_config.json"
 )
 RESET_REFERENCE = (
     "alignment/reset_idle_open/initial_observations_and_student_response.npz"

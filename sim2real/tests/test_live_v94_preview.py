@@ -50,7 +50,7 @@ from sim2real.observation.live_preview import (
     _wait_for_camera_replacement,
     build_parser,
 )
-from sim2real.v94_kinematics import KinematicVelocityTracker
+from sim2real.observation.kinematics import KinematicVelocityTracker
 from sim2real.observation.model import PolicyHistory, PolicyPointFrame
 
 

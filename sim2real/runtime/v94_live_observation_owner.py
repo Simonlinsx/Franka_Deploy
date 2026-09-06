@@ -38,7 +38,7 @@ from sim2real.observation.live_preview import (
 from robot_control.rh56.actuator import RH56SafetyFeedback
 from sim2real.observation.camera_profile import ThrownRolloutTriggerConfig
 from sim2real.contracts.v94 import INITIAL_PREVIOUS_ACTION13, V94Contract
-from sim2real.v94_kinematics import (
+from sim2real.observation.kinematics import (
     RH56FeedbackMapper,
     RH56FingertipKinematics,
     T_base_policy_palm_from_franka,

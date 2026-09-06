@@ -12,12 +12,12 @@ from sim2real.contracts.v94 import (
     REGISTER_HAND_ORDER,
     V94Contract,
 )
-from sim2real.v94_kinematics import RH56FeedbackMapper
+from sim2real.observation.kinematics import RH56FeedbackMapper
 
 
 ROOT = Path(__file__).resolve().parents[2]
 BUNDLE = ROOT / "data/test_fixtures/sim2real/deploy.zip"
-DEPLOY_CONFIG = ROOT / "sim2real" / "v94_deploy_config.json"
+DEPLOY_CONFIG = ROOT / "sim2real" / "configs" / "v94_deploy_config.json"
 
 
 def _mapper(initial_hand):

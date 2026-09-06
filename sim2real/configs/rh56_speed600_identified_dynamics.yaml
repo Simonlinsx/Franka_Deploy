@@ -3,7 +3,7 @@ identified_at: 2026-08-05
 speed_set: 600
 force_set_g_during_identification: 500
 policy_rate_hz: 20
-evidence_directory: dexgrasp/runs/rh56-speed600-20260805-181710
+evidence_directory: data/runs/rh56-speed600-20260805-181710
 
 # Isaac/PhysX active-motor order, not the RH56 register order.
 active_motor_order:

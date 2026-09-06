@@ -1,6 +1,6 @@
 import numpy as np
 
-from sim2real.example_franka_shaper_20hz import run_demo
+from sim2real.diagnostics.franka_shaper_demo import run_demo
 from robot_control.reference.franka_v225_interpolator_reference import (
     MAX_COMMAND_ACCELERATION_RAD_S2,
     MAX_COMMAND_JERK_RAD_S3,

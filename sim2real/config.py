@@ -11,7 +11,7 @@ import yaml
 
 from .contracts import ObservationSpec
 
-DEFAULT_CONFIG_PATH = Path(__file__).resolve().with_name("config.json")
+DEFAULT_CONFIG_PATH = Path(__file__).resolve().parent / "configs" / "config.json"
 
 
 def _load_json(path: Path) -> dict[str, Any]:

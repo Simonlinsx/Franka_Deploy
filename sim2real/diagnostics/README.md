@@ -9,6 +9,7 @@ Available tools include:
 - `audit_thrown_v60_candidate` and `audit_thrown_v61_bundle`;
 - `audit_v57_thrown_alignment`;
 - `compare_policy_io` and `compare_v94_action_trends`;
+- `export_inference_checkpoint` and `franka_shaper_demo`;
 - `export_policy_io_action_replay`;
 - `replay_v94`;
 - `audit_v94_preview`;
