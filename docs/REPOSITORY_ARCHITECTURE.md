@@ -28,8 +28,8 @@ The September 2026 inventory found:
 
 | Area | Evidence | Maintenance impact |
 | --- | ---: | --- |
-| `sim2real` root | 16 Python modules, about 7,000 lines | Public commands and a smaller set of shared core adapters remain; domain implementations live in subpackages |
-| object point-cloud provider | about 27,300 lines, 249 methods in one class | State, proof objects, mask policy, and I/O are tightly coupled |
+| `sim2real` root | 16 Python modules, about 4,100 lines | Public commands and compatibility facades remain; replay and closed-loop implementations now live in focused subpackages |
+| object point-cloud provider | about 26,200 lines in the transactional owner | State records, runtime config, and pure mask geometry are separate; mask policy and I/O remain tightly coupled |
 | online tabletop planner | about 3,000 lines after the first kinematics extraction | Phase transitions, safety, and diagnostics still change together |
 | README/runbook | previously over 1,300 lines with repeated shell history | Stale commands could be mistaken for supported workflows |
 | root Git state | maintained source tracked; generated/runtime/external trees ignored | Reviews and diffs now focus on maintained integration code |
@@ -53,6 +53,8 @@ sim2real/
   commissioning/   explicit calibration, identification, and hardware probes
   policy/          NumPy inference, exact I/O evidence, and rate contracts
   contracts/       observation schemas and V94 action/runtime contracts
+  replay/          validated replay models, loaders, and policy transaction
+  closed_loop/     authorization, commands, dual-ACK ledger, and action mapper
 
 motion_planning/
   kinematics.py    pure Panda/palm FK and bounded IK corrections
@@ -137,7 +139,9 @@ Project-specific external code and Python environments likewise live under
 
 - Move the provider's evidence/proof dataclasses into
   `dynamic_pcd.provider.state` with compatibility re-exports.
-- Split pure mask geometry and proof validation from camera/tracker mutation.
+- Pure mask geometry and provider-local config validation now live in
+  `dynamic_pcd.provider.mask_geometry` and `dynamic_pcd.provider.config`.
+- Split proof validation from camera/tracker mutation in later guarded steps.
 - Keep `ObjectPCDProvider` as the public facade; require byte-identical replay
   and the saved-provenance suite before each move.
 

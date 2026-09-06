@@ -1,10 +1,7 @@
-"""Compatibility facade for validated transactional action replay.
+"""Validated replay loading, contracts, and transactional execution."""
 
-Implementation is organized under :mod:`sim2real.replay`. This module remains
-stable for existing launchers and external integrations.
-"""
-
-from .replay import (
+from .loading import load_replay_actions, load_replay_actions_payload
+from .models import (
     CANONICAL_ACTION_ORDER,
     MAX_REPLAY_ACTION_BYTES,
     MAX_REPLAY_ACTIONS,
@@ -12,11 +9,9 @@ from .replay import (
     ReplayPolicyOutput,
     TabletopInterceptReplayConfig,
     TabletopOnlinePlannerConfig,
-    TransactionalReplayActionPolicy,
-    load_replay_actions,
-    load_replay_actions_payload,
     summarize_replay_actions,
 )
+from .policy import TransactionalReplayActionPolicy
 
 __all__ = [
     "CANONICAL_ACTION_ORDER",

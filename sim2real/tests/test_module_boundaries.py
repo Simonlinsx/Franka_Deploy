@@ -10,12 +10,16 @@ from robot_control.rh56 import RH56WatchdogOwner
 from robot_control.safety import ClosedLoopSafetyGate
 from sim2real.deploy import DeploymentRequest as PublicDeploymentRequest
 from sim2real.deployment import DeploymentRequest
+from sim2real.action_replay import ReplayActionSequence as FacadeReplayActionSequence
+from sim2real.closed_loop_core import ClosedLoopCommand as FacadeClosedLoopCommand
+from sim2real.closed_loop import ClosedLoopCommand
 from motion_planning.online_tabletop import (
     cartesian_joint_correction as planner_cartesian_joint_correction,
     panda_T_base_policy_palm as planner_panda_fk,
     pose_preserving_joint_target as planner_pose_target,
 )
 from sim2real.tasks import build_task_command
+from sim2real.replay import ReplayActionSequence
 
 
 def test_motion_planning_public_and_implementation_imports_share_functions() -> None:
@@ -31,3 +35,8 @@ def test_domain_public_apis_import_without_constructing_hardware() -> None:
     assert DeploymentRequest.__name__ == "DeploymentRequest"
     assert DeploymentRequest is PublicDeploymentRequest
     assert build_task_command.__name__ == "build_task_command"
+
+
+def test_compatibility_facades_export_the_split_implementations() -> None:
+    assert FacadeReplayActionSequence is ReplayActionSequence
+    assert FacadeClosedLoopCommand is ClosedLoopCommand

@@ -15,8 +15,8 @@
     "checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
     "model_config_sha256": "f932eac1c6241e910031b2f000a81cd9f8a8d4896e2277ab5ffb721f378b188d",
     "implementation_source_manifest": "guarded_v2_implementation_sources.json",
-    "implementation_source_manifest_sha256": "e2edb40a1722c19d227c97e31066a17ecb3f1798f995026cd499e7ec57fa56f1",
-    "implementation_source_set_sha256": "a762bc4aa26eed960f2bad3ef74550488f2b8c692ebea546e8ce810b59741de8"
+    "implementation_source_manifest_sha256": "3fd4de654fd1538f72c5e47dce0dee2cd578616eefa7d482472e89bc97d2e140",
+    "implementation_source_set_sha256": "aa808f6bb105b62b354eedaa70acb9834920687efc095fb38703153bcf0fc7c7"
   },
   "cases": [
     {

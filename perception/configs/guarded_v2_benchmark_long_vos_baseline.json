@@ -3,7 +3,7 @@
   "description": "Hardware-free real-video regression set. This manifest scores saved long-VOS/SAM2 masks only as a historical baseline; replace each candidate path with guarded_v2 exports when tuning production.",
   "sparse_ground_truth_manifest": "guarded_v2_sparse_ground_truth.json",
   "expected_sparse_ground_truth_manifest_sha256": "84aaa5b2017aea1e80a0f52938274e9d691ebc9c46f0eeaa739038adc06f4cbd",
-  "expected_replay_manifest_sha256": "1357af4b4e7606527cd4fd401f95356293d184d22bf55182c405bfd91b4d1e9c",
+  "expected_replay_manifest_sha256": "66d6186bdfe333419a9626d6c32def21cf9844984dc9d438bf275c5bde057f27",
   "production_suite_coverage_contract": {
     "schema": "guarded_v2_suite_coverage_v1",
     "exact_20hz_case_names": [

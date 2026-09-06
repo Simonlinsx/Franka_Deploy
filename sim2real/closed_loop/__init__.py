@@ -1,24 +1,21 @@
-"""Compatibility facade for hardware-inert closed-loop transactions.
+"""Hardware-inert closed-loop authorization and transaction primitives."""
 
-Implementation is organized under :mod:`sim2real.closed_loop`. This module
-remains stable for runtime, device adapters, tests, and external integrations.
-"""
-
-from .closed_loop import (
-    AUTHORIZATION_SCOPE,
-    COMMAND_CONSUMERS,
-    ClosedLoopCommand,
+from .authorization import (
     ClosedLoopProtocolError,
     ClosedLoopSafetyGate,
-    ExecutedActionCommit,
-    ExecutedActionLedger,
     MotionAuthorization,
-    PolicyCommandSampleHold,
     SafetyState,
-    SingleThreadOwner,
-    TransactionalV94ActionMapper,
+)
+from .commands import (
+    ClosedLoopCommand,
+    ExecutedActionCommit,
+    PolicyCommandSampleHold,
     TransactionalV94ActionProposal,
 )
+from .constants import AUTHORIZATION_SCOPE, COMMAND_CONSUMERS
+from .ledger import ExecutedActionLedger
+from .mapper import TransactionalV94ActionMapper
+from .ownership import SingleThreadOwner
 
 __all__ = [
     "AUTHORIZATION_SCOPE",

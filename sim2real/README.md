@@ -196,9 +196,12 @@ Use the matching commissioned recovery application and inspect its refusal.
 | `commissioning/` | Explicit calibration, identification, timing, and physical probe tools |
 | `policy/` | NumPy inference, policy-I/O evidence, and policy-rate contracts |
 | `contracts/` | General observations plus V94 action/runtime contracts |
+| `replay/` | Replay data models, validation/loading, and transactional policy implementation |
+| `closed_loop/` | Authorization, immutable commands, dual-ACK ledger, mapper, and thread ownership |
 | `configs/` | Shared sim-to-real defaults and identified dynamics evidence |
 | `perception.py` | Stable camera-only perception command |
-| `action_replay.py` | Safe action/replay parsing and transactional replay policy |
+| `action_replay.py` | Compatibility facade for `replay/` |
+| `closed_loop_core.py` | Compatibility facade for `closed_loop/` |
 | `../motion_planning/` | Kinematics, trajectories, and tabletop interception |
 | `../robot_control/` | FR3/RH56 sessions, transports, watchdogs, and safety commits |
 

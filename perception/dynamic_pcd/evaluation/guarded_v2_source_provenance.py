@@ -74,6 +74,14 @@ REQUIRED_SOURCE_SPECS = (
         "pointcloud_extractor",
     ),
     GuardedV2SourceSpec(
+        "perception/dynamic_pcd/provider/config.py",
+        "object_pcd_provider_config",
+    ),
+    GuardedV2SourceSpec(
+        "perception/dynamic_pcd/provider/mask_geometry.py",
+        "object_pcd_provider_mask_geometry",
+    ),
+    GuardedV2SourceSpec(
         "perception/dynamic_pcd/provider/object_pcd_provider.py",
         "object_pcd_provider",
     ),

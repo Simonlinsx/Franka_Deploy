@@ -585,7 +585,7 @@ def test_validator_owned_child_with_pinned_health_identity_passes() -> None:
 def test_default_config_mutation_fails_fixed_acceptance_contract(tmp_path: Path) -> None:
     contract = _load_fixed_acceptance_contract()
     assert contract["sha256"] == (
-        "1357af4b4e7606527cd4fd401f95356293d184d22bf55182c405bfd91b4d1e9c"
+        "66d6186bdfe333419a9626d6c32def21cf9844984dc9d438bf275c5bde057f27"
     )
     assert contract["default_config_sha256"] == (
         "2e829bac00e5815e2c5c157672787a78201e822de9856c57f5131297bf8ff427"

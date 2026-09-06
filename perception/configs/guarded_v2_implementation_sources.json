@@ -40,8 +40,8 @@
     {
       "path": "perception/dynamic_pcd/evaluation/guarded_v2_source_provenance.py",
       "role": "source_provenance_validator",
-      "sha256": "9dceb1d741ec31be05b9837c2ce66daf50fbf5030107f6e75311aecbb24ac4ff",
-      "size_bytes": 14181
+      "sha256": "51fbf1f1f4ab55880e17338e92463f50c00d839ec873d534dfff6035996a8ff9",
+      "size_bytes": 14441
     },
     {
       "path": "perception/dynamic_pcd/pointcloud/extractor.py",
@@ -50,10 +50,22 @@
       "size_bytes": 16492
     },
     {
+      "path": "perception/dynamic_pcd/provider/config.py",
+      "role": "object_pcd_provider_config",
+      "sha256": "6fb7a31ca58f6d4de02fc4e76805de16f4e681cc57472beab31a73803be1d99b",
+      "size_bytes": 1450
+    },
+    {
+      "path": "perception/dynamic_pcd/provider/mask_geometry.py",
+      "role": "object_pcd_provider_mask_geometry",
+      "sha256": "62200f40ee61e05600e4ad1537cfa269827e0ae75ef136fa446475f3a845ba8b",
+      "size_bytes": 8359
+    },
+    {
       "path": "perception/dynamic_pcd/provider/object_pcd_provider.py",
       "role": "object_pcd_provider",
-      "sha256": "27b454a05c597b74fb16439ebfa59f8d868b9a490dda3be801e29ab97d0de3a7",
-      "size_bytes": 1167877
+      "sha256": "f80898122c8735f3f50ba0e7be6fb10dd2ddfce7ba6471348aa79eec15464eeb",
+      "size_bytes": 1159302
     },
     {
       "path": "perception/dynamic_pcd/provider/state.py",
@@ -123,6 +135,6 @@
     }
   ],
   "schema": "guarded_v2_implementation_sources_v1",
-  "source_set_sha256": "a762bc4aa26eed960f2bad3ef74550488f2b8c692ebea546e8ce810b59741de8",
+  "source_set_sha256": "aa808f6bb105b62b354eedaa70acb9834920687efc095fb38703153bcf0fc7c7",
   "workspace_root": "."
 }
