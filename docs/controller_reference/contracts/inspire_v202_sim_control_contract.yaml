@@ -1,0 +1,169 @@
+contract_version: inspire_v202_20hz_adapter_v7_20260727
+task_id: SimToolReal-Inspire-Franka-UnifiedRollingJointDeltaV202ExtendedLearnedHold20HzLSTM-Teacher-Direct-v0
+evidence: resolved_from_task_source_and_adapter_v7_urdf
+
+timing:
+  physics_frequency_hz: 120
+  policy_frequency_hz: 20
+  physics_dt_s: 0.008333333333333333
+  decimation: 6
+  target_update_once_per_policy_step: true
+  target_hold_physics_steps: 6
+
+robot_asset:
+  urdf: assets/embodiments/franka-inspire-rh56bfx-adapter-v7/franka_inspire_rh56bfx_adapter_v7.urdf
+  fixed_base: true
+  robot_gravity_disabled: true
+  self_collision_enabled: true
+  adjacent_and_internal_collision_pairs_filtered: true
+
+actuators:
+  implementation: IsaacLab_ImplicitActuatorCfg
+  command_type: joint_position_target
+  franka_shoulder_joints_1_to_4:
+    stiffness_nm_per_rad: 600.0
+    damping_nms_per_rad: 60.0
+    effort_limit_sim_nm: 87.0
+    velocity_limit_sim_rad_s: 2.2
+    armature_kg_m2: not_explicitly_overridden
+    joint_friction: not_explicitly_overridden
+  franka_forearm_joints_5_to_7:
+    stiffness_nm_per_rad: 600.0
+    damping_nms_per_rad: 60.0
+    effort_limit_sim_nm: 87.0
+    velocity_limit_sim_rad_s: 2.7
+    armature_kg_m2: not_explicitly_overridden
+    joint_friction: not_explicitly_overridden
+    warning: adapter_v7_urdf_effort_limits_are_12_nm_but_ImplicitActuatorCfg_overrides_them_to_87_nm
+  inspire_active_motors:
+    active_dofs: 6
+    order:
+      - thumb_proximal_yaw_joint
+      - thumb_proximal_pitch_joint
+      - index_proximal_joint
+      - middle_proximal_joint
+      - ring_proximal_joint
+      - pinky_proximal_joint
+    stiffness_nm_per_rad: 60.0
+    damping_nms_per_rad: 6.0
+    effort_limit_sim_nm: 1.0
+    armature_kg_m2: 0.01
+    joint_friction: not_explicitly_overridden
+    velocity_limit_sim_rad_s:
+      thumb_yaw: 4.10
+      thumb_flex: 2.62
+      index_middle_ring_pinky_flex: 9.95
+    position_limits_rad:
+      thumb_yaw: [0.0, 1.308]
+      thumb_flex: [0.0, 0.6]
+      index_flex: [0.0, 1.47]
+      middle_flex: [0.0, 1.47]
+      ring_flex: [0.0, 1.47]
+      pinky_flex: [0.0, 1.47]
+  urdf_joint_dynamics:
+    dynamics_tags_present: false
+    implication: armature_and_joint_friction_default_to_the_imported_PhysX_values_when_not_overridden
+
+inspire_mimic_coupling:
+  native_physx_mimic_constraints_preserved: true
+  followers_are_not_independently_actuated: true
+  thumb_intermediate: 1.334_times_thumb_flex
+  thumb_distal: 0.667_times_thumb_flex
+  finger_intermediate: 1.06399_times_proximal_minus_0.04545_rad
+  mimic_natural_frequency_hz: 0.0
+  mimic_damping_ratio: 0.0
+
+policy_action:
+  dimension: 13
+  normalized_range: [-1.0, 1.0]
+  layout:
+    franka_joint_delta: [0, 7]
+    inspire_absolute_motor_target: [7, 13]
+  franka:
+    semantics: incremental_joint_position_target
+    raw_target_equation: q_raw_next_equals_q_target_plus_0.045_times_action
+    target_ema_alpha: 0.40
+    effective_saturated_increment_rad_per_20hz_step: 0.018
+    effective_saturated_target_velocity_rad_s: 0.36
+    target_delta_limit_rad_per_step: 0.045
+    target_vs_measured_joint_error_limit_rad: 0.05
+    velocity_acceleration_jerk_shaper_enabled: false
+  inspire:
+    semantics: absolute_six_motor_target
+    target_equation: fraction_equals_0.5_times_action_plus_1_then_interpolate_open_to_close
+    open_target_rad: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    semantic_close_target_rad: [1.25, 0.599, 0.95, 0.95, 1.05, 1.10]
+    target_ema_alpha: 0.737856
+    target_delta_limit_rad_per_step: 0.30
+  reset_target_lock:
+    arm_steps: 4
+    hand_steps: 4
+    duration_s: 0.20
+
+privileged_execution_behavior:
+  success_streak_arm_hold_enabled: true
+  trigger: simulator_physical_success_streak_greater_than_zero
+  behavior: replace_the_seven_Franka_action_deltas_with_zero_before_action_bookkeeping
+  hand_target_hold_enabled: false
+  post_success_arm_target_lock_enabled: false
+  post_success_hand_target_lock_enabled: false
+  deployment_warning: this_privileged_arm_zeroing_is_not_automatically_available_on_the_real_robot
+
+contact:
+  model: rigid_PhysX_contact
+  explicit_contact_stiffness: null
+  explicit_contact_damping: null
+  note: contact_is_constraint_solved_not_a_configured_penalty_spring
+  robot_collision:
+    contact_offset_m: 0.003
+    rest_offset_m: 0.0
+    max_depenetration_velocity_m_s: 5.0
+    solver_position_iterations: 16
+    solver_velocity_iterations: 2
+  object_and_table_collision:
+    contact_offset_m: 0.002
+    rest_offset_m: 0.0
+    object_max_depenetration_velocity_m_s: 4.0
+    object_solver_position_iterations: 16
+    object_solver_velocity_iterations: 2
+  material_combine_mode:
+    friction: multiply
+    restitution: multiply
+  robot_material:
+    static_friction: 3.0
+    dynamic_friction: 2.5
+    restitution: 0.0
+  simulation_default_material:
+    static_friction: 1.2
+    dynamic_friction: 1.0
+    restitution: 0.0
+  nominal_object_material_after_reset:
+    static_friction: 0.75
+    dynamic_friction: 0.65
+    restitution: 0.0
+  nominal_table_material_after_reset:
+    static_friction: 0.55
+    dynamic_friction: 0.45
+    restitution: 0.0
+  full_physics_domain_randomization:
+    object_mass_scale: [0.5, 2.0]
+    object_static_friction: [0.35, 1.10]
+    object_dynamic_friction: [0.25, 0.90]
+    object_restitution: [0.0, 0.08]
+    table_static_friction: [0.25, 1.0]
+    table_dynamic_friction: [0.20, 0.80]
+    table_restitution: [0.0, 0.05]
+
+current_student_collection_control_dr:
+  alpha: 0.0
+  action_delay_steps: [0, 0]
+  arm_action_scale: [1.0, 1.0]
+  hand_action_scale: [1.0, 1.0]
+  action_noise_std: 0.0
+  note: input_scene_physics_sensor_and_observation_latency_DR_remain_enabled
+
+source_locations:
+  actuator_and_robot_cfg: source/simtoolreal_lab/simtoolreal_lab/tasks/dynamic_dexterous_grasp/dynamic_dexterous_grasp_env_cfg.py
+  action_adapter: source/simtoolreal_lab/simtoolreal_lab/tasks/dynamic_dexterous_grasp/dynamic_dexterous_grasp_env.py
+  robot_material_binding: source/simtoolreal_lab/simtoolreal_lab/tasks/revo2_static_grasp/revo2_static_grasp_env.py
+  urdf: assets/embodiments/franka-inspire-rh56bfx-adapter-v7/franka_inspire_rh56bfx_adapter_v7.urdf

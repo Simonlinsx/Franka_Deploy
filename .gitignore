@@ -1,0 +1,78 @@
+# Python environments and generated interpreter state.
+.venv/
+.venv-*/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+**/.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE and operating-system metadata.
+.idea/
+.vscode/
+.DS_Store
+__MACOSX/
+
+# Local credentials and machine-specific authentication material.
+.env
+.env.*
+!.env.example
+.netrc
+credentials.json
+secrets.json
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+*.pem
+*.p12
+*.pfx
+*.key
+
+# Crash dumps and local diagnostics.
+core
+core.*
+*.core
+
+# Build products.
+build/
+dist/
+*.so
+*.o
+/dexgrasp/native/**/build*/
+
+# Runtime captures, model weights, and generated experiment output.  These are
+# workspace assets, not source code; their provenance belongs in manifests.
+/data/checkpoints/
+/data/perception_corpus/
+/data/runs/
+/perception/artifacts/
+/perception/mask_debug/
+/data/captures/
+/data/demos/
+/data/logs/
+/data/test_fixtures/
+/data/test_videos/
+/data/archives/historical_bundles/
+/data/archives/import_metadata/
+/data/archives/releases/
+/*.pt
+/*.zip
+/*.tar.gz
+/*.png
+
+# External checkouts. Keep their repository histories independent from this
+# integration workspace while retaining the directory-level documentation.
+/third_party/*
+!/third_party/README.md
+
+# Legacy calibration workspace retained until its absolute provenance paths
+# have been migrated to the canonical data/calibration layout.
+/beta/
+
+# Local example output.
+examples/inspire_mano_pipeline/output/

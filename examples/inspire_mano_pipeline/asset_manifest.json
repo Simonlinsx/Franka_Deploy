@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-14",
+  "notes": "Hashes of the local model and robot assets used for the verified pipeline run.",
+  "wilor": {
+    "pretrained_models/wilor_final.ckpt": "3e97aafc7dd08d883a4cc5a027df61fdb6fda6136dbd1319405413862ada6bb2",
+    "pretrained_models/detector.pt": "5ef3df44e42d2db52d4ffe91f83a22ce9925e2acc9abebf453f2c5d22e380033",
+    "pretrained_models/MANO_RIGHT.pkl": "45d60aa3b27ef9107a7afd4e00808f307fd91111e1cfa35afd5c4a62de264767",
+    "pretrained_models/mano_mean_params.npz": "efc0ec58e4a5cef78f3abfb4e8f91623b8950be9eff8b8e0dbb0d036ebc63988"
+  },
+  "dex_retargeting": {
+    "git_commit": "3f56141bc8bd2760d5e452e382937269554ebb21",
+    "src/dex_retargeting/configs/teleop/inspire_hand_right.yml": "8adebf4e01d0c9975f4effc7501c95a5795bd551c8cd5effe7ba3fbfd788695a",
+    "assets/robots/hands/inspire_hand/inspire_hand_right.urdf": "bfc377800d1913a36d4bf4693ffce0003f8a2555bf2a803b9a02c1f24b055769"
+  }
+}

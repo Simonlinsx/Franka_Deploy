@@ -1,0 +1,1158 @@
+{
+  "case": "fast_green_ball_entry",
+  "evaluation_fps_hz": 20,
+  "records": [
+    {
+      "bbox_xyxy": [
+        57,
+        32,
+        135,
+        129
+      ],
+      "centroid_xy": [
+        97.54811133200795,
+        76.96441351888669
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "nearest_nonempty_guarded_v2_candidate_source_39",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 38
+    },
+    {
+      "bbox_xyxy": [
+        54,
+        32,
+        143,
+        134
+      ],
+      "centroid_xy": [
+        98.57990697674418,
+        78.08074418604652
+      ],
+      "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+      "proposal_source": "human_sparse_ground_truth",
+      "review_notes": "First clearly detectable entry frame; accepted only the strongly motion-blurred visible green silhouette and excluded the nearby monitor, cup and hand.",
+      "review_status": "human_confirmed",
+      "source_frame": 39
+    },
+    {
+      "bbox_xyxy": [
+        158,
+        136,
+        209,
+        203
+      ],
+      "centroid_xy": [
+        181.02473326867118,
+        171.2133850630456
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 41
+    },
+    {
+      "bbox_xyxy": [
+        180,
+        201,
+        256,
+        286
+      ],
+      "centroid_xy": [
+        219.37551652892563,
+        245.10330578512398
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 42
+    },
+    {
+      "bbox_xyxy": [
+        240,
+        268,
+        288,
+        335
+      ],
+      "centroid_xy": [
+        262.85667276051186,
+        301.23692870201097
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 44
+    },
+    {
+      "bbox_xyxy": [
+        239,
+        235,
+        289,
+        300
+      ],
+      "centroid_xy": [
+        263.15688445921006,
+        267.6777408637874
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 45
+    },
+    {
+      "bbox_xyxy": [
+        241,
+        183,
+        294,
+        243
+      ],
+      "centroid_xy": [
+        267.23422377080914,
+        212.8397212543554
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 47
+    },
+    {
+      "bbox_xyxy": [
+        246,
+        165,
+        297,
+        222
+      ],
+      "centroid_xy": [
+        271.1026842778015,
+        192.85683851725608
+      ],
+      "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+      "proposal_source": "human_sparse_ground_truth",
+      "review_notes": "Fast diagonal motion with residual blur; contour follows the complete visible ball and contains no background branch.",
+      "review_status": "human_confirmed",
+      "source_frame": 48
+    },
+    {
+      "bbox_xyxy": [
+        257,
+        150,
+        310,
+        200
+      ],
+      "centroid_xy": [
+        284.49756986634264,
+        177.67922235722963
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 50
+    },
+    {
+      "bbox_xyxy": [
+        266,
+        153,
+        318,
+        201
+      ],
+      "centroid_xy": [
+        292.5792044661549,
+        180.92044661549198
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 51
+    },
+    {
+      "bbox_xyxy": [
+        286,
+        178,
+        338,
+        226
+      ],
+      "centroid_xy": [
+        313.1143717080512,
+        206.30097817908202
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 53
+    },
+    {
+      "bbox_xyxy": [
+        296,
+        193,
+        349,
+        256
+      ],
+      "centroid_xy": [
+        322.03608445297505,
+        224.18579654510557
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 54
+    },
+    {
+      "bbox_xyxy": [
+        321,
+        257,
+        370,
+        319
+      ],
+      "centroid_xy": [
+        345.0154109589041,
+        287.6532534246575
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 56
+    },
+    {
+      "bbox_xyxy": [
+        330,
+        254,
+        376,
+        306
+      ],
+      "centroid_xy": [
+        352.932987012987,
+        280.0633766233766
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 57
+    },
+    {
+      "bbox_xyxy": [
+        344,
+        221,
+        393,
+        269
+      ],
+      "centroid_xy": [
+        367.79967776584317,
+        244.82277121374867
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 59
+    },
+    {
+      "bbox_xyxy": [
+        353,
+        212,
+        400,
+        256
+      ],
+      "centroid_xy": [
+        375.9541511771995,
+        233.9467162329616
+      ],
+      "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+      "proposal_source": "human_sparse_ground_truth",
+      "review_notes": "Mid-flight isolated ball; reviewed against the original RGB frame at native resolution.",
+      "review_status": "human_confirmed",
+      "source_frame": 60
+    },
+    {
+      "bbox_xyxy": [
+        370,
+        211,
+        420,
+        257
+      ],
+      "centroid_xy": [
+        394.36224489795916,
+        233.58673469387756
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 62
+    },
+    {
+      "bbox_xyxy": [
+        380,
+        218,
+        429,
+        269
+      ],
+      "centroid_xy": [
+        404.2223966509681,
+        242.94505494505495
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 63
+    },
+    {
+      "bbox_xyxy": [
+        401,
+        251,
+        448,
+        307
+      ],
+      "centroid_xy": [
+        424.0965853658537,
+        278.9409756097561
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 65
+    },
+    {
+      "bbox_xyxy": [
+        410,
+        257,
+        455,
+        306
+      ],
+      "centroid_xy": [
+        432.29930394431557,
+        281.4477958236659
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 66
+    },
+    {
+      "bbox_xyxy": [
+        424,
+        238,
+        471,
+        282
+      ],
+      "centroid_xy": [
+        446.6764705882353,
+        259.1239048811014
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 68
+    },
+    {
+      "bbox_xyxy": [
+        431,
+        235,
+        478,
+        278
+      ],
+      "centroid_xy": [
+        454.1212507977026,
+        256.06381620931717
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 69
+    },
+    {
+      "bbox_xyxy": [
+        447,
+        245,
+        492,
+        292
+      ],
+      "centroid_xy": [
+        468.90811455847256,
+        268.2291169451074
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 71
+    },
+    {
+      "bbox_xyxy": [
+        453,
+        256,
+        498,
+        303
+      ],
+      "centroid_xy": [
+        474.861482381531,
+        279.05953827460513
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 72
+    },
+    {
+      "bbox_xyxy": [
+        468,
+        247,
+        514,
+        288
+      ],
+      "centroid_xy": [
+        490.69818913480884,
+        267.10731052984573
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 74
+    },
+    {
+      "bbox_xyxy": [
+        477,
+        246,
+        521,
+        285
+      ],
+      "centroid_xy": [
+        498.33795620437957,
+        264.7583941605839
+      ],
+      "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+      "proposal_source": "human_sparse_ground_truth",
+      "review_notes": "Smaller distant ball after a large displacement; only visible object pixels retained.",
+      "review_status": "human_confirmed",
+      "source_frame": 75
+    },
+    {
+      "bbox_xyxy": [
+        490,
+        256,
+        536,
+        301
+      ],
+      "centroid_xy": [
+        512.0550343964978,
+        278.28330206378985
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 77
+    },
+    {
+      "bbox_xyxy": [
+        499,
+        254,
+        543,
+        295
+      ],
+      "centroid_xy": [
+        520.3074811256006,
+        273.7206588881263
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 78
+    },
+    {
+      "bbox_xyxy": [
+        513,
+        253,
+        558,
+        295
+      ],
+      "centroid_xy": [
+        534.8366935483871,
+        273.33870967741933
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 80
+    },
+    {
+      "bbox_xyxy": [
+        520,
+        256,
+        566,
+        298
+      ],
+      "centroid_xy": [
+        542.0625841184387,
+        276.70255720053837
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 81
+    },
+    {
+      "bbox_xyxy": [
+        534,
+        254,
+        581,
+        297
+      ],
+      "centroid_xy": [
+        556.8507462686567,
+        275.02401038286825
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 83
+    },
+    {
+      "bbox_xyxy": [
+        542,
+        256,
+        588,
+        297
+      ],
+      "centroid_xy": [
+        564.2985586822238,
+        275.761153054221
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 84
+    },
+    {
+      "bbox_xyxy": [
+        557,
+        257,
+        604,
+        298
+      ],
+      "centroid_xy": [
+        579.7511643379906,
+        276.41849634065204
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 86
+    },
+    {
+      "bbox_xyxy": [
+        565,
+        257,
+        611,
+        298
+      ],
+      "centroid_xy": [
+        587.3,
+        276.506
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 87
+    },
+    {
+      "bbox_xyxy": [
+        580,
+        257,
+        627,
+        298
+      ],
+      "centroid_xy": [
+        602.7883355176933,
+        276.59895150720837
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 89
+    },
+    {
+      "bbox_xyxy": [
+        586,
+        257,
+        635,
+        298
+      ],
+      "centroid_xy": [
+        610.1820496499046,
+        276.8204964990452
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 90
+    },
+    {
+      "bbox_xyxy": [
+        603,
+        257,
+        650,
+        298
+      ],
+      "centroid_xy": [
+        625.957627118644,
+        276.5638852672751
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 92
+    },
+    {
+      "bbox_xyxy": [
+        610,
+        257,
+        658,
+        297
+      ],
+      "centroid_xy": [
+        633.3638726445744,
+        276.4132553606238
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 93
+    },
+    {
+      "bbox_xyxy": [
+        625,
+        257,
+        673,
+        297
+      ],
+      "centroid_xy": [
+        648.3305249513934,
+        276.3707064160726
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 95
+    },
+    {
+      "bbox_xyxy": [
+        633,
+        258,
+        679,
+        296
+      ],
+      "centroid_xy": [
+        655.8654804270462,
+        275.691103202847
+      ],
+      "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+      "proposal_source": "human_sparse_ground_truth",
+      "review_notes": "Rightward high-speed motion; reviewed for scale and identity continuity.",
+      "review_status": "human_confirmed",
+      "source_frame": 96
+    },
+    {
+      "bbox_xyxy": [
+        647,
+        257,
+        694,
+        297
+      ],
+      "centroid_xy": [
+        670.3355614973262,
+        276.23395721925135
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 98
+    },
+    {
+      "bbox_xyxy": [
+        654,
+        257,
+        702,
+        298
+      ],
+      "centroid_xy": [
+        677.7511111111111,
+        276.6355555555556
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 99
+    },
+    {
+      "bbox_xyxy": [
+        668,
+        257,
+        717,
+        298
+      ],
+      "centroid_xy": [
+        692.0037831021438,
+        277.03972257250945
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 101
+    },
+    {
+      "bbox_xyxy": [
+        675,
+        257,
+        724,
+        298
+      ],
+      "centroid_xy": [
+        699.0790139064476,
+        277.3046776232617
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 102
+    },
+    {
+      "bbox_xyxy": [
+        689,
+        258,
+        739,
+        299
+      ],
+      "centroid_xy": [
+        713.3273291925466,
+        277.8900621118012
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 104
+    },
+    {
+      "bbox_xyxy": [
+        696,
+        258,
+        746,
+        299
+      ],
+      "centroid_xy": [
+        720.1873840445269,
+        278.04761904761904
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 105
+    },
+    {
+      "bbox_xyxy": [
+        710,
+        258,
+        759,
+        300
+      ],
+      "centroid_xy": [
+        734.1127633209418,
+        278.7230483271375
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 107
+    },
+    {
+      "bbox_xyxy": [
+        717,
+        259,
+        766,
+        300
+      ],
+      "centroid_xy": [
+        740.8836923076923,
+        279.17353846153844
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 108
+    },
+    {
+      "bbox_xyxy": [
+        730,
+        260,
+        779,
+        300
+      ],
+      "centroid_xy": [
+        753.7970830691186,
+        279.5504121750159
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 110
+    },
+    {
+      "bbox_xyxy": [
+        737,
+        260,
+        785,
+        300
+      ],
+      "centroid_xy": [
+        760.3277742142399,
+        279.6959589480436
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 111
+    },
+    {
+      "bbox_xyxy": [
+        750,
+        262,
+        798,
+        301
+      ],
+      "centroid_xy": [
+        772.2220131702728,
+        283.9934148635936
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 113
+    },
+    {
+      "bbox_xyxy": [
+        756,
+        263,
+        804,
+        301
+      ],
+      "centroid_xy": [
+        778.2320717131474,
+        284.5119521912351
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 114
+    },
+    {
+      "bbox_xyxy": [
+        768,
+        264,
+        816,
+        302
+      ],
+      "centroid_xy": [
+        790.1416490486258,
+        286.00211416490487
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 116
+    },
+    {
+      "bbox_xyxy": [
+        774,
+        265,
+        819,
+        302
+      ],
+      "centroid_xy": [
+        795.342989571263,
+        286.486674391657
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 117
+    },
+    {
+      "bbox_xyxy": [
+        786,
+        266,
+        831,
+        302
+      ],
+      "centroid_xy": [
+        807.0683870967742,
+        287.3083870967742
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 119
+    },
+    {
+      "bbox_xyxy": [
+        792,
+        265,
+        843,
+        304
+      ],
+      "centroid_xy": [
+        816.1261437908497,
+        283.3856209150327
+      ],
+      "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+      "proposal_source": "human_sparse_ground_truth",
+      "review_notes": "Partial exit at the right image boundary; label contains only the still-visible portion and does not extrapolate beyond the image.",
+      "review_status": "human_confirmed",
+      "source_frame": 120
+    },
+    {
+      "bbox_xyxy": [
+        803,
+        268,
+        848,
+        304
+      ],
+      "centroid_xy": [
+        824.1991643454039,
+        289.40529247910865
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 122
+    },
+    {
+      "bbox_xyxy": [
+        805,
+        267,
+        848,
+        302
+      ],
+      "centroid_xy": [
+        825.3886462882097,
+        287.78893740902475
+      ],
+      "label_method": "guarded_v2 geometry proposal plus independent native-RGB/contact-sheet visual review",
+      "proposal_source": "guarded_v2_candidate",
+      "review_notes": "Independently reviewed on 2026-08-11; accepted target identity, bbox extent, and centroid against the native RGB/contact-sheet overlay.",
+      "review_status": "independent_visual_review",
+      "source_frame": 123
+    }
+  ],
+  "reviewed_visible_sampled_source_indices": [
+    38,
+    39,
+    41,
+    42,
+    44,
+    45,
+    47,
+    48,
+    50,
+    51,
+    53,
+    54,
+    56,
+    57,
+    59,
+    60,
+    62,
+    63,
+    65,
+    66,
+    68,
+    69,
+    71,
+    72,
+    74,
+    75,
+    77,
+    78,
+    80,
+    81,
+    83,
+    84,
+    86,
+    87,
+    89,
+    90,
+    92,
+    93,
+    95,
+    96,
+    98,
+    99,
+    101,
+    102,
+    104,
+    105,
+    107,
+    108,
+    110,
+    111,
+    113,
+    114,
+    116,
+    117,
+    119,
+    120,
+    122,
+    123
+  ],
+  "reviewed_visible_source_intervals": [
+    [
+      38,
+      123
+    ]
+  ],
+  "sampled_source_indices": [
+    0,
+    2,
+    3,
+    5,
+    6,
+    8,
+    9,
+    11,
+    12,
+    14,
+    15,
+    17,
+    18,
+    20,
+    21,
+    23,
+    24,
+    26,
+    27,
+    29,
+    30,
+    32,
+    33,
+    35,
+    36,
+    38,
+    39,
+    41,
+    42,
+    44,
+    45,
+    47,
+    48,
+    50,
+    51,
+    53,
+    54,
+    56,
+    57,
+    59,
+    60,
+    62,
+    63,
+    65,
+    66,
+    68,
+    69,
+    71,
+    72,
+    74,
+    75,
+    77,
+    78,
+    80,
+    81,
+    83,
+    84,
+    86,
+    87,
+    89,
+    90,
+    92,
+    93,
+    95,
+    96,
+    98,
+    99,
+    101,
+    102,
+    104,
+    105,
+    107,
+    108,
+    110,
+    111,
+    113,
+    114,
+    116,
+    117,
+    119,
+    120,
+    122,
+    123
+  ],
+  "schema": "reviewed_visible_bbox_track_v1",
+  "source_start_frame": 0,
+  "source_video_fps_hz": 30,
+  "source_video_frame_count": 125,
+  "source_video_sha256": "29a1d0f51cfcff6506df2ae9e07f4c3a59d4c26225040df31d65fe1af4bec621",
+  "source_video_size_wh": [
+    848,
+    480
+  ],
+  "thresholds": {
+    "reviewed_centroid_error_max": 0.75,
+    "reviewed_centroid_error_p95_max": 0.35,
+    "reviewed_motion_residual_p95_max": 0.4
+  },
+  "review_provenance": "All 58 exact-20Hz visible-frame overlays were independently reviewed against the native RGB/contact-sheet imagery on 2026-08-11; existing sparse human labels were preserved and the remaining accepted geometry is marked independent_visual_review."
+}

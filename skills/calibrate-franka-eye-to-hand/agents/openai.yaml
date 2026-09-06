@@ -1,0 +1,4 @@
+interface:
+  display_name: "Franka Eye-to-Hand Calibration"
+  short_description: "Calibrate and validate a fixed Franka RGB-D camera"
+  default_prompt: "Use $calibrate-franka-eye-to-hand to commission a new fixed RGB-D camera for this Franka workcell."

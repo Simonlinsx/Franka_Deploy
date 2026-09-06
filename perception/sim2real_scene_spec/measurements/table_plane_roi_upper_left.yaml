@@ -1,0 +1,160 @@
+schema_version: 1
+kind: tabletop_plane_measurement
+measurement_status: candidate_requires_visual_review
+measured_at_start: '2026-07-17T14:12:02.159706+00:00'
+measured_at_end: '2026-07-17T14:12:04.654645+00:00'
+hardware_access:
+  camera_read_only: true
+  robot_connected: false
+  robot_commanded: false
+frames:
+  base_frame: robot_base
+  camera_frame: camera_color_optical_frame
+  plane_equation: a*x + b*y + c*z + d = 0
+  normal_orientation: c >= 0
+units:
+  length: m
+  angle: deg
+  pixel: px
+source_calibration:
+  path: /home/qiaoguanren/code/franka/perception/sim2real_scene_spec/source/calibration/fr3_d435_eye_to_hand.yaml
+  sha256: aa78c17ebb98d39eeda5b838a458818870d8d4e697f5762d1f5693b94188a1e4
+  calibration_id: eye-to-hand-b722bce10485c8a3
+  T_base_camera:
+  - - -0.4586796860502671
+    - 0.5116787889996631
+    - -0.7264969115506734
+    - 1.2480084212821743
+  - - 0.8882808336406767
+    - 0.24205537638961394
+    - -0.39034133184625325
+    - 0.3699026859708365
+  - - -0.023876896604316192
+    - -0.8243749217732913
+    - -0.56554034529804
+    - 0.6403031702928152
+  - - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+camera:
+  name: Intel RealSense D435
+  serial: '337322072188'
+  stream:
+    width: 848
+    height: 480
+    fps: 30
+    depth_aligned_to_color: true
+  color_intrinsics:
+    width: 848
+    height: 480
+    fx: 603.7852172851562
+    fy: 603.3232421875
+    ppx: 435.23577880859375
+    ppy: 246.64630126953125
+    model: distortion.inverse_brown_conrady
+    distortion:
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+  depth_scale_m_per_unit: 0.0010000000474974513
+candidate_selection:
+  roi_xyxy_px:
+  - 180
+  - 180
+  - 370
+  - 285
+  frames: 30
+  warmup_frames: 30
+  stride_px: 3
+  black_value_max_8bit: 100
+  black_chroma_max_8bit: 50
+  camera_depth_range_m:
+  - 0.25
+  - 1.2
+  base_z_range_m:
+  - null
+  - null
+  candidate_count_before_ransac: 48297
+  per_frame_candidate_counts:
+  - 1609
+  - 1615
+  - 1611
+  - 1626
+  - 1621
+  - 1601
+  - 1607
+  - 1601
+  - 1628
+  - 1604
+  - 1604
+  - 1606
+  - 1621
+  - 1605
+  - 1605
+  - 1615
+  - 1604
+  - 1609
+  - 1615
+  - 1609
+  - 1612
+  - 1614
+  - 1609
+  - 1593
+  - 1614
+  - 1607
+  - 1605
+  - 1611
+  - 1618
+  - 1598
+  note: The sampled inlier bounds below are observation coverage, not physical table
+    dimensions.
+robust_fit_configuration:
+  algorithm: near_horizontal_RANSAC_then_iterated_SVD
+  ransac_iterations: 1200
+  distance_threshold_m: 0.005
+  max_tilt_deg: 20.0
+  minimum_inliers: 1500
+  minimum_inlier_ratio: 0.25
+  minimum_xy_span_m: 0.15
+  random_seed: 17
+result:
+  plane_abcd:
+  - 0.0013405992903626973
+  - 0.022493454574599326
+  - 0.9997460914126363
+  - -0.031122989150713883
+  normal_robot_base:
+  - 0.0013405992903626973
+  - 0.022493454574599326
+  - 0.9997460914126363
+  height:
+    reference_xy_m:
+    - 0.598958226900227
+    - -0.30242975205502326
+    z_m: 0.037132144236920524
+    note: For a tilted table, z depends on x and y; use plane_abcd for collision geometry.
+  tilt_from_robot_base_plus_z_deg: 1.291176207051606
+  residual_rms_m: 0.0024810292378278
+  residual_p95_m: 0.004410220316486812
+  residual_max_m: 0.004999715801558599
+  inlier_count: 41166
+  inlier_ratio: 0.8523510777066898
+  sampled_inlier_bounds_robot_base_m:
+    min:
+    - 0.3908528800139115
+    - -0.537104070429675
+    - 0.027971585297720702
+    max:
+    - 0.7504170351386708
+    - -0.09754301156476364
+    - 0.04731938115054157
+review_checklist:
+- Confirm the ROI contained exposed tabletop and excluded the robot, objects, table
+  edge, and background.
+- Overlay or inspect inlier coverage; sampled bounds are not a table-size survey.
+- Repeat with at least three separated tabletop ROIs and compare height/normal.
+- Do not copy this result into scene_manifest.json until repeatability and physical
+  plausibility pass review.

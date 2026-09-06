@@ -1,0 +1,835 @@
+camera:
+  serial: '337322072188'
+  width: 848
+  height: 480
+  fps: 30
+  # Native frame timestamps must share an epoch-compatible domain. These
+  # limits guard RGB-D synchronization and capture-to-host transport before
+  # any tracker or policy processing is counted.
+  # The installed D435's native color/depth metadata pair is stably offset by
+  # about 5.48 ms. 8 ms admits that measured synchronized pair while staying
+  # below half of the 60 Hz policy period (8.333 ms).
+  max_color_depth_timestamp_skew_s: 0.008
+  max_capture_to_retrieval_s: 0.10
+  max_timestamp_future_skew_s: 0.05
+  # Startup is not a blind discard loop. Readiness requires this many
+  # consecutive fresh/synchronized RGB-D frames whose color and depth sensor
+  # frame numbers both strictly increase. Any bad frame restarts the run.
+  startup_required_consecutive_frames: 30
+  startup_timeout_s: 5.0
+  # The formal frame-by-frame provider must report a missing RGB-D frame before
+  # either robot owner's 500 ms command heartbeat can expire. This still allows
+  # roughly three nominal 30 Hz frame periods. ROI acquisition keeps the camera
+  # API's separate one-second default.
+  runtime_frame_timeout_ms: 100
+  # During the consecutive run, (CLOCK_REALTIME - CLOCK_MONOTONIC) must stay
+  # within this span. A wall-clock step resets the run and must stabilize
+  # before startup can pass.
+  startup_max_clock_offset_jitter_s: 0.005
+  z_min: 0.25
+  z_max: 1.20
+  emitter: true
+  laser_power: 180
+  preset: default       # custom/default/hand/high_accuracy/high_density/medium_density
+  spatial_filter: false
+  temporal_filter: false
+  hole_filter: false
+
+tracker:
+  # The prompt mask may come from SAM2, GrabCut, or a manual box.  The 30 Hz
+  # fast path learns its color generically from that mask; no object hue is hardcoded.
+  mode: adaptive_color_depth # roi_depth, adaptive_color_depth, or sam2_reinit
+  init_method: grabcut   # box or grabcut; SAM2 overrides this when enabled
+  # The deployment initializer is SAM2 box-prompt, not GrabCut.  Preserve the
+  # operator's tight object box exactly: automatic padding can include RH56
+  # fingers/background and make SAM2 select a fused hand/object silhouette.
+  interactive_roi_padding_px: 0
+  roi_scale: 2.2
+  lock_roi: false       # true only for stationary, numeric-ROI commissioning
+  depth_tolerance: 0.045 # minimum meters around tracked median depth
+  max_depth_tolerance: 0.08
+  depth_spread_margin: 0.008
+  min_area: 80
+  # The 60 mm sphere is only ~39 px across.  A 3x3 kernel left a thin
+  # same-colour reflection bridge into the black support cloth, causing
+  # periodic 1.22x mask-area jumps and four-frame recovery gaps.  A 5x5
+  # open/close removes that bridge while retaining >1000 sphere pixels.
+  morph_kernel: 5
+  max_center_jump: 0.20 # meters per frame; rejects sudden bad tracks
+  max_area_growth: 1.8 # rejects sudden 2D mask expansion, usually caused by table/background leakage
+  max_area_vs_initial: 3.0 # rejects gradual growth far beyond the first valid target mask
+  max_bbox_growth: 4.0
+  min_area_vs_initial: 0.25 # reject drift onto a small same-color patch
+  min_bbox_area_vs_initial: 0.30
+  recovery_enabled: true
+  recovery_search_scale: 5.0 # template search window around the last bbox when tracking is invalid
+  recovery_min_score: 0.35
+  sam2_lost_search_scale: 3.0 # expanded SAM2 prompt fallback when template recovery fails
+  identity_enabled: true
+  identity_max_hist_dist: 0.55 # lower is stricter; rejects masks with different color distribution
+  identity_max_center_jump_px: 220.0
+  identity_max_depth_jump: 0.25
+  identity_max_area_ratio: 4.0
+  identity_update_alpha: 0.0 # keep initial appearance fixed to avoid drifting onto distractors
+  lost_after: 8
+  # Generic adaptive appearance/depth component gates. Failed gates publish an
+  # empty invalid mask immediately, never a stale object point cloud.
+  color_probability_threshold: 0.56
+  component_min_confidence: 0.62
+  # Preserve the SAM2/appearance semantic silhouette even where D435 edge
+  # depth is missing or belongs to the background. Depth still validates the
+  # whole component and the final policy points; it does not delete mask
+  # pixels.
+  semantic_mask_depth_pixel_gate_enabled: false
+  component_min_valid_depth_ratio: 0.25
+  component_max_center_jump_px: 100.0
+  # Timestamped committed-target motion model. At 30 Hz, 2400 px/s covers the
+  # measured 71 px/frame fast-ball case (about 2134 px/s). Candidate direction
+  # is checked against an EMA velocity prediction after the first accepted
+  # displacement. Only identity-gated valid masks update that velocity;
+  # tentative recovery/hand masks and missing frames never do.
+  # Set ``legacy_per_frame`` to restore the historical fixed-pixel behavior.
+  component_motion_model: timestamp_velocity
+  component_motion_max_speed_px_s: 2400.0
+  component_motion_velocity_ema_beta: 0.70
+  component_motion_max_frame_gap: 3
+  component_motion_max_timestamp_gap_s: 0.20
+  component_motion_prediction_residual_bbox_diagonal_ratio: 0.80
+  component_motion_prediction_residual_min_px: 12.0
+  component_motion_prediction_residual_max_px: 48.0
+  # Final source-agnostic publication guard.  The adaptive mask, tracked SAM2
+  # mask and every LOST recovery candidate are compared with the last
+  # robot-facing clean silhouette after timestamped committed-velocity
+  # translation.  Only newly attached pixels are appearance-scored, so fast
+  # object translation stays valid while a thin RH56 finger branch fails
+  # closed before it can teach tracker/recovery state.
+  publication_appendage_guard_enabled: true
+  publication_appendage_max_timestamp_gap_s: 0.20
+  publication_appendage_registration_bbox_diagonal_ratio: 0.80
+  publication_appendage_registration_min_px: 12.0
+  publication_appendage_registration_max_px: 48.0
+  publication_appendage_registration_hard_max_px: 72.0
+  publication_appendage_max_acceleration_px_s2: 12000.0
+  publication_appendage_core_dilation_px: 2
+  publication_appendage_min_pixels: 24
+  publication_appendage_min_fraction: 0.04
+  publication_appendage_probability_threshold: 0.42
+  publication_appendage_min_appearance_support_ratio: 0.65
+  publication_appendage_min_appearance_mean: 0.45
+  # A visible partial may remain robot-facing, but an exact guarded-v2 mask
+  # retaining less than 90% of aligned-clean/full-authority support cannot
+  # update trusted/full-target geometry. A later complete frame rebases them.
+  publication_full_target_min_aligned_coverage: 0.90
+  # Two coherent raw-exact shrink frames may update perspective scale using a
+  # scale-normalized silhouette proof. Both the adjacent mask and unchanged
+  # trusted/full mask remain anchors; this lower floor is not used by normal
+  # partial-authority publication.
+  publication_full_scale_transition_min_normalized_coverage: 0.85
+  # A confirmed, uninterrupted guarded-v2 visible-partial chain may publish
+  # one exact-current clean silhouette at the reviewed motion-blur floor.
+  # This never updates full/trusted geometry; exact provenance, identity,
+  # dynamics/depth/prediction and the final source-agnostic guard still apply.
+  publication_visible_partial_min_normalized_coverage: 0.83
+  # Teaching full/trusted geometry requires much stronger immutable target
+  # support than merely publishing a still-visible partial. This prevents an
+  # in-footprint RH56 replacement from becoming the next scale authority.
+  publication_full_target_min_appearance_support_ratio: 0.90
+  # Severe motion blur near the D435's effective 16 px image border lowers
+  # supported colour pixels slightly (reviewed fast-exit frames: 0.613--0.629).
+  # This narrower exception still requires target mean appearance, outward
+  # motion, non-growth and the full device-time/depth dynamics contract.
+  publication_boundary_exit_min_appearance_support_ratio: 0.60
+  # The reviewed last visible boundary slivers are around 0.58 support. Keep
+  # a measured margin while still requiring finite support (not mean alone),
+  # same-edge outward motion, non-growth, shape, depth, and exact-final bytes.
+  publication_boundary_exit_continuation_min_appearance_support_ratio: 0.55
+  publication_boundary_exit_margin_px: 16
+  publication_boundary_exit_min_outward_step_px: 1.0
+  publication_boundary_exit_max_area_ratio: 1.15
+  # Only an already-confirmed same-edge exit may shrink this quickly as the
+  # last visible cylinder sliver crosses the image border. Growth and all
+  # non-boundary motion keep the ordinary 12/s hard limit.
+  publication_boundary_exit_continuation_max_log_shrink_rate_s: 36.0
+  # During an already-committed track, remove a detected low-appearance
+  # appendage and keep the motion-aligned visible target core.  This preserves
+  # policy coverage while RH56 partially occludes the object.  A tiny core or
+  # a core that no longer resembles the immutable target still fails closed.
+  publication_appendage_sanitize_enabled: true
+  publication_appendage_sanitize_min_pixels: 20
+  publication_appendage_sanitize_min_clean_fraction: 0.15
+  # Under a confirmed sanitizer lineage, retain the higher-recall 0.20
+  # immutable-appearance core only when a strict 0.42 current-frame core can
+  # align one fixed pre-occlusion target anchor and the broad core overlaps at
+  # least half of both masks.  The anchor is proof-only and never ratchets or
+  # grants full/trusted authority; complete occlusion remains fail-closed.
+  publication_broad_visible_core_probability_threshold: 0.20
+  publication_broad_visible_core_min_anchor_overlap_fraction: 0.50
+  publication_broad_visible_core_min_candidate_overlap_fraction: 0.50
+  publication_broad_visible_core_max_anchor_area_ratio: 1.50
+  publication_broad_visible_core_alignment_radius_px: 6
+  # Deep hand occlusion is a separate, two-frame transaction.  It never
+  # lowers the ordinary 0.50/0.50 broad-core gate above.  Each exact frame
+  # must retain enough immutable target appearance inside the same fixed
+  # full-target anchor, and a second RGB-D tuple must agree locally before a
+  # current visible fragment is exposed.  These reviewed floors separate all
+  # source225--242 visible samples from all 50 reviewed complete-absence
+  # samples; the pair gates alone are deliberately not trusted because an
+  # absent hand mask can also be temporally stable.
+  deep_occlusion_broad_min_broad_raw_fraction: 0.32
+  deep_occlusion_broad_min_strict_raw_fraction: 0.19
+  deep_occlusion_broad_min_fixed_anchor_fraction: 0.29
+  deep_occlusion_broad_min_candidate_broad_fraction: 0.74
+  deep_occlusion_broad_min_pair_iou: 0.45
+  deep_occlusion_broad_min_pair_previous_coverage: 0.56
+  deep_occlusion_broad_min_pair_current_coverage: 0.60
+  deep_occlusion_broad_max_pair_center_step_px: 12.0
+  deep_occlusion_broad_max_pair_area_ratio: 1.50
+  deep_occlusion_broad_alignment_radius_px: 12
+  # While formally LOST, the first clean visible core remains fail-closed.
+  # A second independent RGB-D tuple may expose only this non-authoritative
+  # core while the ordinary third-evidence recovery remains pending.
+  lost_reappearance_broad_probability_threshold: 0.20
+  lost_reappearance_strict_probability_threshold: 0.42
+  lost_reappearance_min_candidate_raw_fraction: 0.50
+  lost_reappearance_min_strict_raw_fraction: 0.50
+  lost_reappearance_min_candidate_anchor_overlap_fraction: 0.90
+  lost_reappearance_min_anchor_candidate_overlap_fraction: 0.20
+  lost_reappearance_anchor_alignment_radius_px: 12
+  lost_reappearance_min_pair_bbox_iou: 0.60
+  lost_reappearance_max_pair_center_step_px: 8.0
+  lost_reappearance_min_pair_seed_coverage: 0.90
+  lost_reappearance_max_pair_area_ratio: 2.50
+  lost_reappearance_pair_alignment_radius_px: 12
+  # A clipped initial target can later be merged with an approaching hand by
+  # temporal SAM. Learn a fine immutable Lab a/b foreground/background table
+  # only from that clipped seed, then require strong seed coverage on two
+  # fresh interior components before the existing LOST transaction publishes.
+  # This selector is non-authoritative and never relaxes complete-occlusion
+  # fail-closed behavior or the normal full/trusted geometry gates.
+  boundary_seed_fine_recovery_enabled: true
+  boundary_seed_fine_lab_bins: 16
+  boundary_seed_fine_foreground_erode_px: 7
+  boundary_seed_fine_background_inner_px: 15
+  boundary_seed_fine_background_outer_px: 31
+  boundary_seed_fine_hist_sigma: 0.8
+  boundary_seed_fine_probability_threshold: 0.60
+  # A clipped seed can contain only the cylinder side.  Recover a brighter
+  # rigid top surface only from the relaxed component which contains the
+  # already-proven strict core; detached/larger hand components never win.
+  boundary_seed_fine_relaxed_probability_threshold: 0.40
+  boundary_seed_fine_relaxed_max_area_ratio: 1.35
+  boundary_seed_fine_relaxed_min_strict_retention: 0.98
+  boundary_seed_fine_relaxed_max_bbox_extent_ratio: 1.10
+  boundary_seed_fine_relaxed_max_center_step_px: 8.0
+  boundary_seed_fine_min_pixels: 80
+  boundary_seed_fine_anchor_alignment_radius_px: 12
+  boundary_seed_fine_min_candidate_anchor_fraction: 0.45
+  boundary_seed_fine_min_anchor_coverage_fraction: 0.80
+  boundary_seed_fine_rearmed_min_anchor_coverage_fraction: 0.65
+  boundary_seed_fine_raw_release_fraction: 0.70
+  boundary_seed_fine_min_pair_bbox_iou: 0.55
+  boundary_seed_fine_max_pair_center_step_px: 30.0
+  boundary_seed_fine_min_pair_seed_coverage: 0.85
+  boundary_seed_fine_max_pair_area_ratio: 1.50
+  boundary_seed_fine_pair_alignment_radius_px: 24
+  # A confirmed sanitizer-owned core may contract concentrically only when the
+  # exact raw SAM mask still covers the lost target pixels and a low-target-
+  # appearance component connects at least this fraction of that loss to the
+  # outside of the aligned target. This is an occluder proof, not a relaxed
+  # erosion/scale threshold; the persistent 15% anchor floor remains fixed.
+  publication_external_occluder_min_explained_loss_fraction: 0.90
+  # Private two-exact-frame TRACKING->LOST contraction handoff.  These do not
+  # relax any normal guard: both frames must independently prove the same
+  # outside-occluder invasion against one fixed pre-transition anchor.  The
+  # first frame is always empty to consumers; the second exposes only its
+  # current exact appearance core as non-authoritative visible evidence.
+  tracking_contraction_seed_max_retention: 0.65
+  tracking_contraction_min_core_raw_fraction: 0.15
+  tracking_contraction_min_fixed_anchor_fraction: 0.15
+  # The first frame has already proven an outside low-appearance occluder.
+  # A moving finger can remove roughly 30% more of that visible core on the
+  # second independent RGB-D tuple; fixed-anchor, identity, depth and pair
+  # motion gates still apply, and internal erosion cannot arm this path.
+  tracking_contraction_min_pair_retention: 0.70
+  tracking_contraction_min_relocated_pair_area_ratio: 0.80
+  tracking_contraction_min_pair_raw_bbox_iou: 0.35
+  tracking_contraction_max_pair_center_step_px: 12.0
+  tracking_contraction_alignment_radius_px: 12
+  # A real bounce or sharp turn conflicts with the old constant-velocity ray.
+  # Keep the first two identity-gated candidates unpublished; three coherent
+  # candidates reset committed velocity from their latest pair. A one-frame
+  # teleport/hand candidate therefore never changes tracking state.
+  component_maneuver_recovery_enabled: true
+  component_maneuver_confirm_frames: 3
+  component_maneuver_confirm_max_frame_gap: 3
+  component_maneuver_confirm_max_timestamp_step_s: 0.20
+  component_maneuver_confirm_max_area_ratio: 1.60
+  component_maneuver_confirm_max_depth_step_m: 0.030
+  # Recovery candidates may arrive after a LOST frame plus two skipped exact
+  # RGB-D frames. They are still predicted from the last committed target;
+  # this wider horizon does not learn from tentative candidates.
+  occlusion_recovery_motion_max_frame_gap: 6
+  # Legacy-only fixed-frame identity boundary and KLT probation controls.
+  component_max_motion_px: 24.0
+  component_motion_bbox_diagonal_ratio: 0.80
+  component_max_motion_cap_px: 100.0
+  # Only a RANSAC/KLT estimate above this confidence may use the full guarded
+  # flow displacement range. Low-confidence flow never relaxes identity gates.
+  component_flow_motion_min_confidence: 0.45
+  # The first KLT-supported motion above the strict 24 px identity bound is
+  # internal-only. Freeze appearance while the provider confirms later exact
+  # frames; no point cloud from that first observation is published.
+  motion_probation_appearance_freeze_frames: 3
+  component_min_score_margin: 0.04 # reject near-tied connected components
+  min_area_ratio: 0.35
+  state_update_alpha: 0.65
+  lost_roi_growth: 0.25
+  max_roi_scale: 4.0
+  background_ring_scale: 1.8
+  background_exclusion_dilation: 7
+  background_likelihood_weight: 1.0
+  # Learn target appearance from a deep core, while background exclusion uses
+  # the full validated semantic seed. Small/thin masks safely fall back to the
+  # full seed unless erosion retains both >=20 px and >=25% of the seed.
+  appearance_seed_erode: 11
+  box_prompt_seed_scale: 0.65
+  hue_bins: 24
+  saturation_bins: 16
+  value_bins: 16
+  histogram_smoothing: 1.0e-6
+  appearance_anchor_weight: 0.70
+  appearance_update_alpha: 0.025
+  appearance_update_min_confidence: 0.82
+  # Learn illumination changes only from the eroded intersection between the
+  # current mask and affine-warped previous mask, never from uncertain edges.
+  appearance_update_erode_kernel: 3
+  appearance_update_min_core_pixels: 40
+  appearance_update_min_core_fraction: 0.35
+  appearance_update_min_flow_confidence: 0.35
+  reinit_min_color_score: 0.62
+  # Text-prompt mode tracks a category, not a physically distinguishable
+  # instance. A unique globally detected category may therefore reappear far
+  # from its previous image position; appearance/depth/size gates still apply.
+  reinit_max_center_jump_px: 0.0
+  reinit_max_depth_jump_m: 0.12
+  # A global text-prompt retry may recover the requested category at a very
+  # different camera depth.  Zero disables only that prompt-reacquisition raw
+  # depth-jump check; online SAM2 still uses reinit_max_depth_jump_m strictly.
+  prompt_reinit_max_depth_jump_m: 0.0
+  # Complete occlusion destroys KLT. The generic appearance/depth recovery
+  # below may therefore recover without flow, but only after a unique candidate
+  # remains consistent for multiple fresh frames. Until confirmation, packets
+  # remain invalid and carry no object payload.
+  lost_recovery_requires_flow: true
+  occlusion_recovery_enabled: true
+  # LOST recovery is progressive. The first frames search close to the last
+  # position; after two rejected frames, scan the complete camera image using
+  # the appearance learned from the text-prompt mask. No hue/category is
+  # hardcoded. This is the prompt-category recovery policy requested here.
+  occlusion_recovery_flow_grace_frames: 2
+  occlusion_global_search_enabled: true
+  occlusion_global_search_after_frames: 2
+  occlusion_global_color_probability_threshold: 0.56
+  occlusion_global_depth_tolerance_m: 0.10
+  occlusion_global_max_depth_jump_m: 0.10
+  occlusion_global_min_confidence: 0.68
+  occlusion_global_min_score_margin: 0.08
+  # Global scale is measured against the immutable initial prompt mask, never
+  # the last partially occluded mask. Perspective changes are allowed, but a
+  # 25%-area colour fragment cannot become the recovered target.
+  occlusion_global_min_area_ratio: 0.55
+  occlusion_global_max_area_ratio: 2.50
+  occlusion_global_min_bbox_area_ratio: 0.50
+  occlusion_global_max_bbox_area_ratio: 2.50
+  # Nearby same-depth colour islands can be highlights/holes on one object.
+  # Reconstruct only their tight depth-supported convex hull; distant objects
+  # or a closer hand are never bridged.
+  occlusion_fragment_merge_enabled: true
+  occlusion_fragment_max_gap_px: 12
+  occlusion_fragment_max_depth_spread_m: 0.08
+  occlusion_fragment_depth_tolerance_m: 0.05
+  occlusion_recovery_confirm_frames: 2
+  occlusion_recovery_search_scale: 4.0
+  occlusion_recovery_max_center_displacement_px: 42.0
+  occlusion_recovery_color_probability_threshold: 0.60
+  occlusion_recovery_min_confidence: 0.68
+  occlusion_recovery_min_score_margin: 0.08
+  occlusion_recovery_min_area_ratio: 0.60
+  occlusion_recovery_max_area_ratio: 1.60
+  occlusion_recovery_min_bbox_area_ratio: 0.60
+  occlusion_recovery_max_bbox_area_ratio: 1.60
+  occlusion_recovery_min_last_bbox_iou: 0.15
+  occlusion_recovery_max_depth_jump_m: 0.06
+  occlusion_recovery_min_valid_depth_ratio: 0.25
+  # Two matching observations may have up to two intervening RGB-D dropouts.
+  # In timestamp_velocity mode their positions are independently checked
+  # against committed velocity, rather than the old fixed 12 px/frame gate.
+  # Appearance/depth/area and candidate-uniqueness gates remain mandatory.
+  occlusion_recovery_confirm_max_frame_gap: 3
+  occlusion_recovery_confirm_max_timestamp_step_s: 0.20
+  # Legacy-only pairwise center threshold.
+  occlusion_recovery_confirm_center_step_px: 12.0
+  occlusion_recovery_confirm_bbox_iou: 0.35
+  occlusion_recovery_confirm_area_ratio: 1.60
+  occlusion_recovery_confirm_depth_step_m: 0.030
+  # Recovery publication selector. ``unified_three_evidence`` carries the two
+  # exact SAM2 recovery observations into this final gate and requires only one
+  # later distinct RGB-D observation (three pieces of evidence total). Set
+  # ``legacy_double_confirm`` to recover the previous SAM2-2 + provider-3
+  # behavior without changing code.
+  recovery_publication_mode: unified_three_evidence
+  # Legacy/fallback final publication quarantine shared by adaptive, online-
+  # SAM2 and prompt recovery. It is still used for non-SAM recovery in v2.
+  recovery_publish_confirm_frames: 3
+  recovery_publish_confirm_max_frame_gap: 1
+  recovery_publish_confirm_min_bbox_iou: 0.35
+  recovery_publish_confirm_max_area_ratio: 1.35
+  recovery_publish_confirm_max_depth_step_m: 0.04
+  recovery_publish_confirm_max_center_step_m: 0.06
+  # A two-SAM recovery mask with a large region outside the aligned object is
+  # carried only as an appearance-sanitized, non-authoritative 2/3 reference.
+  recovery_probation_sanitize_min_extra_fraction: 0.25
+  # A clean translating target can have temporary registration-only extra
+  # pixels while retaining the same area.  Treat the second-SAM candidate as
+  # a raw hand/background union only when it is also materially larger than
+  # the aligned clean target.
+  recovery_probation_sanitize_min_area_ratio: 1.35
+  # Either bbox overlap or coherent image-center motion may satisfy the 2D
+  # gate. Device timestamps also prevent a GUI/inference stall from counting
+  # two widely separated sensor observations as consecutive evidence.
+  recovery_publish_confirm_max_center_step_px: 24.0
+  # A skipped 30 Hz sensor frame can make two otherwise consistent accepted
+  # observations 0.13 s apart. Let the existing 0.20 s formal publication
+  # stall guard own that bound instead of rejecting a valid recovery at 0.12 s.
+  recovery_publish_confirm_max_timestamp_step_s: 0.20
+  # V2 can bridge up to two exact-frame inference misses. Spatial continuity is
+  # evaluated against a timestamped constant-velocity prediction, with bounded
+  # acceleration and independent 2-D/3-D/depth speed caps. This accepts a fast
+  # ball that has little bbox IoU while rejecting a teleport to another object.
+  recovery_publish_unified_max_frame_gap: 3
+  recovery_publish_unified_max_timestamp_step_s: 0.20
+  recovery_publish_unified_max_center_speed_px_s: 2400.0
+  recovery_publish_unified_prediction_residual_bbox_diagonal_ratio: 0.80
+  recovery_publish_unified_prediction_residual_min_px: 12.0
+  recovery_publish_unified_prediction_residual_max_px: 48.0
+  recovery_publish_unified_max_acceleration_px_s2: 12000.0
+  recovery_publish_unified_max_depth_speed_m_s: 1.0
+  recovery_publish_unified_max_center_speed_m_s: 2.0
+  recovery_publish_min_valid_depth_ratio: 0.35
+  recovery_publish_max_depth_spread_m: 0.18
+  occlusion_recovery_appearance_freeze_frames: 5
+  # Sparse KLT predicts the previous semantic mask between prompt-model calls.
+  # Forward/backward and RANSAC gates discard unreliable flow before use.
+  optical_flow_enabled: true
+  # Corner detection only needs the prior-mask neighborhood. Optical flow and
+  # every safety gate below still run in the full native image coordinates.
+  flow_feature_crop_enabled: true
+  flow_feature_crop_halo_px: 4
+  flow_max_corners: 80
+  flow_min_points: 4
+  flow_quality_level: 0.01
+  flow_min_distance: 4.0
+  flow_window_size: 21
+  flow_pyramid_levels: 3
+  flow_fb_max_error: 1.5
+  flow_min_inlier_ratio: 0.55
+  flow_ransac_reprojection_px: 2.5
+  flow_min_scale: 0.75
+  flow_max_scale: 1.35
+  flow_max_rotation_deg: 35.0
+  flow_max_displacement_px: 100.0
+  # Motion-compensated Schmitt mask: weak evidence can retain a predicted
+  # pixel, while any new silhouette pixel must pass the stricter enter gate.
+  # Dilation stays at one for backwards config compatibility and is no longer
+  # used to grow weak evidence outside the affine-warped prior.
+  flow_mask_dilation: 1
+  flow_color_probability_floor: 0.42
+  flow_enter_color_probability_threshold: 0.64
+  flow_min_mask_overlap: 0.15
+  # Same-frame contour gate after KLT affine compensation. It catches a mask
+  # jump without restricting legitimate image-space translation/scale.
+  # Keep this hard-veto range aligned with online_sam2 tracked consensus.
+  # The narrower temporal smoothing range below remains 0.85..1.15 and simply
+  # bypasses smoothing on a larger valid semantic correction.
+  tracked_motion_min_area_ratio: 0.60
+  tracked_motion_max_area_ratio: 1.60
+  tracked_motion_min_mask_iou: 0.50
+  tracked_motion_min_flow_confidence: 0.45
+  # Affine-warp the previous soft silhouette before blending it with the
+  # current raw component. A missing old edge is held for one frame; a new
+  # edge must persist for two frames. This removes reflective-edge flicker
+  # without applying a stationary-coordinate low-pass to a moving object.
+  temporal_mask_stability_enabled: true
+  temporal_mask_min_flow_confidence: 0.45
+  # Smooth or reflective objects may not expose four stable KLT corners. In
+  # that case use the already color/depth-validated current component only to
+  # estimate a bounded translation/scale transform; it cannot run when the
+  # target is absent and therefore cannot resurrect a stale mask.
+  temporal_mask_geometry_fallback_enabled: true
+  # Zero reuses the scale-aware component motion range. This fallback runs only
+  # after a current color/depth component has already passed identity gates.
+  temporal_mask_geometry_max_displacement_px: 0.0
+  temporal_mask_geometry_min_scale: 0.85
+  temporal_mask_geometry_max_scale: 1.18
+  temporal_mask_geometry_max_anisotropy: 1.20
+  temporal_mask_min_raw_iou: 0.65
+  temporal_mask_min_raw_area_ratio: 0.85
+  temporal_mask_max_raw_area_ratio: 1.15
+  temporal_mask_current_weight: 0.45
+  temporal_mask_threshold: 0.50
+  temporal_mask_max_hold_pixels: 48
+  temporal_mask_max_hold_fraction: 0.08
+  temporal_mask_retention_depth_tolerance_m: 0.045
+  temporal_mask_retention_depth_gate_enabled: false
+
+pointcloud:
+  num_points: 1024
+  history_len: 4
+  use_rgb: false
+  erode_kernel: 3
+  # A guarded_v2 sanitizer core is already the exact intersection of current
+  # SAM, motion-aligned target support and immutable target appearance. Keep
+  # those sparse visible pixels during hand occlusion; raw masks still use the
+  # normal 3x3 erosion above.
+  sanitized_core_erode_kernel: 0
+  stride: 1
+  voxel_size: 0.003
+  remove_outliers: true
+  outlier_nb_neighbors: 20
+  outlier_std_ratio: 1.5
+  # Keep object_pcd/object_pcd_history in robot_base for this deployment.
+  center_policy_points: false
+  # The object may sit on the table or on a raised box. Do not assume one
+  # world-space support height; downstream policy projection uses the fresh
+  # semantic mask's robust depth instead.
+  support_plane_abcd: null
+  support_plane_min_clearance_m: 0.0
+  workspace_min: null   # e.g. [-0.8, -0.8, -0.1] in base frame
+  workspace_max: null   # e.g. [ 0.8,  0.8,  1.0]
+
+# Fixed-camera eye-to-hand transform. Fail closed for robot-facing output.
+extrinsics:
+  calibration_file: calibrations/fr3_d435_eye_to_hand.yaml
+  require_calibration: true
+  require_quality_pass: true
+  strict_camera_serial: true
+  calibrated: null
+  base_frame: robot_base
+  camera_frame: camera_color_optical_frame
+  T_base_camera:
+    - [1.0, 0.0, 0.0, 0.0]
+    - [0.0, 1.0, 0.0, 0.0]
+    - [0.0, 0.0, 1.0, 0.0]
+    - [0.0, 0.0, 0.0, 1.0]
+
+# Conservative first-commissioning envelope for one-shot XY hover validation.
+# The controller never plans descent: it rises if needed, then translates.
+hover:
+  object_workspace_min: [0.505, 0.008, -0.05]
+  object_workspace_max: [0.650, 0.104, 0.30]
+  eef_workspace_min: [0.480, -0.020, 0.300]
+  eef_workspace_max: [0.660, 0.130, 0.360]
+  target_z_min: 0.320
+  target_z_max: 0.345
+  hover_clearance: 0.150
+  descent_clearance_guard: 0.015
+  descent_velocity: 0.005
+  max_descent_xy_error: 0.005
+  max_top_drift: 0.010
+  stable_frames: 30
+  stable_seconds: 1.0
+  max_packet_age: 0.15
+  motion_max_packet_age: 0.25
+  max_center_p95: 0.005
+  max_center_step: 0.010
+  max_fitted_speed: 0.010
+  max_target_drift: 0.020
+  min_raw_points: 200
+  max_segment_distance: 0.030
+  max_velocity: 0.010
+  min_segment_duration: 3.0
+  min_joint_margin: 0.05
+  min_control_success_rate: 0.95
+  max_final_error: 0.015
+
+sam2:
+  # The camera/control environment intentionally has no Torch. Box-prompt
+  # initialization is performed by the separate GPU SAM2 service below.
+  enabled: false
+  require_for_bbox_init: false
+  checkpoint: /home/qiaoguanren/code/franka/third_party/sam2/checkpoints/sam2.1_hiera_tiny.pt
+  model_cfg: configs/sam2.1/sam2.1_hiera_t.yaml
+  device: cuda
+  reinit_every: 10
+  score_threshold: 0.5
+  multimask_output: false
+  keep_largest_component: true
+  min_area: 20
+  max_mask_area_ratio: 4.0 # reject SAM2 masks much larger than the prompt box
+  max_bbox_area_ratio: 6.0
+
+# Stateful official SAM2 video predictor. In the deployed semantic_sam2 mode,
+# this service is the sole mask owner; RGB-D/adaptive gates are not in the mask
+# path. Tiny/512/BF16+TF32 is validated above 20 Hz on this RTX 3060.
+online_sam2:
+  enabled: true
+  guarded_v2_semantic_primary: true
+  # Treat the box-prompt seed as provisional. Two adjacent, finally-published
+  # exact SAM2 masks may commission frozen appearance/geometry once during
+  # this bounded startup interval; recovery, sanitization, and boundary masks
+  # are never eligible.
+  guarded_v2_bootstrap_commission_enabled: true
+  guarded_v2_bootstrap_max_frame_delta: 12
+  guarded_v2_bootstrap_max_elapsed_s: 0.40
+  guarded_v2_bootstrap_candidate_max_frame_gap: 3
+  guarded_v2_bootstrap_candidate_max_timestamp_gap_s: 0.20
+  guarded_v2_bootstrap_stable_max_area_ratio: 1.05
+  guarded_v2_bootstrap_stable_max_extent_ratio: 1.08
+  guarded_v2_bootstrap_max_registered_contraction_fraction: 0.05
+  guarded_v2_bootstrap_min_supported_extent_ratio: 0.90
+  guarded_v2_bootstrap_max_supported_centroid_offset_ratio: 0.075
+  # A hand-occluded provisional seed can bias the immutable appearance
+  # centroid.  This slightly wider value is consulted only for a bound raw
+  # bootstrap token before one-shot commissioning; normal publication keeps
+  # the stricter 0.075 limit above.
+  guarded_v2_bootstrap_partial_seed_max_supported_centroid_offset_ratio: 0.10
+  guarded_v2_bootstrap_max_unsupported_bbox_margin_ratio: 0.075
+  guarded_v2_bootstrap_max_center_speed_px_s: 2400.0
+  guarded_v2_bootstrap_max_depth_step_m: 0.04
+  # SAM2 Video alone owns the robot-facing binary silhouette. Depth/point-cloud
+  # quality and the adaptive tracker cannot alter or invalidate this mask.
+  mask_publication_mode: semantic_sam2
+  # A newly selected ROI must be segmented by SAM2 itself before either the
+  # adaptive tracker or temporal memory is initialized. Never seed temporal
+  # SAM2 from a lower-quality GrabCut silhouette in deployment.
+  require_for_bbox_init: true
+  # Clean the first semantic silhouette with the D435 depth connected to the
+  # manually selected object centre before seeding either temporal owner.
+  # Keep the complete semantic SAM2 silhouette. D435 mixed/background depth
+  # at object edges is filtered in the formal policy projector instead of
+  # deleting valid RGB mask pixels (notably the sphere's visible top edge).
+  bbox_init_depth_refine_enabled: false
+  bbox_init_depth_seed_scale: 0.35
+  bbox_init_depth_tolerance_m: 0.055
+  bbox_init_depth_min_seed_pixels: 20
+  bbox_init_depth_min_retained_ratio: 0.20
+  bbox_init_depth_morph_kernel: 3
+  # A box prompt is not a crop inside SAM2, so explicitly bound only the first
+  # accepted silhouette to the operator-selected object box (+2 px antialias
+  # allowance).  Temporal tracking is unconstrained after initialization and
+  # can follow a moving object across the image.
+  bbox_init_clip_to_prompt: true
+  bbox_init_clip_margin_px: 2
+  service_addr: tcp://127.0.0.1:5558
+  service_autostart: true
+  # Covers one cold official VOS torch.compile prewarm before the service
+  # binds/advertises READY. Runtime request/deadline values below are unchanged.
+  startup_timeout_s: 300.0
+  request_timeout_s: 0.50
+  # SAM2-tiny measured ~18.6 ms hot on this RTX 3060.  Give it one bounded
+  # 45 ms same-frame window at 20 Hz so its accepted silhouette is normally
+  # the actual policy mask; Franka's native servo runs in another process/core.
+  tracked_frame_wait_timeout_s: 0.045
+  tracked_publication_source: sam2
+  # If adaptive tracking is invalid, temporal SAM2 can provide recovery
+  # evidence.  Hot inference measures roughly 27--34 ms, so the former 30 ms
+  # deadline rejected correct masks.  Keep the exact-frame wait bounded to
+  # 45 ms; a late mask is never paired with newer depth and is consumed only
+  # to advance/check the temporal session.
+  frame_wait_timeout_s: 0.045
+  # 45 ms fits one 20 Hz period while leaving 5 ms for publication/consumer.
+  semantic_frame_wait_timeout_s: 0.045
+  # At the next tick, use a bounded 15 ms tail to retire a just-late old
+  # inference (its mask is discarded) before submitting the current frame.
+  # This prevents a normal 46--54 ms tail from creating a second busy hole.
+  semantic_previous_frame_grace_s: 0.015
+  # The first temporal propagate after a new box prompt is a CUDA/kernel cold
+  # path (~59--62 ms on this host), which otherwise creates a deadline miss
+  # followed by a busy frame at 20 Hz. During camera-only initialization run
+  # repeated duplicate-frame tracks until two consecutive calls have at least
+  # 5 ms headroom under the formal 45 ms deadline, discard every mask, then
+  # restore the original accepted frame/mask with an exact initialize before
+  # rollout. No stale or duplicate mask can become a policy observation.
+  bbox_init_discarded_track_prewarm: true
+  bbox_init_prewarm_max_attempts: 6
+  bbox_init_prewarm_required_stable_tracks: 2
+  bbox_init_prewarm_max_rpc_ms: 40.0
+  initialization_timeout_s: 2.0
+  checkpoint: /home/qiaoguanren/code/franka/third_party/sam2/checkpoints/sam2.1_hiera_tiny.pt
+  model_config: configs/sam2.1/sam2.1_hiera_t.yaml
+  device: cuda
+  image_size: 512
+  amp_dtype: bfloat16
+  # Official SAM2 VOS-optimized compilation path. Keep this explicit in
+  # service health and replay provenance; false remains available for A/B.
+  vos_optimized: true
+  # Retain torch.compile + max autotuning, but disable CUDA Graph Trees.
+  # SAM2's position-encoding cache keeps CUDA tensors across video frames;
+  # CUDA Graph storage reuse can overwrite those tensors on PyTorch 2.5.
+  vos_compile_mode: max-autotune-no-cudagraphs
+  reset_every_frames: 0
+  min_mask_area: 20
+  object_score_threshold: 0.0
+  # The remaining tracked/recovery options below are used only by the optional
+  # adaptive_fusion mode. They are inert in semantic_sam2 mode.
+  tracked_min_area_ratio: 0.60
+  tracked_max_area_ratio: 1.60
+  tracked_min_iou: 0.40
+  tracked_min_adaptive_coverage: 0.65
+  tracked_min_online_coverage: 0.65
+  # TRACKED-state hand-attachment guard.  A fast target may translate freely,
+  # but its semantic bbox cannot silently grow far beyond the immutable first
+  # frame.  SAM-only contour pixels outside a 2px adaptive-core allowance must
+  # also resemble the target's immutable appearance; otherwise the clean
+  # adaptive mask is published for that frame.
+  tracked_min_initial_bbox_area_ratio: 0.45
+  tracked_max_initial_bbox_area_ratio: 1.35
+  tracked_extra_core_dilation_px: 2
+  tracked_extra_appearance_min_pixels: 24
+  tracked_extra_appearance_min_fraction: 0.04
+  tracked_extra_appearance_probability_threshold: 0.42
+  tracked_extra_min_appearance_support_ratio: 0.65
+  tracked_extra_min_appearance_mean: 0.45
+  # Independent exact-SAM temporal owner. These checks compare against the
+  # last SAM mask which crossed the final publication boundary, never against
+  # a disagreeing adaptive mask. Device-time velocity and log-area rate admit
+  # fast translation plus gradual perspective scale while rejecting a
+  # one-frame teleport/hand switch. History advances only after final publish.
+  trusted_max_timestamp_step_s: 0.20
+  trusted_max_center_speed_px_s: 2400.0
+  trusted_max_log_area_rate_s: 12.0
+  trusted_max_depth_step_m: 0.04
+  trusted_max_depth_speed_m_s: 1.0
+  trusted_max_initial_area_ratio: 2.50
+  trusted_max_initial_bbox_area_ratio: 2.50
+  trusted_min_valid_depth_ratio: 0.35
+  trusted_max_depth_spread_m: 0.18
+  trusted_appearance_probability_threshold: 0.50
+  trusted_min_appearance_support_ratio: 0.65
+  trusted_min_appearance_mean: 0.45
+  trusted_extra_core_dilation_px: 2
+  trusted_extra_appearance_min_pixels: 24
+  trusted_extra_appearance_min_fraction: 0.04
+  trusted_prediction_residual_min_px: 12.0
+  trusted_prediction_residual_bbox_diagonal_ratio: 0.80
+  trusted_prediction_residual_max_px: 72.0
+  trusted_max_acceleration_px_s2: 12000.0
+  # After a real occlusion exceeds the 0.20 s prediction horizon, use actual
+  # device time for the average-speed bound, but never allow reacquisition to
+  # span more than this horizon or 60% of the image diagonal. This only feeds
+  # the 2-exact-SAM + later-distinct-RGB-D recovery probation; it is not a
+  # stale-mask publication path.
+  trusted_recovery_max_reacquire_horizon_s: 2.0
+  trusted_recovery_max_displacement_image_diagonal_ratio: 0.60
+  # Only after two independently coherent exact SAM masks may the stale
+  # adaptive fallback be tentatively realigned. Perspective shrink is allowed;
+  # maximum-size/appearance/final-publication guards stay enabled.
+  trusted_reinit_min_area_vs_initial: 0.05
+  trusted_reinit_min_bbox_area_vs_initial: 0.05
+  trusted_recovery_max_area_ratio_cap: 2.20
+  # LOST: immutable prompt-scale and RGB-D quality gates run before the normal
+  # appearance/depth reinitialize gate. Two exact-frame candidates must agree
+  # before tracker mutation. In unified mode they count as evidence 1/3 and 2/3
+  # rather than starting a second three-frame quarantine.
+  recovery_min_area_ratio: 0.40
+  recovery_max_area_ratio: 1.80
+  recovery_min_bbox_area_ratio: 0.35
+  recovery_max_bbox_area_ratio: 2.20
+  recovery_min_valid_depth_ratio: 0.35
+  recovery_max_depth_spread_m: 0.18
+  recovery_confirm_frames: 2
+  # Allow the two exact SAM2 recovery observations to have up to two skipped
+  # inference/deadline frames between them. Every mask remains tied to its own
+  # RGB-D frame; a late mask is never applied to current depth.
+  recovery_confirm_max_frame_gap: 3
+  recovery_confirm_min_bbox_iou: 0.50
+  recovery_confirm_max_area_ratio: 1.35
+  recovery_confirm_max_depth_step_m: 0.04
+  recovery_confirm_max_timestamp_step_s: 0.20
+  recovery_confirm_max_center_speed_px_s: 2400.0
+  recovery_confirm_max_depth_speed_m_s: 1.0
+
+prompting:
+  # Verified automatic discovery front-end. YOLO-World searches exact D435
+  # frames for the text category; its rectangle is used only as a native box
+  # prompt for online SAM2. The rectangle itself is never a policy mask.
+  detector_backend: yolo_world
+  service_addr: tcp://127.0.0.1:5557
+  service_autostart: true
+  service_device: cuda
+  yolo_world_weights: /home/qiaoguanren/code/franka/third_party/long_vos_clean/weights/yolov8s-worldv2.pt
+  # The small 35-50 px cube scores around 0.002-0.010 with a true custom
+  # vocabulary. Keep low-score proposals, then rank them by detector evidence
+  # and any explicit colour word. Do not bias automatic discovery toward a
+  # fixed image region: object reachability belongs to a later 3-D check, and
+  # an image-space prior previously made a 0.003 background proposal outrank a
+  # 0.587 blue-ball proposal after the ball moved left in the image.
+  yolo_world_confidence: 0.001
+  yolo_world_image_size: 640
+  # Optional diagnostic/instance-selection hint only. Production text
+  # discovery is global; no fixed screening region participates in ranking.
+  search_reference_roi_xyxy: null
+  # Used only by the optional Grounding-DINO compatibility backend.
+  mask_backend: sam1
+  startup_timeout_s: 20.0
+  request_timeout_s: 0.25
+  box_threshold: 0.001
+  text_threshold: 0.20
+  mask_threshold: 0.50
+  top_k: 20
+  # 20 Hz exact-frame category search while no target is committed. Once found,
+  # SAM2 owns the per-frame mask and the detector is idle until tracking is lost.
+  search_interval_s: 0.05
+  # Dynamic entry admission for open-vocabulary proposals. Patterned beanbags
+  # can give low-confidence false proposals on static lab equipment. During
+  # target discovery, accept only compact candidates which either contain
+  # current-frame motion or have independently strong detector confidence.
+  # Ratios use the shorter image side, so this remains identical at 424x240
+  # and native 848x480. SAM2, not this rectangle, owns the published mask.
+  entry_candidate_filter_enabled: true
+  entry_candidate_min_extent_ratio: 0.03
+  entry_candidate_max_extent_ratio: 0.15
+  entry_candidate_max_aspect_ratio: 2.5
+  entry_candidate_motion_difference: 10
+  entry_candidate_min_motion_fraction: 0.15
+  entry_candidate_strong_static_score: 0.05
+  auto_reacquire: true
+  global_reacquire: true
+  # Keep exact RGB-D frames while asynchronous semantics runs. A valid source
+  # mask is propagated through a fresh generic tracker to the exact newest
+  # buffered frame. Any invalid intermediate update fails closed and retries.
+  replay_buffer_s: 2.0
+  replay_max_frames: 12
+  # Deprecated fixed-scale translation fallback. It stays off because a high
+  # template score does not prove pixel-accurate alignment on the current RGB-D.
+  relocate_stale_mask: false
+  stale_mask_after_frames: 3
+  stale_mask_min_score: 0.70
+  stale_mask_min_score_margin: 0.04
+  # Start GPU semantic fallback after about 0.1 s. The per-frame RGB-D recovery
+  # keeps running concurrently and wins if it recovers before the response.
+  reacquire_lost_frames: 3
+  reacquire_cooldown_s: 0.5
+
+runtime:
+  # Keep only Open3D active by default. Running OpenCV-Qt and Open3D/GLFW GUI
+  # backends in one process produces the non-fatal QObject::moveToThread spam
+  # seen in the cover/uncover log. Pass --vis --no_show_pcd for RGB-mask only.
+  vis: false
+  show_pcd: true
+  # One Open3D window: dim RGB scene + orange segmented object, all in robot_base.
+  show_scene_pcd: true
+  pcd_point_size: 3.0
+  scene_stride: 4
+  scene_update_every: 2
+  scene_brightness: 0.32
+  scene_color_floor: 0.08 # keep the black table visible against the 0.02 background
+  # Display-only marker: 10 cm requested clearance + 1.5 cm depth/calibration guard.
+  goal_clearance_m: 0.115
+  publish_zmq: false
+  zmq_addr: tcp://127.0.0.1:5556
+  max_packet_hz: 30
+  # Acceptance threshold shown in live stats after the 30-sample warmup.
+  min_packet_hz: 20
+  save_debug_masks: false
+  debug_masks_dir: mask_debug

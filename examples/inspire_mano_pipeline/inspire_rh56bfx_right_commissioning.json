@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "description": "Narrow-range first-motion calibration for RH56BFX-2R commissioning.",
+  "detector_confidence": 0.5,
+  "safety": {
+    "tracking_timeout_seconds": 0.75,
+    "valid_frames_to_arm": 5,
+    "arming_max_frame_gap_seconds": 0.25,
+    "arming_max_target_delta_units": 25,
+    "speed": 80,
+    "force_limit": 80,
+    "control_hz": 20.0,
+    "feedback_hz": 5.0,
+    "require_depth_for_hardware": true,
+    "min_palm_depth_m": 0.15,
+    "max_palm_depth_m": 1.50,
+    "preflight_stability_seconds": 0.15,
+    "preflight_max_angle_delta": 5,
+    "preflight_max_idle_current_ma": 300,
+    "stream_max_current_ma": 600
+  },
+  "axes": {
+    "pinky": {
+      "q_open": 0.0,
+      "q_closed": 1.47,
+      "command_open": 900,
+      "command_closed": 700,
+      "enabled": true,
+      "max_rate_units_per_second": 80.0
+    },
+    "ring": {
+      "q_open": 0.0,
+      "q_closed": 1.47,
+      "command_open": 900,
+      "command_closed": 700,
+      "enabled": true,
+      "max_rate_units_per_second": 80.0
+    },
+    "middle": {
+      "q_open": 0.0,
+      "q_closed": 1.47,
+      "command_open": 900,
+      "command_closed": 700,
+      "enabled": true,
+      "max_rate_units_per_second": 80.0
+    },
+    "index": {
+      "q_open": 0.0,
+      "q_closed": 1.47,
+      "command_open": 900,
+      "command_closed": 700,
+      "enabled": true,
+      "max_rate_units_per_second": 80.0
+    },
+    "thumb_bend": {
+      "q_open": 0.0,
+      "q_closed": 0.60,
+      "command_open": 900,
+      "command_closed": 750,
+      "enabled": true,
+      "max_rate_units_per_second": 60.0
+    },
+    "thumb_rotate": {
+      "q_open": 0.0,
+      "q_closed": 1.308,
+      "command_open": 700,
+      "command_closed": 300,
+      "enabled": false,
+      "max_rate_units_per_second": 60.0
+    }
+  }
+}

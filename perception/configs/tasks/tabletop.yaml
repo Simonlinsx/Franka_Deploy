@@ -1,0 +1,58 @@
+schema_version: 1
+kind: v94_task_profile
+name: tabletop
+description: Tabletop manipulation with the commissioned external D435.
+base_config: ../d435_default.yaml
+policy_rgbd_resolution: 424x240
+# Reuse the same commissioned camera/calibration while explicitly widening
+# this task's admissible measurement depth to 2.0 m.
+camera_contract_override: true
+commissioning_status: accepted
+robot_execution_enabled: true
+default_object_text: ball
+# Camera/model warm-up and both robot owners complete while the object is
+# stationary.  Only a fresh, area-consistent centroid displacement releases
+# the first 20 Hz policy/planner tick.  Empty-field entry is deliberately not
+# accepted for tabletop manipulation: the grounded object must first be seen
+# stable, preventing a hand/tool entering the image from arming the robot.
+rollout_trigger:
+  enabled: true
+  # Release the first 20 Hz planner tick as soon as fresh motion is detected.
+  # The v4 planner may begin its table-clear arm approach while the object is
+  # still on an external ramp, but its independent +/-15 mm Z capture gate
+  # prevents closure until the object enters the calibrated tabletop corridor.
+  mode: object_motion_only
+  maximum_wait_s: 20.0
+  poll_interval_s: 0.001
+  minimum_mask_area_px: 100
+  absent_arm_frames: 999
+  stable_arm_frames: 3
+  stable_max_centroid_speed_px_s: 10.0
+  trigger_min_centroid_speed_px_s: 25.0
+  trigger_min_displacement_px: 0.3
+  minimum_area_ratio: 0.75
+  maximum_area_ratio: 1.35
+config_overrides:
+  camera:
+    # The tabletop D435 sees the staging side of the mat at roughly 1.5 m.
+    # Keep this task-scoped: thrown-object profiles own their own calibrated
+    # ranges, while the canonical guarded-v2 acceptance config stays frozen.
+    z_max: 2.0
+    # Runtime evidence on the commissioned 848x480@30 camera showed the
+    # native color/depth phase drifting from 7.97 ms to 9.22 ms.  The former
+    # global 8 ms bound then rejected every fresh pair until the formal
+    # publication watchdog stopped the run.  Keep a task-local 12 ms bound:
+    # at the commissioned 0.4 m/s maximum it adds at most 1.6 mm of temporal
+    # registration uncertainty over the old bound, while remaining well
+    # below half a native 30 Hz frame period.
+    max_color_depth_timestamp_skew_s: 0.012
+  prompting:
+    # Reject static red/pink lab clutter before it can become a SAM2 owner.
+    # This is deliberately wider than the planner's 0.21 m correction radius:
+    # the operator may stage the object outside the catch point and roll it in.
+    grounding_workspace_center_base_m: [0.5896658057, -0.1356170101, 0.0522189354]
+    grounding_workspace_max_horizontal_distance_m: 2.0 # 0.40
+    # The real cylinder scores about 0.039 with the specific prompt while the
+    # fixed distractor is about 0.003.  Accept the real object even if the
+    # operator happens to hold it still; weaker static clutter still retries.
+    entry_candidate_strong_static_score: 0.03

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "description": "Right-hand thumb-rotation-only commissioning profile. The unverified sixth axis is limited to 900..800 around the observed idle angle 887; run only after an open-hand -20-unit nudge confirms physical direction and clearance.",
+  "detector_confidence": 0.5,
+  "temporal_filter": {
+    "axes": ["thumb_rotate"],
+    "median_window": 3,
+    "ema_alpha": 0.65
+  },
+  "safety": {
+    "tracking_timeout_seconds": 0.75,
+    "valid_frames_to_arm": 5,
+    "arming_max_frame_gap_seconds": 0.25,
+    "arming_max_target_delta_units": 15,
+    "speed": 60,
+    "force_limit": 80,
+    "control_hz": 20.0,
+    "feedback_hz": 5.0,
+    "require_depth_for_hardware": true,
+    "min_palm_depth_m": 0.15,
+    "max_palm_depth_m": 1.50,
+    "preflight_stability_seconds": 0.15,
+    "preflight_max_angle_delta": 5,
+    "preflight_max_idle_current_ma": 200,
+    "stream_max_current_ma": 400,
+    "stream_max_total_current_ma": 400
+  },
+  "axes": {
+    "pinky": {
+      "q_open": 0.05, "q_closed": 0.55,
+      "command_open": 1000, "command_closed": 800,
+      "enabled": false, "max_rate_units_per_second": 80.0
+    },
+    "ring": {
+      "q_open": 0.05, "q_closed": 0.58,
+      "command_open": 1000, "command_closed": 800,
+      "enabled": false, "max_rate_units_per_second": 80.0
+    },
+    "middle": {
+      "q_open": 0.05, "q_closed": 0.47,
+      "command_open": 1000, "command_closed": 800,
+      "enabled": false, "max_rate_units_per_second": 80.0
+    },
+    "index": {
+      "q_open": 0.08, "q_closed": 0.40,
+      "command_open": 1000, "command_closed": 800,
+      "enabled": false, "max_rate_units_per_second": 80.0
+    },
+    "thumb_bend": {
+      "q_open": 0.0, "q_closed": 0.60,
+      "command_open": 1000, "command_closed": 850,
+      "enabled": false, "max_rate_units_per_second": 60.0
+    },
+    "thumb_rotate": {
+      "q_open": 0.0,
+      "q_closed": 1.308,
+      "command_open": 900,
+      "command_closed": 800,
+      "enabled": true,
+      "max_rate_units_per_second": 40.0,
+      "feedback_to_command_offset_units": 15,
+      "feedback_to_command_valid_min": 840,
+      "feedback_to_command_valid_max": 870,
+      "hysteresis": {
+        "open_enter_q": 0.0,
+        "open_exit_q": 0.15,
+        "closed_enter_q": 1.308,
+        "closed_exit_q": 1.10
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=65"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anydex-pipeline"
+version = "0.1.0"
+description = "Perception-only AnyDexGrasp bridge for calibrated RealSense object point clouds"
+requires-python = ">=3.8"
+dependencies = ["numpy>=1.23,<3", "PyYAML>=6"]
+
+[project.optional-dependencies]
+viewer = ["open3d>=0.18"]
+test = ["pytest>=7"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

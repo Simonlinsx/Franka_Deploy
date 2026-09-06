@@ -1,0 +1,72 @@
+schema_version: 1
+kind: tabletop_surface_plane_summary
+status: provisional_for_visual_and_kinematic_simulation_alignment
+reviewed_at: '2026-07-17T22:16:00+08:00'
+hardware_access:
+  camera_read_only: true
+  robot_connected: false
+  robot_commanded: false
+frames:
+  base_frame: robot_base
+  camera_frame: camera_color_optical_frame
+units:
+  length: m
+  angle: deg
+method:
+  description: >-
+    Three separated exposed-black-tabletop ROIs were captured independently.
+    Each ROI used near-horizontal RANSAC followed by SVD. The provisional
+    large-scale surface plane is the plane through the three local fitted-plane
+    reference points. It represents the black cloth working surface, not the
+    metal robot support and not a surveyed rigid table solid.
+  roi_count: 3
+  consensus_fit: plane_through_three_local_reference_points
+  selected_rois_xyxy_px:
+    - [250, 300, 480, 460]
+    - [600, 330, 790, 460]
+    - [180, 180, 370, 285]
+sources:
+  - path: table_plane_roi_lower_center.yaml
+    sha256: 4cfae715f73c540e0cd034f964fba3b95a401c670f615371831aced4a8941847
+  - path: table_plane_roi_lower_right.yaml
+    sha256: 6893a28b0295501a0c780d2c92bbf95c86cced23916717cbb6d7fd44ce5cf504
+  - path: table_plane_roi_upper_left.yaml
+    sha256: 67de5bbc4f5256e8c41275497e63a971be8e4a07aecbd312e4d28268836cf4f5
+local_reference_points_robot_base_m:
+  - [0.7958726124778761, 0.013883294838682836, 0.03813767251220761]
+  - [0.6310328740115968, 0.4088579717775038, 0.039085085706575304]
+  - [0.598958226900227, -0.30242975205502326, 0.037132144236920524]
+result:
+  plane_equation: a*x + b*y + c*z + d = 0
+  plane_abcd:
+    - -0.0007503140372821853
+    - -0.002711796670329629
+    - 0.9999960415859976
+    - -0.03750271848176338
+  normal_robot_base:
+    - -0.0007503140372821853
+    - -0.002711796670329629
+    - 0.9999960415859976
+  reference_xy_m: [0.6310328740115968, 0.013883294838682836]
+  height_z_at_reference_xy_m: 0.038013990452949634
+  tilt_from_robot_base_plus_z_deg: 0.16121237667126215
+repeatability:
+  local_reference_height_mean_m: 0.03811830081856781
+  local_reference_height_sample_std_m: 0.0009766148385418885
+  local_reference_height_range_m: 0.00195294146965478
+  local_fit_residual_rms_range_m:
+    - 0.001479711785567989
+    - 0.0024810292378278
+  worst_local_fit_residual_p95_m: 0.004410220316486812
+  maximum_local_normal_disagreement_from_consensus_deg: 1.4492244472406912
+observed_surface_coverage_robot_base_m:
+  min: [0.3908528800139115, -0.537104070429675, 0.027971585297720702]
+  max: [0.9628147437657857, 0.518705908288891, 0.04731938115054157]
+  note: >-
+    This is the union of sampled inlier bounds and is not the physical table
+    polygon, length, width, thickness, or a guaranteed obstacle-free region.
+limitations:
+  - The black cloth has wrinkles; local normals differ by as much as 1.45 deg.
+  - D435 depth plus eye-to-hand uncertainty remains; use a conservative margin for collision.
+  - Physical table edges, thickness, support geometry, friction, and cloth compressibility are unmeasured.
+  - This provisional plane is suitable for visual alignment and non-contact scene prototypes, not safety certification.

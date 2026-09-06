@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "commissioning_profile": "../dexgrasp/configs/fr3_rh56_v94_seq286_20hz_commissioned.json",
+  "franka": {
+    "enabled": true,
+    "enforce_realtime": false
+  },
+  "inspire": {
+    "enabled": true,
+    "serial_timeout_s": 0.5,
+    "debug": false
+  },
+  "object_pcd": {
+    "enabled": true,
+    "addr": "tcp://127.0.0.1:5556",
+    "timeout_ms": 1000,
+    "max_age_s": 0.15,
+    "min_raw_points": 200,
+    "max_center_reference_error_m": 0.02,
+    "history_shape": [4, 1024, 3],
+    "current_shape": [1024, 3],
+    "reference_frame": "robot_base",
+    "point_frame": "robot_base",
+    "calibration_file": "../perception/configs/calibrations/fr3_d435_eye_to_hand.yaml"
+  },
+  "observation": {
+    "max_future_skew_s": 0.05,
+    "max_capture_span_s": 0.5,
+    "max_hand_temperature_c": 59,
+    "minimum_control_success_rate": 0.95
+  },
+  "baseline": {
+    "policy_hz": 10.0,
+    "duration_s": 2.0,
+    "max_arm_step_rad": 0.005,
+    "max_arm_episode_delta_rad": 0.03,
+    "max_hand_step_units": 10,
+    "hardware_writes_enabled": false,
+    "hardware_write_blocker": "Waiting for the simulation checkpoint/action contract and commissioned joint-hand collision envelope"
+  }
+}

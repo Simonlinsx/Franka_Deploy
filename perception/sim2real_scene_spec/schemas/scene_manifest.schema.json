@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/sim2real_scene_spec/scene_manifest.schema.json",
+  "title": "FR3 D435 sim-to-real scene manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "package",
+    "evidence_classes",
+    "sources",
+    "coordinate_conventions",
+    "camera",
+    "calibration_quality",
+    "calibration_target",
+    "robot",
+    "scene",
+    "workspace",
+    "training_target",
+    "timing_and_sensor_model",
+    "readiness"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "1.0.0"},
+    "package": {
+      "type": "object",
+      "required": [
+        "name",
+        "generated_at",
+        "generation_mode",
+        "live_camera_accessed",
+        "live_robot_accessed",
+        "canonical_length_unit",
+        "canonical_angle_unit",
+        "canonical_time_unit"
+      ]
+    },
+    "evidence_classes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"enum": ["measured", "derived", "configured", "reported", "assumed", "unknown"]}
+    },
+    "sources": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["kind", "timestamp"]
+      }
+    },
+    "coordinate_conventions": {
+      "type": "object",
+      "required": ["transform_notation", "matrix_layout", "robot_base", "camera_color_optical_frame", "simulation_world"]
+    },
+    "camera": {
+      "type": "object",
+      "required": [
+        "identity",
+        "stream",
+        "pinhole_intrinsics",
+        "derived_frustum",
+        "depth",
+        "extrinsics",
+        "negative_z_forward_simulator_pose",
+        "physical_body_and_mount"
+      ]
+    },
+    "calibration_quality": {"type": "object"},
+    "calibration_target": {"type": "object"},
+    "robot": {
+      "type": "object",
+      "required": [
+        "identity",
+        "simulation_asset_candidate",
+        "candidate_description_joint_limits",
+        "runtime_motion_gate_joint_limits",
+        "base_pose",
+        "operational_end_effector",
+        "reference_joint_configuration"
+      ]
+    },
+    "scene": {
+      "type": "object",
+      "required": ["tabletop", "robot_support_and_mount", "floor_and_room", "visual_appearance"]
+    },
+    "workspace": {"type": "object"},
+    "training_target": {"type": "object"},
+    "timing_and_sensor_model": {"type": "object"},
+    "readiness": {
+      "type": "object",
+      "required": [
+        "metric_camera_projection",
+        "camera_to_robot_registration",
+        "kinematic_arm_prototype",
+        "collision_accurate_scene",
+        "contact_dynamics_sim2real",
+        "render_to_real_validation",
+        "hard_blockers"
+      ],
+      "properties": {
+        "hard_blockers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "evidence_class": {
+      "enum": ["measured", "derived", "configured", "reported", "assumed", "unknown"]
+    },
+    "matrix4": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {"type": "number"}
+      }
+    },
+    "vec3": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {"type": "number"}
+    }
+  }
+}

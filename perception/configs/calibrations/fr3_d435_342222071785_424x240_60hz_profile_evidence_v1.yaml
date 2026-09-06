@@ -1,0 +1,256 @@
+schema_version: 1
+kind: realsense_stream_profile_revalidation_evidence
+decision: provisional
+captured_at: '2026-08-13T00:44:48+08:00'
+camera:
+  name: Intel RealSense D435
+  serial: '342222071785'
+  firmware: 5.13.0.55
+  usb_type: '3.2'
+  color_stream:
+    width: 424
+    height: 240
+    fps: 60
+    format: YUYV
+    aligned_depth_to_color: true
+    intrinsics:
+      fx: 302.3836364746094
+      fy: 302.2502746582031
+      ppx: 210.95738220214844
+      ppy: 123.3145980834961
+      distortion_model: distortion.inverse_brown_conrady
+      distortion: [0.0, 0.0, 0.0, 0.0, 0.0]
+  depth_stream:
+    width: 424
+    height: 240
+    fps: 60
+    format: Z16
+    depth_scale_m_per_unit: 0.0010000000474974513
+parent_calibration:
+  path: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260812-002810-remount5-daniilidis-robust15-final-v1.yaml
+  sha256: 3b52ba445413a15797b3fa44d1aac6e0fc60ae342f56d320a19972398412a49e
+  native_width: 848
+  native_height: 480
+  native_fps: 30
+  intrinsics_relation:
+    kind: exact_integer_decimation
+    scale: 2
+    fx_parent_over_2: 302.3836364746094
+    fy_parent_over_2: 302.2502746582031
+    ppx_parent_over_2: 210.95738220214844
+    ppy_parent_over_2: 123.3145980834961
+    matches_live_424x240_intrinsics: true
+native_profile_capture_config:
+  path: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/configs/d435_342222071785_424x240_60hz_revalidation.yaml
+  sha256: a273252d72695c6f059acfeb07c759ddd8b81523adaab1267688cb591c50632b
+  camera_only: true
+  robot_controller_present: false
+live_inventory:
+  command: rs-enumerate-devices -c --format basic
+  device_count: 2
+  requested_serial_present: true
+  requested_color_profile_present: true
+  requested_depth_profile_present: true
+recorded_profile_evidence:
+  - manifest: /home/qiaoguanren/code/franka/data/perception_corpus/thrown_patterned_beanbag_424x240_60hz_auto_20260812_233257/manifest.json
+    sha256: 41a98dba914e46ba7f26fe5def3637a0d2be7daea5504b5f0e2e32e825b540d2
+    frame_count: 900
+    effective_fps: 59.510554307707444
+    rgbd_sensor_skew_s: 0.000104
+  - manifest: /home/qiaoguanren/code/franka/data/perception_corpus/thrown_triangular_beanbag_424x240_60hz_auto_20260812_233330/manifest.json
+    sha256: b283bd95e9e951b9a47ec44ab4c31098d1ebb2999dc34965c147dfe8e620ac62
+    frame_count: 900
+    effective_fps: 59.73692693259375
+    rgbd_sensor_skew_s: 0.000104
+  - manifest: /home/qiaoguanren/code/franka/data/perception_corpus/thrown_small_ball_60hz_auto_20260812_231149/manifest.json
+    sha256: 85a7598815314188ef7371fa7868b36d790418e54e4e3e08e12e219d4b56e4d2
+    frame_count: 900
+    effective_fps: 59.54944472487127
+    rgbd_sensor_skew_s: 0.000104
+inherited_evidence:
+  holdout_dataset: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260812-002810-remount5-holdout-v1.yaml
+  holdout_dataset_sha256: dc1415770f45ed7a6686f4176428c4eb1044d363ec83705921b5dfd8911a443d
+  holdout_validation: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260812-002810-remount5-daniilidis-robust15-final-v1.validation.json
+  holdout_validation_sha256: cb7e0f82895bc04c21059784cb61782d614524682619d1b6723429738f8b7bdc
+  holdout_translation_p95_mm: 4.746591785805999
+  holdout_rotation_p95_deg: 0.7348059525668819
+physical_revalidation_attempts:
+  - attempted_at: '2026-08-13T00:48:06+08:00'
+    kind: camera_only_aruco_visibility_check
+    hardware_access:
+      camera_read_only: true
+      franka_opened: false
+      rh56_opened: false
+      robot_motion: false
+    stream:
+      width: 424
+      height: 240
+      fps: 60
+      fx: 302.3836364746094
+      fy: 302.2502746582031
+      ppx: 210.95738220214844
+      ppy: 123.3145980834961
+    target:
+      dictionary: DICT_6X6_50
+      marker_id: 42
+      marker_length_m: 0.19
+    detections: 0
+    result: pending_setup
+    reason: calibration target was not present in the camera field of view
+    raw_image: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260813-004806-424x240-60hz-revalidation-raw.png
+    raw_image_sha256: b279e58e970f795df0064872df989898652f5e1ddbf6a1d6fd3f752657e92d78
+    annotated_image: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260813-004806-424x240-60hz-revalidation-annotated.png
+    annotated_image_sha256: b279e58e970f795df0064872df989898652f5e1ddbf6a1d6fd3f752657e92d78
+  - attempted_at: '2026-08-13'
+    kind: native_profile_camera_only_visibility_check
+    hardware_access:
+      camera_read_only: true
+      franka_opened: false
+      rh56_opened: false
+      robot_motion: false
+    stream:
+      width: 424
+      height: 240
+      fps: 60
+      fx: 302.3836364746094
+      fy: 302.2502746582031
+      ppx: 210.95738220214844
+      ppy: 123.3145980834961
+      exact_profile_opened: true
+    target:
+      dictionary: DICT_6X6_50
+      marker_id: 42
+      marker_length_m: 0.19
+    detections: 0
+    result: profile_stream_pass_target_pending
+    reason: exact stream and intrinsics were confirmed, but the marker was visibly absent from the EEF/camera image
+    sensor_configuration_warning: get_xu(ctrl=1) returned device busy after laser_power=180 was applied; the native-profile recording evidence remains the authoritative sensor-profile proof
+    raw_image: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260813-424x240-60hz-preboard-v2-raw.png
+    raw_image_sha256: 17fb9bb7ad6df6d888e7d71c5ae8efefc2d1c55a5a6acaa1310300a225c22b60
+    annotated_image: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260813-424x240-60hz-preboard-v2-annotated.png
+    annotated_image_sha256: 17fb9bb7ad6df6d888e7d71c5ae8efefc2d1c55a5a6acaa1310300a225c22b60
+  - attempted_at: '2026-08-13'
+    kind: native_profile_camera_only_visibility_recheck
+    hardware_access:
+      camera_read_only: true
+      franka_opened: false
+      rh56_opened: false
+      robot_motion: false
+    stream:
+      width: 424
+      height: 240
+      fps: 60
+      fx: 302.3836364746094
+      fy: 302.2502746582031
+      ppx: 210.95738220214844
+      ppy: 123.3145980834961
+      exact_profile_opened: true
+    target:
+      dictionary: DICT_6X6_50
+      marker_id: 42
+      marker_length_m: 0.19
+    detections: 0
+    result: blocked_pending_physical_target_setup
+    reason: repeat current-camera inspection visibly confirms that the marker is not mounted on the EEF or present in the image
+    raw_image: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260813-424x240-60hz-preboard-v3-raw.png
+    raw_image_sha256: 1f2693e416d5b5195ed2cfd028025099b535b7299fdeb69b1da0afbf1a167eb3
+    annotated_image: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260813-424x240-60hz-preboard-v3-annotated.png
+    annotated_image_sha256: 1f2693e416d5b5195ed2cfd028025099b535b7299fdeb69b1da0afbf1a167eb3
+offline_profile_decimation_diagnostic:
+  path: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260813-424x240-profile-decimation-v1.json
+  sha256: eb650fcd99fca5413cdb16eabf946c04a7c026c92be993710a68c2b83c90ab40
+  source_image_count: 6
+  decision: diagnostic_fail
+  translation_delta_p95_mm: 7.701047487803859
+  translation_delta_max_mm: 9.294585184986761
+  rotation_delta_p95_deg: 0.9475418901704535
+  scaled_corner_delta_p95_px: 0.3333335644396433
+  derived_reprojection_p95_px: 0.2860373258590698
+  interpretation: old 848x480 images downsampled with OpenCV are insufficient to prove the native sensor profile; physical 424x240 holdouts remain mandatory
+physical_revalidation_tooling:
+  runbook: /home/qiaoguanren/code/franka/perception/docs/THROWN_OBJECT_424X240_60HZ_PHYSICAL_REVALIDATION.md
+  runbook_sha256: a1a20ad119ed7ba3b223aad0d03b572d08f9e0026f335721944d5ea68ab244c1
+  profile_decimation_validator:
+    path: /home/qiaoguanren/code/franka/skills/calibrate-franka-eye-to-hand/scripts/validate_profile_decimation.py
+    sha256: 2605751a6c5459b7cd2aba0587e0917096456ca94e57c234ae6df3379fcac856
+  reused_extrinsic_holdout_validator:
+    path: /home/qiaoguanren/code/franka/skills/calibrate-franka-eye-to-hand/scripts/validate_reused_extrinsic_holdout.py
+    sha256: 1ed1154bde9bbbf7767fce9c37b895b44f15ef592d4869280b90401888213dcf
+  rgbd_physical_validator:
+    path: /home/qiaoguanren/code/franka/skills/calibrate-franka-eye-to-hand/scripts/validate_rgbd_physical.py
+    sha256: 61b29ec489cd7337608734e1255c418ff9d668bf0f16954e4b94251ad9d18a67
+offline_task_acceptance:
+  evaluated_at: '2026-08-13'
+  hardware_access:
+    recorded_rgbd_read_only: true
+    franka_opened: false
+    rh56_opened: false
+    robot_motion: false
+  contract:
+    camera_width: 424
+    camera_height: 240
+    camera_fps: 60
+    policy_rate_hz: 20
+    object_mask_mode: guarded_v2
+    point_feature_mode: xyz
+    output_point_count: 128
+    min_source_points: 16
+    maximum_mask_depth_deviation_m: 0.055
+  masks:
+    decision: accepted
+    reviewed_throw_count: 7
+    visible_valid_frames: 112
+    visible_total_frames: 112
+    absent_false_positive_frames: 0
+    absent_total_frames: 36
+    longest_visible_invalid_run: 0
+    worst_compute_p95_ms: 21.2987
+    worst_compute_max_ms: 21.4429
+    reports:
+      - object: patterned_beanbag
+        path: /home/qiaoguanren/code/franka/data/perception_corpus/beanbag_60hz_validation_20260812/pattern_end_to_end_20260813_v3_aligned/summary.json
+        sha256: d5891f5f5bf24cbb9f3ea3879682bd559bab382379dd51d4d0f504fdad26baf7
+      - object: triangular_beanbag
+        path: /home/qiaoguanren/code/franka/data/perception_corpus/beanbag_60hz_validation_20260812/triangle_end_to_end_20260813_v2_aligned/summary.json
+        sha256: 019ff1de5851fbd87ea2999a27726e453028aba1da7558334520ea30474f12d3
+      - object: small_red_ball
+        path: /home/qiaoguanren/code/franka/data/perception_corpus/ab_blur_20260812/small_ball_end_to_end_20260813_v5_aligned/summary.json
+        sha256: e8195c0535f592281afb24e66924d71a52d4d7d58333912f561fc1deba950736
+  pointcloud:
+    decision: not_accepted
+    production_depth_ceiling_m: 1.2
+    production_valid_frames: 40
+    production_total_visible_frames: 112
+    best_diagnostic_depth_ceiling_m: 1.5
+    best_diagnostic_valid_frames: 102
+    best_diagnostic_total_visible_frames: 112
+    zero_source_depth_failure_frames: 10
+    reason: exact current masks contain no target-consistent D435 depth on ten visible policy ticks; physical catch-workspace and extrinsic holdouts remain pending
+    reports:
+      - object: patterned_beanbag
+        path: /home/qiaoguanren/code/franka/data/perception_corpus/beanbag_60hz_validation_20260812/pattern_end_to_end_20260813_v3_aligned/pointcloud_envelope_diagnostic_v2.json
+        sha256: 991573925ff3590ce20ad6af64c34d9b0146d03aa166735b5a4a49b40ea73ab3
+      - object: triangular_beanbag
+        path: /home/qiaoguanren/code/franka/data/perception_corpus/beanbag_60hz_validation_20260812/triangle_end_to_end_20260813_v2_aligned/pointcloud_envelope_diagnostic_v2.json
+        sha256: aa2f32a096cc9071d17209e0c9bf9c03f1654062040419ecc2d6f7c8f4b5c087
+      - object: small_red_ball
+        path: /home/qiaoguanren/code/franka/data/perception_corpus/ab_blur_20260812/small_ball_end_to_end_20260813_v5_aligned/pointcloud_envelope_diagnostic_v2.json
+        sha256: 423815bbe1eca19f7e6c54676e5a3dd774b9602695e219c2cf848d59bb4c8fbc
+static_runtime_audit:
+  audited_at: '2026-08-13'
+  calibration_id: eye-to-hand-5e3620b789d775b9
+  runtime_config: /home/qiaoguanren/code/franka/dexgrasp/runs/task_configs/thrown_object-90ff3d5cff6b6cd1.yaml
+  expected_camera_serial: '342222071785'
+  expected_dictionary: DICT_6X6_50
+  expected_marker_id: 42
+  expected_marker_length_m: 0.19
+  static_checks_pass: true
+  decision: provisional
+  failures: []
+  warning: static checks do not include holdout closure, mount rigidity, multi-distance depth, known-base-point, or task-clearance evidence
+remaining_gates:
+  exact_profile_physical_holdout: pending
+  multi_distance_aligned_depth: pending
+  independently_known_base_point: pending
+  catch_workspace_pointcloud_and_clearance: pending
+  robot_execution: disabled

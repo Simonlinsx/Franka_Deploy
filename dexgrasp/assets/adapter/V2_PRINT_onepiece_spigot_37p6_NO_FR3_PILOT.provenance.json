@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "asset": "V2_PRINT_onepiece_spigot_37p6_NO_FR3_PILOT.stl",
+  "asset_sha256": "5f6d8be3d8aed7e5d5b309ac7da7107b22a6a6fdfdcc02b5c694ce42c141fc82",
+  "source_archive": "/home/qiaoguanren/下载/FR3_RH56BFX_adapter_V2_confirmed_interface.zip",
+  "source_archive_sha256": "92df84ecf64aa58aa7d6338da35bee94e828135ede1160672124fd94dac150e5",
+  "user_sliced_job": "/home/qiaoguanren/下载/V2_PRINT_onepiece_spigot_37p6_NO_FR3_PILOT.gcode (3).3mf",
+  "user_sliced_job_sha256": "1e7db138e0c894ec3017ab64436f24117b4078ae8a46faf38d620c0e8f042097",
+  "units": "millimeter",
+  "asset_frame": {
+    "origin": "adapter axis on the FR3 seating plane",
+    "z_axis": "outward from the FR3 flange toward the RH56 hand",
+    "bounds_mm": [
+      [-35.0, -35.0, 0.0],
+      [35.0, 34.9956131, 17.7999992]
+    ]
+  },
+  "nominal_geometry_m": {
+    "disk_diameter": 0.07,
+    "disk_thickness": 0.01,
+    "spigot_diameter": 0.0376,
+    "spigot_protrusion": 0.0078,
+    "total_axial_envelope": 0.0178,
+    "fr3_face_to_rh56_seating_plane": 0.01
+  },
+  "manufacturing": {
+    "sliced_material": "Bambu PLA Basic",
+    "source_readme_allows_plastic_only_for": "low-speed unloaded fit, clearance, and cable checks",
+    "load_bearing_robot_grasping_allowed": false
+  },
+  "unknowns_requiring_measurement": [
+    "assembled yaw about the flange axis",
+    "RH56 seating-plane to AnyDex/URDF palm-frame transform",
+    "installed adapter, fastener, cable, and RH56 mass",
+    "installed center of mass and inertia",
+    "printed dimensional tolerance and mounting rigidity"
+  ]
+}

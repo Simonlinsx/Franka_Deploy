@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "bundle": "../data/test_fixtures/sim2real/deploy.zip",
+  "commissioning_profile": "../dexgrasp/configs/fr3_rh56_v94_seq286_20hz_commissioned.json",
+  "execution": {
+    "hardware_writes_enabled": false,
+    "full_dr_stress_accepted": false,
+    "fr3_hardware_revision_verified": false,
+    "policy_reset_path_collision_verified": false,
+    "policy_workspace_collision_verified": false,
+    "installed_payload_dynamics_measured": false,
+    "rh56_fingertip_fk_commissioned": false,
+    "rh56_six_axis_policy_motion_commissioned": false,
+    "camera_control_latency_measured": false,
+    "camera_robot_time_alignment_verified": false,
+    "external_object_mask_depth_cleaning_verified": false,
+    "policy_reset_scene_height_verified": false,
+    "live_observation_action_replay_verified": false,
+    "policy_rate_tracking_verified": false,
+    "external_hold_gate_commissioned": false,
+    "external_emergency_stop_verified": false
+  },
+  "offline_replay": {
+    "max_camera_age_s": 0.10,
+    "minimum_valid_object_points": 16
+  }
+}

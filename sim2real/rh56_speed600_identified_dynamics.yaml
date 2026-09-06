@@ -1,0 +1,59 @@
+contract_version: rh56_speed600_free_space_step_identification_v1
+identified_at: 2026-08-05
+speed_set: 600
+force_set_g_during_identification: 500
+policy_rate_hz: 20
+evidence_directory: dexgrasp/runs/rh56-speed600-20260805-181710
+
+# Isaac/PhysX active-motor order, not the RH56 register order.
+active_motor_order:
+  - thumb_proximal_yaw_joint
+  - thumb_proximal_pitch_joint
+  - index_proximal_joint
+  - middle_proximal_joint
+  - ring_proximal_joint
+  - pinky_proximal_joint
+
+model:
+  type: velocity_limited_second_order
+  equation: q_ddot=(K/I_eff)*(q_target-q)-(D/I_eff)*q_dot
+  simulated_armature_kg_m2_assumption: 0.01
+  warning: >-
+    Stiffness and damping are effective free-space candidates derived using
+    I_eff=0.01 kg*m^2. Imported link inertia and contact dynamics remain in
+    addition to this armature, so validate these values in simulation before
+    retraining. Effort limit was not identified by this experiment.
+
+recommended_implicit_actuator_cfg:
+  stiffness_nm_per_rad: [23.458898, 7.557553, 11.052065, 11.362393, 10.454224, 10.742838]
+  damping_nms_per_rad: [0.768932, 0.305846, 0.230193, 0.206092, 0.230269, 0.232133]
+  velocity_limit_sim_rad_s: [2.292989, 2.205058, 3.371551, 4.135655, 3.488776, 4.112957]
+  armature_kg_m2: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+  effort_limit_sim_nm: unchanged_1.0_not_identified
+
+identified_response:
+  natural_frequency_hz: [7.654768, 4.375329, 5.289460, 5.364782, 5.145297, 5.215734]
+  damping_ratio: [0.798513, 0.556757, 0.340033, 0.303098, 0.362139, 0.351045]
+  execution_delay_s: [0.025700, 0.019291, 0.016255, 0.023197, 0.026206, 0.015791]
+  angle_set_to_angle_act_dc_gain: [1.076786, 1.045627, 1.052206, 1.062081, 1.030776, 1.033314]
+
+axis_notes:
+  thumb_proximal_yaw_joint: >-
+    Identified at interior ANGLE_SET baseline 400 with a 120-unit step. Strong
+    direction asymmetry remains; the listed values are the six-leg median.
+  thumb_proximal_pitch_joint: >-
+    Identified with a 250-unit step. One velocity-saturated high-frequency fit
+    was excluded; the listed values are the stable five-leg median.
+  middle_proximal_joint: >-
+    Four of six legs passed R^2>=0.90; listed values use accepted legs only.
+  other_axes: Six of six legs passed R^2>=0.90 for each axis.
+
+suggested_training_randomization:
+  # Applied multiplicatively around the per-axis nominal values above.
+  stiffness_scale: [0.8, 1.2]
+  damping_scale: [0.75, 1.25]
+  velocity_limit_scale: [0.85, 1.15]
+  execution_delay_s: [0.010, 0.035]
+  note: >-
+    Keep one sampled parameter set fixed for an episode. Do not independently
+    resample these actuator parameters at every policy step.

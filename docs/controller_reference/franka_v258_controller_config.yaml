@@ -1,0 +1,66 @@
+contract: franka_v258_reflex_safe_interpolated_joint_position_20hz
+status: maintained
+
+timing:
+  policy_rate_hz: 20
+  policy_period_s: 0.05
+  servo_rate_hz: 1000
+  nominal_servo_period_s: 0.001
+  simulator_physics_rate_hz: 120
+  simulator_virtual_servo_packet_schedule: [8, 8, 9]
+
+arm_action:
+  semantics: normalized_joint_delta_to_held_absolute_target
+  order: [fr3_joint1, fr3_joint2, fr3_joint3, fr3_joint4, fr3_joint5, fr3_joint6, fr3_joint7]
+  normalized_range: [-1.0, 1.0]
+  raw_gain_rad: 0.045
+  target_ema_alpha: 0.40
+  effective_max_delta_rad_per_policy_tick: 0.018
+  explicit_max_target_delta_rad_per_policy_tick: 0.045
+  measured_position_envelope_rad: 0.05
+  safe_joint_lower_rad: [-2.6937, -1.7337, -2.8507, -2.9921, -2.7565, 0.5945, -2.9659]
+  safe_joint_upper_rad: [2.6937, 1.7337, 2.8507, -0.2018, 2.7565, 4.4669, 2.9659]
+
+motion_generator:
+  target_lowpass_cutoff_hz: 100.0
+  tracking_natural_frequency_hz: 6.0
+  tracking_damping_ratio: 1.0
+  velocity_limit_rad_s: 0.5
+  acceleration_limit_rad_s2: 5.0
+  jerk_limit_rad_s3: 250.0
+  state_is_continuous_across_policy_ticks: true
+  reset_from_measured_q_each_servo_packet: false
+
+libfranka:
+  interface: joint_position
+  controller_mode: joint_impedance
+  limit_rate: true
+  cutoff_frequency: kMaxCutoffFrequency
+  duplicate_external_shaper_allowed: false
+
+inspire_action:
+  semantics: normalized_absolute_semantic_motor_target
+  policy_order: [thumb_rotation, thumb_bending, index, middle, ring, little]
+  hardware_register_order: [little, ring, middle, index, thumb_bending, thumb_rotation]
+  normalized_range: [-1.0, 1.0]
+  closure_fraction_range: [0.0, 1.0]
+  target_ema_alpha: 0.737856
+  max_virtual_joint_target_delta_rad_per_policy_tick: 0.30
+  follower_joints_commanded_directly: false
+
+initialization:
+  initial_q_source: measured_q
+  initial_dq_source: zero
+  initial_ddq_source: zero
+  previous_policy_target_source: measured_q
+  missed_policy_deadline_behavior: hold_previous_target
+
+required_logs:
+  - policy_timestamp
+  - normalized_policy_action
+  - accepted_held_target_q
+  - generated_q_d
+  - generated_dq_d
+  - generated_ddq_d
+  - measured_q
+  - safety_or_rate_limit_event

@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "status": "external_dependency_candidate_physical_revision_unverified",
+  "not_a_panda_substitute": true,
+  "package": {
+    "name": "ros-humble-franka-description",
+    "installed_version": "1.0.1-3jammy.20260422.111300",
+    "upstream_model_version": "1.0.1",
+    "root": "/opt/ros/humble/share/franka_description",
+    "installed_size_approx_mib": 118,
+    "package_xml_sha256": "e2167ab51e3567a4080f96a7b7cf3c8417da2ed0b7a4040fb39139c2318bef44"
+  },
+  "shared_files": {
+    "robots/common/franka_robot.xacro": "43a14647c521526597b5ddc7941dd004d4d03ca5cf2f1a8b3cc7b3ac711bfd05",
+    "robots/common/franka_arm.xacro": "87fd4b269f965c1011f264d9704613d8c39873de6da493f94061dd2f10703c15",
+    "robots/common/utils.xacro": "817e3973cbfe4a8db60007f94fee7c56e2530b56db49b74477420d46a5e7581d"
+  },
+  "candidates": {
+    "fr3": {
+      "xacro": "robots/fr3/fr3.urdf.xacro",
+      "xacro_sha256": "f739aa0791d4db3ec9ac166cd77e8a4a0cc15a8284a881fad8271c6c7878c611",
+      "joint_limits": "robots/fr3/joint_limits.yaml",
+      "joint_limits_sha256": "ae3cc3148dc7d917a6f5317547b27831b37ee290dfd5c362aee8012904ef7767",
+      "kinematics": "robots/fr3/kinematics.yaml",
+      "kinematics_sha256": "44326830a6773dd6611cdf9947045eeb3276ea4e3ca47a05272816c862c8e386",
+      "inertials": "robots/fr3/inertials.yaml",
+      "inertials_sha256": "447383a28f3183b04278a624c961a15df627dd6df485c599b12f921f21af3458",
+      "dynamics": "robots/fr3/dynamics.yaml",
+      "dynamics_sha256": "dc608cde593ead3bc3722115adfa328ca1b3420ea7faf0da2cb6604e8feda761"
+    },
+    "fr3v2": {
+      "xacro": "robots/fr3v2/fr3v2.urdf.xacro",
+      "xacro_sha256": "36dd55bfaf7b0d0583edd8b2dea0ee83df7002e83e6e6b33b1689913da17b463",
+      "joint_limits": "robots/fr3v2/joint_limits.yaml",
+      "joint_limits_sha256": "ae3cc3148dc7d917a6f5317547b27831b37ee290dfd5c362aee8012904ef7767",
+      "kinematics": "robots/fr3v2/kinematics.yaml",
+      "kinematics_sha256": "44326830a6773dd6611cdf9947045eeb3276ea4e3ca47a05272816c862c8e386",
+      "inertials": "robots/fr3v2/inertials.yaml",
+      "inertials_sha256": "9c32658d50fea65f7bb6e0a23640632ad9cd138be59df3501cd0f0870da97c1a",
+      "dynamics": "robots/fr3v2/dynamics.yaml",
+      "dynamics_sha256": "dc608cde593ead3bc3722115adfa328ca1b3420ea7faf0da2cb6604e8feda761"
+    }
+  },
+  "generation_policy": {
+    "hand": false,
+    "ros2_control": false,
+    "gazebo": false,
+    "reason": "Generate a core-arm candidate without inventing the real operational EEF, TCP, payload, or control plugin."
+  },
+  "mesh_policy": {
+    "bundled": false,
+    "reason": "The approximately 118 MiB external description package is deliberately not duplicated. Generated URDFs retain package://franka_description mesh URIs."
+  },
+  "physical_selection": {
+    "selected_candidate": null,
+    "evidence_class": "unknown",
+    "required_evidence": "Physical robot serial/hardware revision from nameplate, Desk, or procurement records."
+  }
+}

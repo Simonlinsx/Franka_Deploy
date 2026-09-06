@@ -1,0 +1,197 @@
+camera:
+  serial: '337322072188'
+  width: 848
+  height: 480
+  fps: 30
+  z_min: 0.25
+  z_max: 1.20
+  emitter: true
+  laser_power: 180
+  preset: default       # custom/default/hand/high_accuracy/high_density/medium_density
+  spatial_filter: false
+  temporal_filter: false
+  hole_filter: false
+
+tracker:
+  # The prompt mask may come from SAM2, GrabCut, or a manual box.  The 30 Hz
+  # fast path learns its color generically from that mask; no object hue is hardcoded.
+  mode: adaptive_color_depth # roi_depth, adaptive_color_depth, or sam2_reinit
+  init_method: grabcut   # box or grabcut; SAM2 overrides this when enabled
+  roi_scale: 2.2
+  lock_roi: false       # true only for stationary, numeric-ROI commissioning
+  depth_tolerance: 0.045 # minimum meters around tracked median depth
+  max_depth_tolerance: 0.08
+  depth_spread_margin: 0.008
+  min_area: 80
+  morph_kernel: 3
+  max_center_jump: 0.20 # meters per frame; rejects sudden bad tracks
+  max_area_growth: 1.8 # rejects sudden 2D mask expansion, usually caused by table/background leakage
+  max_area_vs_initial: 3.0 # rejects gradual growth far beyond the first valid target mask
+  max_bbox_growth: 4.0
+  min_area_vs_initial: 0.25 # reject drift onto a small same-color patch
+  min_bbox_area_vs_initial: 0.30
+  recovery_enabled: true
+  recovery_search_scale: 5.0 # template search window around the last bbox when tracking is invalid
+  recovery_min_score: 0.35
+  sam2_lost_search_scale: 3.0 # expanded SAM2 prompt fallback when template recovery fails
+  identity_enabled: true
+  identity_max_hist_dist: 0.55 # lower is stricter; rejects masks with different color distribution
+  identity_max_center_jump_px: 220.0
+  identity_max_depth_jump: 0.25
+  identity_max_area_ratio: 4.0
+  identity_update_alpha: 0.0 # keep initial appearance fixed to avoid drifting onto distractors
+  lost_after: 8
+  # Generic adaptive appearance/depth component gates. Failed gates publish an
+  # empty invalid mask immediately, never a stale object point cloud.
+  color_probability_threshold: 0.56
+  component_min_confidence: 0.62
+  component_max_center_jump_px: 100.0
+  component_max_motion_px: 24.0 # fail closed instead of switching to an identical neighbour
+  component_min_score_margin: 0.04 # reject near-tied connected components
+  min_area_ratio: 0.35
+  state_update_alpha: 0.65
+  lost_roi_growth: 0.25
+  max_roi_scale: 4.0
+  background_ring_scale: 1.8
+  background_exclusion_dilation: 7
+  background_likelihood_weight: 1.0
+  appearance_seed_erode: 3
+  box_prompt_seed_scale: 0.65
+  hue_bins: 24
+  saturation_bins: 16
+  value_bins: 16
+  histogram_smoothing: 1.0e-6
+  appearance_anchor_weight: 0.70
+  appearance_update_alpha: 0.025
+  appearance_update_min_confidence: 0.82
+  reinit_min_color_score: 0.62
+  reinit_max_center_jump_px: 90.0
+  reinit_max_depth_jump_m: 0.12
+  lost_recovery_requires_flow: true
+  # Sparse KLT predicts the previous semantic mask between prompt-model calls.
+  # Forward/backward and RANSAC gates discard unreliable flow before use.
+  optical_flow_enabled: true
+  flow_max_corners: 80
+  flow_min_points: 4
+  flow_quality_level: 0.01
+  flow_min_distance: 4.0
+  flow_window_size: 21
+  flow_pyramid_levels: 3
+  flow_fb_max_error: 1.5
+  flow_min_inlier_ratio: 0.55
+  flow_ransac_reprojection_px: 2.5
+  flow_min_scale: 0.75
+  flow_max_scale: 1.35
+  flow_max_rotation_deg: 35.0
+  flow_max_displacement_px: 100.0
+  flow_mask_dilation: 5
+  flow_color_probability_floor: 0.42
+  flow_min_mask_overlap: 0.15
+
+pointcloud:
+  num_points: 1024
+  history_len: 4
+  use_rgb: false
+  erode_kernel: 3
+  stride: 1
+  voxel_size: 0.003
+  remove_outliers: true
+  outlier_nb_neighbors: 20
+  outlier_std_ratio: 1.5
+  # Keep object_pcd/object_pcd_history in robot_base for this deployment.
+  center_policy_points: false
+  workspace_min: null   # e.g. [-0.8, -0.8, -0.1] in base frame
+  workspace_max: null   # e.g. [ 0.8,  0.8,  1.0]
+
+# Fixed-camera eye-to-hand transform. Fail closed for robot-facing output.
+extrinsics:
+  calibration_file: calibrations/fr3_d435_eye_to_hand.yaml
+  require_calibration: true
+  require_quality_pass: true
+  strict_camera_serial: true
+  calibrated: null
+  base_frame: robot_base
+  camera_frame: camera_color_optical_frame
+  T_base_camera:
+    - [1.0, 0.0, 0.0, 0.0]
+    - [0.0, 1.0, 0.0, 0.0]
+    - [0.0, 0.0, 1.0, 0.0]
+    - [0.0, 0.0, 0.0, 1.0]
+
+# Conservative first-commissioning envelope for one-shot XY hover validation.
+# The controller never plans descent: it rises if needed, then translates.
+hover:
+  object_workspace_min: [0.505, 0.008, -0.05]
+  object_workspace_max: [0.650, 0.104, 0.30]
+  eef_workspace_min: [0.480, -0.020, 0.300]
+  eef_workspace_max: [0.660, 0.130, 0.360]
+  target_z_min: 0.320
+  target_z_max: 0.345
+  hover_clearance: 0.150
+  descent_clearance_guard: 0.015
+  descent_velocity: 0.005
+  max_descent_xy_error: 0.005
+  max_top_drift: 0.010
+  stable_frames: 30
+  stable_seconds: 1.0
+  max_packet_age: 0.15
+  motion_max_packet_age: 0.25
+  max_center_p95: 0.005
+  max_center_step: 0.010
+  max_fitted_speed: 0.010
+  max_target_drift: 0.020
+  min_raw_points: 200
+  max_segment_distance: 0.030
+  max_velocity: 0.010
+  min_segment_duration: 3.0
+  min_joint_margin: 0.05
+  min_control_success_rate: 0.95
+  max_final_error: 0.015
+
+sam2:
+  # The high-rate process does not run SAM per frame. Text-prompt acquisition
+  # uses the separate persistent Grounded-SAM service below.
+  enabled: false
+  checkpoint: /home/qiaoguanren/code/franka/third_party/sam2/checkpoints/sam2.1_hiera_tiny.pt
+  model_cfg: configs/sam2.1/sam2.1_hiera_t.yaml
+  device: cuda
+  reinit_every: 10
+  score_threshold: 0.5
+  multimask_output: false
+  keep_largest_component: true
+  min_area: 20
+  max_mask_area_ratio: 4.0 # reject SAM2 masks much larger than the prompt box
+  max_bbox_area_ratio: 6.0
+
+prompting:
+  service_addr: tcp://127.0.0.1:5557
+  service_autostart: true
+  startup_timeout_s: 45.0
+  request_timeout_s: 35.0
+  box_threshold: 0.25
+  text_threshold: 0.20
+  mask_threshold: 0.50
+  top_k: 5
+  auto_reacquire: true
+  reacquire_lost_frames: 8
+  reacquire_cooldown_s: 2.0
+
+runtime:
+  vis: true
+  show_pcd: true
+  # One Open3D window: dim RGB scene + orange segmented object, all in robot_base.
+  show_scene_pcd: true
+  pcd_point_size: 3.0
+  scene_stride: 4
+  scene_update_every: 2
+  scene_brightness: 0.32
+  scene_color_floor: 0.08 # keep the black table visible against the 0.02 background
+  # Display-only marker: 10 cm requested clearance + 1.5 cm depth/calibration guard.
+  goal_clearance_m: 0.115
+  publish_zmq: false
+  zmq_addr: tcp://127.0.0.1:5556
+  max_packet_hz: 30
+  # Acceptance threshold shown in live stats after the 30-sample warmup.
+  min_packet_hz: 20
+  save_debug_masks: false
+  debug_masks_dir: mask_debug

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "asset": "V7_FR3_RH56_M3_CAPTIVE_NUT_ROT45.stl",
+  "asset_sha256": "7fdd3dd06bd8dafed445f6a6910315edd3073bd1b9cd9015a951b6e415b947e1",
+  "source_step": "V7_FR3_RH56_M3_CAPTIVE_NUT_ROT45.step",
+  "source_step_sha256": "9c275149f33347b2c9d4fb26da81d5e90e477c6d491ce75b4a12c8a80787270c",
+  "source_archive": "/home/qiaoguanren/下载/FR3_RH56_adapter_V7_bundle.zip",
+  "source_archive_sha256": "0e47e4d42cbb2db2518b65136b080062717230d96eb96dcdbb60a796777daa31",
+  "user_sliced_job": "/home/qiaoguanren/下载/V2_PRINT_onepiece_spigot_37p6_NO_FR3_PILOT.gcode (4).3mf",
+  "user_sliced_job_sha256": "1d409130f191f6c3fe5b11311edcffcc354469fdd8364420c2d08f06c1a2c756",
+  "units": "millimeter",
+  "asset_frame": {
+    "origin": "adapter axis on the FR3 flange face",
+    "z_axis": "outward from the FR3 flange toward the RH56 hand",
+    "x_axis": "V7 STEP +X; the unique eccentric FR3 pin recess is on -Y",
+    "bounds_mm": [
+      [-35.0, -35.0, 0.0],
+      [35.0, 35.0, 17.7999992]
+    ]
+  },
+  "nominal_geometry_m": {
+    "disk_diameter": 0.07,
+    "disk_thickness": 0.01,
+    "spigot_diameter": 0.0376,
+    "spigot_protrusion": 0.0078,
+    "total_axial_envelope": 0.0178,
+    "fr3_face_to_rh56_seating_plane": 0.01
+  },
+  "interface_features": {
+    "fr3_m6_centres_mm": "PCD 50 at 45 + k*90 degrees",
+    "fr3_eccentric_pin_recess_mm": [0.0, -25.0],
+    "rh56_radial_m3_axes": "45 + k*90 degrees in the V7 STEP frame",
+    "rh56_radial_hole_centre_above_shoulder_m": 0.00495
+  },
+  "anydex_mount_datum": {
+    "source_origin": "RH56 metal-sleeve mounting end, coincident with the adapter shoulder",
+    "seating_to_hand_source_origin_m": [0.0, 0.0, 0.0],
+    "official_generator": "third_party/AnyDexGrasp/generate_mesh_and_pointcloud/recover_inspire_hand_to_stl.py",
+    "official_generator_sha256": "48688a875b4b6b121040c16548ae4635974113bd44aaf8c9585a93db5efc7942",
+    "link111_mesh_sha256": "01e66e58f8b8bf95d00f1a99b8700834c569ad6a6357af4fe8bd6ebbf5b02dda",
+    "note": "The official 7.8 mm mounting-ring translation moves Link111 away from this origin; the V7 spigot occupies the interface and is not an additional TCP offset."
+  },
+  "installed_orientation": {
+    "assembled_yaw_deg": -45.0,
+    "evidence": "FR3 official link7 flange pin at F (+17.6777,+17.6777) mm, V7 unique pin recess at A (0,-25) mm, V7 ROT45 RH56 holes, and the user's installed right-hand orientation",
+    "T_fr3_adapter_yaw_deg": 135.0,
+    "source_x_in_fr3": "+Z",
+    "source_z_in_fr3": "(+X + +Y)/sqrt(2)"
+  },
+  "manufacturing": {
+    "sliced_material": "Bambu PLA Basic",
+    "source_readme_allows_plastic_only_for": "fit verification and low-speed unloaded checks",
+    "load_bearing_robot_grasping_allowed": false
+  }
+}

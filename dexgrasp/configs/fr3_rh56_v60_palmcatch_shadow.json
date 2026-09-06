@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "profile_id": "fr3_rh56_v60_palmcatch_candidate_shadow_v1",
+  "mode": "read_only_policy_shadow",
+  "policy_contract": "v94_inspire_semantic_13d",
+  "reference_frame": "robot_base",
+  "robot_hardware_writes": false,
+  "calibration": {
+    "id": "eye-to-hand-5e3620b789d775b9",
+    "camera_serial": "342222071785"
+  },
+  "franka": {
+    "ip": "172.16.0.2",
+    "default_q_rad": [
+      -2.544386888,
+      -1.411713805,
+      -0.049395346,
+      -2.337750525,
+      1.570796377,
+      0.464266852,
+      2.7
+    ],
+    "default_q_source": "V60 checkpoint DEPLOYMENT.md",
+    "default_q_hardware_motion_authorized": false,
+    "joint_limit_discrepancy": {
+      "joint": "panda_joint6",
+      "v60_q_home_rad": 0.464266852,
+      "base_bundle_conservative_lower_rad": 0.5445,
+      "recorded_runtime_gate_lower_rad": 0.4398,
+      "packaged_urdf_lower_rad": -0.0175,
+      "status": "unresolved_blocks_reset_and_execution"
+    }
+  },
+  "inspire": {
+    "port": "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0",
+    "hand_id": 1,
+    "baud": 115200,
+    "open_targets": [1000, 1000, 1000, 1000, 1000, 1000],
+    "speed_set": 600,
+    "force_limit_g": 500,
+    "force_scope": "declared V60 thrown task setting; shadow performs no writes"
+  },
+  "candidate_checkpoint": {
+    "path": "/home/qiaoguanren/code/franka/data/checkpoints/thrown/thrown_v60_palmcatch_dagger_milddr_e60_a050_candidate_20260814/thrown_v60_palmcatch_dagger_milddr_e60_a050_candidate_20260814/checkpoint.pt",
+    "sha256": "f6ac6400c9a6d280942300705a168d77a5cf70fa6ce32eb26790a805c6e043e7"
+  }
+}

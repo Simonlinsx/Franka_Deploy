@@ -1,0 +1,143 @@
+schema_version: 1
+kind: v94_task_profile
+name: thrown_object_v60
+description: V60 palm-catch tilted-reset thrown ball or beanbag with the dedicated
+  60 Hz D435.
+base_config: ../d435_default.yaml
+policy_rgbd_resolution: 424x240
+camera_contract_override: true
+commissioning_status: accepted
+robot_execution_enabled: true
+# One complete simulator episode is 72 policy ticks at 20 Hz (3.6 s).  The
+# runtime independently enforces this cap and retains every native Franka,
+# RH56, deadline, camera-freshness and operator-supervision stop condition.
+maximum_supervised_execute_steps: 72
+commissioning_scope: operator_supervised_full_episode_72_ticks
+# The V60 simulator reset uses the current FR3 system limit for J6 rather than
+# the older V94 bundle's conservative interval.  Its alpha=0.5 global task
+# support reaches camera z=1.672 m while this checkpoint intentionally
+# processes [0.25,1.50] m.  Every live policy point remains independently
+# depth-gated to that processing interval throughout the rollout.
+rollout_execution_limits:
+  maximum_commanded_policy_ticks: 72
+  simulator_episode_horizon_ticks: 72
+  require_current_policy_points_inside_processing_depth: true
+  require_current_policy_points_inside_processing_depth: true
+  allow_q_home_outside_base_bundle_joint_limits: true
+  allow_global_object_support_outside_processing_depth: true
+  robot_hardware_writes: true
+  fr3_system_joint_limits_source: https://frankarobotics.github.io/docs/robot_specifications.html
+  fr3_system_joint_limits_checked_date: '2026-08-14'
+  fr3_system_joint_limit_margin_rad: 0.02
+  fr3_system_joint_limits_rad:
+  - [-2.9007, 2.9007]
+  - [-1.8361, 1.8361]
+  - [-2.9007, 2.9007]
+  - [-3.077, -0.1169]
+  - [-2.8763, 2.8763]
+  - [0.4398, 4.6216]
+  - [-3.0508, 3.0508]
+commissioning_evidence:
+  accepted_date: '2026-08-14'
+  checkpoint_path: /home/qiaoguanren/code/franka/data/checkpoints/thrown/thrown_v60_palmcatch_dagger_milddr_e60_a050_candidate_20260814/thrown_v60_palmcatch_dagger_milddr_e60_a050_candidate_20260814/checkpoint.pt
+  checkpoint_sha256: f6ac6400c9a6d280942300705a168d77a5cf70fa6ce32eb26790a805c6e043e7
+  bundle_manifest_path: /home/qiaoguanren/code/franka/data/checkpoints/thrown/thrown_v60_palmcatch_dagger_milddr_e60_a050_candidate_20260814/thrown_v60_palmcatch_dagger_milddr_e60_a050_candidate_20260814/manifest.json
+  bundle_manifest_status: candidate_requires_real_robot_validation
+  correct_reset_policy_shadow_report:
+    path: /home/qiaoguanren/code/franka/dexgrasp/runs/thrown-v60-shadow-20260814-131347_perception_report.json
+    sha256: 622b1892b313bbf0d2f03c8da84c045c24e774a382c09524d8a5e2eb989d10ea
+  correct_reset_policy_io:
+    path: /home/qiaoguanren/code/franka/dexgrasp/runs/thrown-v60-shadow-20260814-131347_observation_visualization/policy_shadow_io.npz
+    sha256: 096f4fd5c124ea2baf8919c2d817bc4c8d5d8d847e2d791265be3d08e489f405
+  shadow_action_audit:
+    inference_count: 20
+    first_trigger_to_action_ms: 8.223576995078474
+    inference_p95_ms: 4.892064752493752
+    first_arm_target_max_delta_rad: 0.017999887
+    first_rh56_angle_set_register_order: [727, 714, 684, 684, 499, 760]
+    scope: checkpoint_and_first_action_evidence
+  first_motion_robot_audit:
+    path: /home/qiaoguanren/code/franka/dexgrasp/runs/v94_supervised_real_thrown-v60-first-motion-20260814-135957.json
+    sha256: de5bc64030e8100cbaae0e4fd8ab9e0ad27e7f884fa17f1cd6892a952e67bdce
+  full_flight_reports:
+  - path: /home/qiaoguanren/code/franka/dexgrasp/runs/thrown-full-patterned-20260814-005739_perception_report.json
+    sha256: 8319630b0e1a71f2097589ad73106b3f8fb7768e4ea1b4a982206c05d4e8d133
+  - path: /home/qiaoguanren/code/franka/dexgrasp/runs/thrown-full-triangle-20260814-005445_perception_report.json
+    sha256: 6279bca1e7e5dbbeb5e661eecfb45cfcf119c5bc8967a6a384b4792999f72a80
+  - path: /home/qiaoguanren/code/franka/dexgrasp/runs/thrown-full-redball-20260814-010145_perception_report.json
+    sha256: be5c38b841d3dc3db243e4a8275851cc758df01d8c5416c327c6d4f69d02fe13
+default_object_text: small patterned beanbag toy
+calibration_sha256: f45bb8af3f2e5f6799cc05291e7d8fb871621d152d4f702c9cd5c09d1139e294
+source_calibration_sha256: 3b52ba445413a15797b3fa44d1aac6e0fc60ae342f56d320a19972398412a49e
+simulation_task_contract_file: ../../v60_real_test_reset_and_throw_ranges.yaml
+simulation_task_contract_sha256: 297acfbcbd7f34652beb74d364bd6e0beab2f511d4c6459db19d490312c0f06a
+simulation_curriculum: alpha_0_5
+rollout_trigger:
+  enabled: true
+  mode: object_motion_or_entry
+  maximum_wait_s: 12.0
+  poll_interval_s: 0.001
+  minimum_mask_area_px: 20
+  absent_arm_frames: 3
+  stable_arm_frames: 3
+  stable_max_centroid_speed_px_s: 80.0
+  trigger_min_centroid_speed_px_s: 120.0
+  trigger_min_displacement_px: 6.0
+  minimum_area_ratio: 0.25
+  maximum_area_ratio: 4.0
+config_overrides:
+  camera:
+    serial: '342222071785'
+    width: 424
+    height: 240
+    fps: 60
+    depth_auto_exposure: false
+    depth_exposure: 2000
+    depth_gain: 32
+    laser_power: 360
+    max_color_depth_timestamp_skew_s: 0.007
+    z_min: 0.25
+    z_max: 1.5
+    emitter: true
+    preset: default
+    spatial_filter: false
+    temporal_filter: false
+    hole_filter: false
+  pointcloud:
+    workspace_min: null
+    workspace_max: null
+    support_plane_abcd: null
+    support_plane_min_clearance_m: 0.0
+    center_policy_points: false
+    temporal_fallback: motion_compensated
+    temporal_fallback_max_stale_s: 0.25
+    temporal_fallback_max_stale_steps: 5
+    temporal_fallback_max_image_speed_px_s: 2400.0
+  extrinsics:
+    calibration_file: ../calibrations/fr3_d435_342222071785_eye_to_hand_424x240_60hz_v60.yaml
+    require_calibration: true
+    require_quality_pass: true
+    strict_camera_serial: true
+  prompting:
+    boundary_entry_refinement_enabled: true
+    boundary_entry_refinement_max_ticks: 2
+    boundary_entry_refinement_max_center_step_ratio: 0.25
+    boundary_entry_refinement_min_area_ratio: 0.35
+    boundary_entry_refinement_max_area_ratio: 4.0
+    boundary_entry_refinement_min_inward_step_px: 1.0
+    boundary_entry_refinement_min_area_growth_ratio: 1.05
+    startup_semantic_confirmation_enabled: true
+    startup_semantic_confirmation_min_elapsed_s: 0.0
+    startup_semantic_confirmation_max_ticks: 10
+    startup_semantic_confirmation_search_every_ticks: 2
+    startup_semantic_confirmation_min_detector_score: 0.1
+    startup_semantic_confirmation_max_center_speed_px_s: 600.0
+    startup_semantic_confirmation_min_area_ratio: 0.35
+    startup_semantic_confirmation_max_area_ratio: 4.0
+    startup_semantic_confirmation_interior_margin_px: 1
+  online_sam2:
+    policy_current_semantic_mask_enabled: true
+  runtime:
+    publish_zmq: false
+    max_packet_hz: 20
+    min_packet_hz: 20

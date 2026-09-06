@@ -1,0 +1,122 @@
+# Current thrown-object-catch V57 real-test alignment contract.
+# Coordinates are in the Franka base frame, in metres. Quaternion order is wxyz.
+# This file describes the V57 task only; it does not change the rolling task.
+
+task:
+  family: thrown_object_catch
+  teacher: InspireAdapterV7ThrownRealSandbagCatchV57BalancedFarOpenTeacherEnvCfg
+  control_hz: 20
+  rh56_speed_set: 600
+
+robot_reset:
+  base_position_m: [0.0, 0.0, 0.0]
+  base_quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+  franka_joint_order:
+    [panda_joint1, panda_joint2, panda_joint3, panda_joint4,
+     panda_joint5, panda_joint6, panda_joint7]
+  franka_joint_position_rad:
+    [0.0, -1.2, 0.0, -2.2, 0.0, 1.4, 0.7853981633974483]
+  franka_joint_position_deg:
+    [0.0, -68.7549354157, 0.0, -126.0507149288,
+     0.0, 80.2140913183, 45.0]
+  joint_velocity_rad_s: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  reset_arm_position_noise_rad: 0.0
+  canonical_reset_curriculum_enabled: false
+
+  # The six virtual active joints used by the policy. Zero is fully open.
+  rh56_policy_joint_order:
+    [thumb_rotation, thumb_bending, index, middle, ring, little]
+  rh56_policy_joint_position_rad: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+  # Manufacturer register order. Write and verify SPEED_SET before ANGLE_SET.
+  rh56_register_order:
+    [little, ring, middle, index, thumb_bending, thumb_rotation]
+  rh56_speed_set_register_order: [600, 600, 600, 600, 600, 600]
+  rh56_angle_set_open_register_order: [1000, 1000, 1000, 1000, 1000, 1000]
+
+  # Simulator-only mimic followers at the open reset. Do not command these as
+  # independent real-hand motors.
+  simulator_mimic_follower_position_rad:
+    thumb_intermediate_joint: 0.0
+    thumb_distal_joint: 0.0
+    index_intermediate_joint: -0.0454
+    middle_intermediate_joint: -0.0454
+    ring_intermediate_joint: -0.0454
+    pinky_intermediate_joint: -0.0454
+
+# With the fixed reset above, the nominal midpoint between the thumb tip and
+# the four opposing fingertips is the center of the sampled interception box.
+catch_reference_center_base_m: [0.1842689514, 0.0539417267, 0.5668298006]
+
+# The legacy object_cfg position [0.98, 0.0, 0.68] is only the asset default.
+# V57 enables ballistic reset, so every real episode uses a sample from the
+# release_position_box below instead.
+alpha_0_5:
+  release_position_box_base_m:
+    x: [0.95, 1.25]
+    y: [-0.20, 0.20]
+    z: [0.35, 0.75]
+  target_position_box_base_m:
+    x: [0.0342689514, 0.3342689514]
+    y: [-0.0960582733, 0.2039417267]
+    z: [0.4168298006, 0.7168298006]
+  target_offset_from_catch_reference_m:
+    x: [-0.15, 0.15]
+    y: [-0.15, 0.15]
+    z: [-0.15, 0.15]
+  target_minimum_offset_norm_m: 0.05
+  flight_time_range_s: [0.585, 0.75]
+  initial_euler_xyz_range_rad_each_axis: [-0.5235987756, 0.5235987756]
+  initial_euler_xyz_range_deg_each_axis: [-30.0, 30.0]
+  initial_angular_speed_magnitude_rad_s: [0.05, 0.5416666667]
+  approximate_axiswise_launch_velocity_envelope_m_s:
+    x: [-2.079, -0.821]
+    y: [-0.506, 0.690]
+    z: [2.30, 4.17]
+
+alpha_1_0:
+  release_position_box_base_m:
+    x: [1.00, 1.40]
+    y: [-0.30, 0.30]
+    z: [0.25, 0.85]
+  target_position_box_base_m:
+    x: [-0.0657310486, 0.4342689514]
+    y: [-0.1960582733, 0.3039417267]
+    z: [0.3168298006, 0.8168298006]
+  target_offset_from_catch_reference_m:
+    x: [-0.25, 0.25]
+    y: [-0.25, 0.25]
+    z: [-0.25, 0.25]
+  target_minimum_offset_norm_m: 0.08
+  configured_flight_time_range_s: [0.62, 0.82]
+  # Per throw, actual lower bound is max(0.62, 0.08 + norm(target_offset)/0.60).
+  target_reach_reaction_time_s: 0.08
+  target_reach_speed_m_s: 0.60
+  initial_euler_xyz_range_rad_each_axis: [-3.1415926536, 3.1415926536]
+  initial_euler_xyz_range_deg_each_axis: [-180.0, 180.0]
+  initial_angular_speed_magnitude_rad_s: [0.05, 2.0]
+  approximate_axiswise_launch_velocity_envelope_m_s:
+    x: [-2.364, -0.690]
+    y: [-0.800, 0.974]
+    z: [2.18, 4.71]
+
+ballistic_velocity_contract:
+  gravity_base_m_s2: [0.0, 0.0, -9.81]
+  equation: "v0 = (target - release - 0.5 * gravity * flight_time^2) / flight_time"
+  note: >-
+    Velocity component envelopes above are conservative axiswise bounds; their
+    extrema are not necessarily jointly attainable. Use the equation with one
+    sampled release, target, and flight time to reproduce a simulator throw.
+
+object_contract:
+  sphere60:
+    size_m: [0.060, 0.060, 0.060]
+    nominal_mass_kg: 0.004523893
+  triangle_sandbag80:
+    size_m: [0.080, 0.070, 0.070]
+    nominal_mass_kg: 0.100
+  cube_sandbag50:
+    size_m: [0.050, 0.050, 0.050]
+    nominal_mass_kg: 0.100
+  simulated_mass_scale_range: [0.75, 1.25]
+  simulated_nominal_mass_fraction: 0.25

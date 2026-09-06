@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+.env
+*.egg-info/
+depth_saves/
+object_pcd_saves/
+pcd_saves/
+*.ply
+*.npz
+*.npy

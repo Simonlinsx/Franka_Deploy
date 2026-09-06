@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "profile_id": "fr3_rh56_v61_sixexpert_candidate_shadow_v1",
+  "mode": "read_only_policy_shadow",
+  "policy_contract": "v61_h16_xyz96_visual_ballistic_six_expert",
+  "reference_frame": "robot_base",
+  "robot_hardware_writes": false,
+  "calibration": {
+    "id": "eye-to-hand-5e3620b789d775b9",
+    "camera_serial": "342222071785",
+    "depth_range_m": [0.25, 2.0]
+  },
+  "franka": {
+    "ip": "172.16.0.2",
+    "default_q_rad": [
+      0.6292979717254639,
+      -0.8440930247306824,
+      -0.008244000375270844,
+      -2.096261978149414,
+      -0.40424200892448425,
+      1.8299169540405273,
+      -1.7469099760055542
+    ],
+    "default_q_source": "all six SHA-bound V61 checkpoint metadata records",
+    "default_q_hardware_motion_authorized": false,
+    "reference_palm_position_base_m": [0.2600000183, 0.1599998940, 0.7599999351]
+  },
+  "inspire": {
+    "port": "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0",
+    "hand_id": 1,
+    "baud": 115200,
+    "open_targets": [1000, 1000, 1000, 1000, 1000, 1000],
+    "speed_set": 600,
+    "force_limit_g": 500,
+    "force_scope": "reuses the commissioned thrown-task hardware threshold; shadow writes nothing"
+  },
+  "candidate_bundle": {
+    "path": "/home/qiaoguanren/code/franka/data/checkpoints/thrown/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815",
+    "manifest_sha256": "2634743f6ea57f8c0a288f4e4f4abd8758d67bf697aeeae3e0fb4e302d5a676d",
+    "routing_mode": "manual_single_expert",
+    "automatic_router_used": false,
+    "analytic_future_17d_runtime_available": true,
+    "runtime_alignment_contract": "thrown_v61_17d_runtime_alignment_v1",
+    "runtime_alignment_source_manifest_sha256": "211f4fde9bf5fc55b65543e5145b1b98fdd3382bf903eb10cab8d79f792301bf",
+    "runtime_alignment_reference_source_sha256": "547c570ba93593541e6e1db466463e759b155c683211a007c2de69bc7ed9b956"
+  }
+}

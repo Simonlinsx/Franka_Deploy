@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "description": "Hardware-free real-video regression set. This manifest scores saved long-VOS/SAM2 masks only as a historical baseline; replace each candidate path with guarded_v2 exports when tuning production.",
+  "sparse_ground_truth_manifest": "guarded_v2_sparse_ground_truth.json",
+  "expected_sparse_ground_truth_manifest_sha256": "84aaa5b2017aea1e80a0f52938274e9d691ebc9c46f0eeaa739038adc06f4cbd",
+  "expected_replay_manifest_sha256": "1357af4b4e7606527cd4fd401f95356293d184d22bf55182c405bfd91b4d1e9c",
+  "production_suite_coverage_contract": {
+    "schema": "guarded_v2_suite_coverage_v1",
+    "exact_20hz_case_names": [
+      "fast_green_ball_entry",
+      "rolling_green_ball",
+      "rolling_red_cylinder",
+      "static_green_ball_rh56",
+      "rh56_heavy_occlusion"
+    ],
+    "visible_part_accuracy_case_names": [
+      "fast_green_ball_entry",
+      "rolling_green_ball",
+      "rolling_red_cylinder",
+      "static_green_ball_rh56",
+      "rh56_heavy_occlusion"
+    ],
+    "fast_entry_case_name": "fast_green_ball_entry",
+    "rolling_case_names": ["rolling_green_ball", "rolling_red_cylinder"],
+    "complete_occlusion_events": [
+      {
+        "case": "static_green_ball_rh56",
+        "source_interval": [245, 245],
+        "reappearance_source_frame": 246
+      },
+      {
+        "case": "static_green_ball_rh56",
+        "source_interval": [290, 292],
+        "reappearance_source_frame": 293
+      },
+      {
+        "case": "static_green_ball_rh56",
+        "source_interval": [307, 310],
+        "reappearance_source_frame": 311
+      }
+    ],
+    "heavy_partial_occlusion_case_name": "rh56_heavy_occlusion",
+    "heavy_partial_occlusion_reviewed_source_frames": [91, 121, 211, 271],
+    "pointcloud_acceptance_scope": "separate_saved_rgbd_guarded_v2_current_provider_exact_128_point_gate"
+  },
+  "cases": [
+    {
+      "name": "fast_green_ball_entry",
+      "video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_223026.mp4",
+      "seed_source_frame": 39,
+      "seed_video_sha256": "8e0d46d2933a16b6b8805909cfd3fdf80dc65b8d3972099f7221bb18c6401ae9",
+      "seed_video_fps_hz": 30.0,
+      "seed_video_frame_count": 125,
+      "seed_video_size_wh": [848, 480],
+      "target_first_visible_source_frame": 38,
+      "reviewed_visible_source_intervals": [[38, 123]],
+      "reviewed_absent_source_intervals": [[0, 37]],
+      "reviewed_motion_track": {
+        "path": "reviewed_motion_tracks/fast_green_ball_entry_exact20hz.json",
+        "sha256": "bffd11af62207b21f3d42c835a930e5066eaa20e1dd3596fce64c95c752ef519"
+      },
+      "candidate": {
+        "name": "yolo_sam2_baseline",
+        "kind": "video",
+        "path": "../../third_party/long_vos_clean/results/realsense_20260725_223026_yolo_sam2/mask_overlay_binary.mp4",
+        "threshold": 96,
+        "evaluation_fps_hz": 20.0,
+        "latency_summary": "../../third_party/long_vos_clean/results/realsense_20260725_223026_yolo_sam2/mask_overlay.json",
+        "latency_summary_fields": {
+          "p50": "sam2_track_ms_p50",
+          "p95": "sam2_track_ms_p95"
+        }
+      },
+      "evaluation_fps_hz": 20.0,
+      "target_proxy": {
+        "hsv_ranges": [[[35, 45, 55], [100, 255, 255]]],
+        "workspace_roi_normalized": [0.0, 0.0, 1.0, 1.0],
+        "motion_threshold_bgr": 28,
+        "initial_seed_xy": [95, 80],
+        "component_selection": "largest_within_jump",
+        "max_center_jump_px": 150,
+        "open_kernel": 3,
+        "close_kernel": 7,
+        "min_area_px": 80,
+        "max_area_px": 7000,
+        "min_aspect": 0.4,
+        "max_aspect": 2.5,
+        "min_fill": 0.25,
+        "min_visible_area_px": 80
+      },
+      "contamination_proxy_dilation_px": 8,
+      "reference_window_frames": 12,
+      "thresholds": {
+        "target_coverage_min": 0.98,
+        "reviewed_visible_nonempty_coverage_min": 0.98,
+        "proxy_recall_p05_min": 0.70,
+        "contamination_p95_max": 0.35,
+        "bbox_growth_p95_max": 1.60,
+        "excess_jump_p95_max": 0.40,
+        "latency_p95_ms_max": 45.0,
+        "latency_max_ms_max": 100.0,
+        "absent_false_positive_max": 0.05,
+        "reviewed_visible_longest_invalid_run_max": 1,
+        "latency_over_50ms_fraction_max": 0.01,
+        "latency_over_50ms_longest_run_max": 1,
+        "reviewed_absent_false_positive_max": 0.05
+      }
+    },
+    {
+      "name": "rolling_green_ball",
+      "video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_221851.mp4",
+      "seed_source_frame": 69,
+      "source_start_frame": 60,
+      "target_first_visible_source_frame": 68,
+      "reviewed_visible_source_intervals": [[68, 183]],
+      "reviewed_absent_source_intervals": [[60, 66]],
+      "proxy_absence_gating": false,
+      "evaluation_fps_hz": 20.0,
+      "candidate": {
+        "name": "long_vos_baseline",
+        "kind": "directory",
+        "path": "../../third_party/long_vos_clean/outputs/prior_rolling_green_ball_full/masks",
+        "states": "../../third_party/long_vos_clean/outputs/prior_rolling_green_ball_full/states.jsonl"
+      },
+      "target_proxy": {
+        "hsv_ranges": [[[35, 45, 55], [100, 255, 255]]],
+        "workspace_roi_normalized": [0.0, 0.25, 1.0, 1.0],
+        "motion_threshold_bgr": 24,
+        "initial_seed_xy": [190, 294],
+        "component_selection": "largest_within_jump",
+        "max_center_jump_px": 80,
+        "open_kernel": 3,
+        "close_kernel": 7,
+        "min_area_px": 80,
+        "max_area_px": 7000,
+        "min_aspect": 0.4,
+        "max_aspect": 2.5,
+        "min_fill": 0.25,
+        "min_visible_area_px": 80
+      },
+      "contamination_proxy_dilation_px": 8,
+      "reference_window_frames": 12,
+      "thresholds": {
+        "target_coverage_min": 0.98,
+        "reviewed_visible_nonempty_coverage_min": 0.98,
+        "proxy_recall_p05_min": 0.75,
+        "contamination_p95_max": 0.30,
+        "bbox_growth_p95_max": 1.60,
+        "excess_jump_p95_max": 0.35,
+        "latency_p95_ms_max": 45.0,
+        "latency_max_ms_max": 100.0,
+        "absent_false_positive_max": 0.05,
+        "reviewed_visible_longest_invalid_run_max": 1,
+        "latency_over_50ms_fraction_max": 0.01,
+        "latency_over_50ms_longest_run_max": 1,
+        "reviewed_absent_false_positive_max": 0.05
+      }
+    },
+    {
+      "name": "rolling_red_cylinder",
+      "video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_222343.mp4",
+      "seed_source_frame": 92,
+      "source_start_frame": 90,
+      "target_first_visible_source_frame": 90,
+      "reviewed_visible_source_intervals": [[90, 95], [101, 171]],
+      "reviewed_absent_source_intervals": [[96, 99], [173, 204]],
+      "evaluation_fps_hz": 20.0,
+      "candidate": {
+        "name": "long_vos_baseline",
+        "kind": "directory",
+        "path": "../../third_party/long_vos_clean/outputs/prior_rolling_red_cylinder_full/masks",
+        "states": "../../third_party/long_vos_clean/outputs/prior_rolling_red_cylinder_full/states.jsonl"
+      },
+      "target_proxy": {
+        "hsv_ranges": [[[0, 55, 45], [15, 255, 255]], [[165, 55, 45], [179, 255, 255]]],
+        "workspace_roi_normalized": [0.0, 0.25, 1.0, 1.0],
+        "motion_threshold_bgr": 24,
+        "initial_seed_xy": [17, 310],
+        "component_selection": "largest_within_jump",
+        "max_center_jump_px": 90,
+        "open_kernel": 3,
+        "close_kernel": 5,
+        "min_area_px": 70,
+        "max_area_px": 10000,
+        "min_aspect": 0.2,
+        "max_aspect": 4.0,
+        "min_fill": 0.15,
+        "min_visible_area_px": 70
+      },
+      "contamination_proxy_dilation_px": 8,
+      "reference_window_frames": 12,
+      "thresholds": {
+        "target_coverage_min": 0.95,
+        "reviewed_visible_nonempty_coverage_min": 0.95,
+        "proxy_recall_p05_min": 0.65,
+        "contamination_p95_max": 0.35,
+        "bbox_growth_p95_max": 1.80,
+        "excess_jump_p95_max": 0.45,
+        "latency_p95_ms_max": 45.0,
+        "latency_max_ms_max": 100.0,
+        "absent_false_positive_max": 0.05,
+        "reviewed_visible_longest_invalid_run_max": 1,
+        "latency_over_50ms_fraction_max": 0.01,
+        "latency_over_50ms_longest_run_max": 1,
+        "reviewed_absent_false_positive_max": 0.05
+      }
+    },
+    {
+      "name": "static_green_ball_rh56",
+      "video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_223222.mp4",
+      "seed_source_frame": 75,
+      "source_start_frame": 75,
+      "reviewed_visible_source_intervals": [
+        [75, 244],
+        [246, 289],
+        [293, 306],
+        [311, 352]
+      ],
+      "reviewed_reappearance_source_frames": [246, 293, 311],
+      "reviewed_absent_source_intervals": [[245, 245], [290, 292], [307, 310], [353, 419]],
+      "evaluation_fps_hz": 20.0,
+      "candidate": {
+        "name": "long_vos_baseline",
+        "kind": "directory",
+        "path": "../../third_party/long_vos_clean/outputs/prior_static_green_ball_rh56_full/masks",
+        "states": "../../third_party/long_vos_clean/outputs/prior_static_green_ball_rh56_full/states.jsonl"
+      },
+      "target_proxy": {
+        "hsv_ranges": [[[35, 45, 55], [100, 255, 255]]],
+        "workspace_roi_normalized": [0.0, 0.25, 1.0, 1.0],
+        "initial_seed_xy": [497, 255],
+        "open_kernel": 3,
+        "close_kernel": 7,
+        "min_area_px": 70,
+        "max_area_px": 7000,
+        "min_aspect": 0.35,
+        "max_aspect": 2.8,
+        "min_fill": 0.20,
+        "max_center_jump_px": 45,
+        "min_visible_area_px": 70
+      },
+      "contamination_proxy_dilation_px": 8,
+      "reference_window_frames": 12,
+      "thresholds": {
+        "target_coverage_min": 0.95,
+        "reviewed_visible_nonempty_coverage_min": 0.95,
+        "proxy_recall_p05_min": 0.65,
+        "contamination_p95_max": 0.30,
+        "bbox_growth_p95_max": 1.60,
+        "excess_jump_p95_max": 0.35,
+        "latency_p95_ms_max": 40.0,
+        "latency_max_ms_max": 100.0,
+        "absent_false_positive_max": 0.05,
+        "reviewed_visible_longest_invalid_run_max": 2,
+        "reviewed_reappearance_ticks_max": 3,
+        "latency_over_50ms_fraction_max": 0.01,
+        "latency_over_50ms_longest_run_max": 1,
+        "reviewed_absent_false_positive_max": 0.05
+      }
+    },
+    {
+      "name": "rh56_heavy_occlusion",
+      "video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_223251.mp4",
+      "seed_source_frame": 32,
+      "source_start_frame": 32,
+      "reviewed_visible_source_intervals": [[32, 358]],
+      "evaluation_fps_hz": 20.0,
+      "candidate": {
+        "name": "long_vos_baseline",
+        "kind": "directory",
+        "path": "../../third_party/long_vos_clean/outputs/compare_red_occlusion_long_vos_full/masks",
+        "states": "../../third_party/long_vos_clean/outputs/compare_red_occlusion_long_vos_full/states.jsonl"
+      },
+      "target_proxy": {
+        "hsv_ranges": [[[0, 45, 45], [18, 255, 255]], [[165, 45, 45], [179, 255, 255]]],
+        "workspace_roi_normalized": [0.0, 0.25, 1.0, 1.0],
+        "initial_seed_xy": [436, 267],
+        "open_kernel": 3,
+        "close_kernel": 5,
+        "min_area_px": 50,
+        "max_area_px": 10000,
+        "min_aspect": 0.2,
+        "max_aspect": 4.0,
+        "min_fill": 0.12,
+        "max_center_jump_px": 55,
+        "min_visible_area_px": 50
+      },
+      "contamination_proxy_dilation_px": 8,
+      "reference_window_frames": 12,
+      "thresholds": {
+        "target_coverage_min": 0.95,
+        "reviewed_visible_nonempty_coverage_min": 0.95,
+        "proxy_recall_p05_min": 0.60,
+        "contamination_p95_max": 0.30,
+        "bbox_growth_p95_max": 1.60,
+        "excess_jump_p95_max": 0.40,
+        "latency_p95_ms_max": 40.0,
+        "latency_max_ms_max": 100.0,
+        "reviewed_visible_longest_invalid_run_max": 2,
+        "latency_over_50ms_fraction_max": 0.01,
+        "latency_over_50ms_longest_run_max": 1
+      }
+    }
+  ]
+}

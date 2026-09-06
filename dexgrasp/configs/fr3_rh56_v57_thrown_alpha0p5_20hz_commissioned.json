@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "profile_id": "fr3_rh56_v57_thrown_alpha0p5_first_motion_v1",
+  "mode": "commissioning_locked",
+  "policy_contract": "v94_inspire_semantic_13d",
+  "reference_frame": "robot_base",
+  "calibration": {
+    "id": "eye-to-hand-5e3620b789d775b9",
+    "camera_serial": "342222071785"
+  },
+  "franka": {
+    "ip": "172.16.0.2",
+    "default_q_rad": [0.0, -1.2, 0.0, -2.2, 0.0, 1.4, 0.7853981633974483],
+    "default_q_provenance": {
+      "source_kind": "sha_bound_v57_alpha0p5_reset_plus_read_only_policy_shadow",
+      "recorded_date": "2026-08-14",
+      "installed_configuration": "FR3 + V7 Bambu PLA adapter + Inspire RH56 right hand",
+      "reason": "V57 alpha=0.5 thrown-object reset and policy observation reference",
+      "verification_scope": "V57 reset-only motion and read-only thrown policy shadow; first real rollout remains operator-supervised and capped at 20 ticks",
+      "evidence_artifact": "../runs/thrown-shadow-patterned-20260814-013156_perception_report.json",
+      "motion_authorized": false
+    },
+    "joint_limits_rad": [
+      [-2.7437, 2.7437],
+      [-1.7837, 1.7837],
+      [-2.9007, 2.9007],
+      [-3.0421, -0.1518],
+      [-2.8065, 2.8065],
+      [0.5445, 4.5169],
+      [-3.0159, 3.0159]
+    ],
+    "joint_limit_margin_rad": 0.05,
+    "default_max_joint_velocity_rad_s": 0.05,
+    "online_max_joint_acceleration_rad_s2": null,
+    "online_max_joint_jerk_rad_s3": null,
+    "online_max_tracking_error_rad": null,
+    "default_max_joint_segment_rad": 0.2,
+    "default_min_duration_s": 6.0,
+    "default_arrival_tolerance_rad": 0.02,
+    "default_path_collision_verified": false,
+    "cartesian_workspace_min_m": null,
+    "cartesian_workspace_max_m": null,
+    "cartesian_max_segment_translation_m": 0.02,
+    "cartesian_max_segment_rotation_rad": 0.1,
+    "cartesian_max_translation_velocity_m_s": 0.005,
+    "cartesian_max_rotation_velocity_rad_s": 0.02,
+    "cartesian_min_segment_duration_s": 3.0,
+    "cartesian_arrival_position_tolerance_m": 0.005,
+    "cartesian_arrival_rotation_tolerance_rad": 0.04,
+    "settle_time_s": 0.3,
+    "settle_timeout_s": 2.0,
+    "settle_poll_s": 0.01,
+    "expected_F_T_EE": [
+      [1.0, 0.0, 0.0, 0.0],
+      [0.0, 1.0, 0.0, 0.0],
+      [0.0, 0.0, 1.0, 0.0],
+      [0.0, 0.0, 0.0, 1.0]
+    ],
+    "expected_end_effector": {
+      "mass_kg": 0.607,
+      "F_x_Cee_m": [0.0, 0.0, 0.076],
+      "inertia_kg_m2": [
+        [0.00151, 0.0, 0.0],
+        [0.0, 0.00169, 0.0],
+        [0.0, 0.0, 0.000442]
+      ]
+    }
+  },
+  "inspire": {
+    "port": "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0",
+    "hand_id": 1,
+    "baud": 115200,
+    "open_targets": [1000, 1000, 1000, 1000, 1000, 1000],
+    "open_speed": 40,
+    "close_speed": 40,
+    "force_limit_g": 500,
+    "force_set_commissioning": {
+      "contract": "v57_thrown_rh56_force500_sim_alignment_v1",
+      "scope": "V57 thrown-object task only; ordinary V94/tabletop remains 80 g",
+      "speed_set": 600,
+      "simulation_and_prior_identification_force_set_g": 500,
+      "free_space_comparison": "../runs/rh56-speed600-force80-throw-compare-20260814/COMPARISON.md",
+      "free_space_comparison_sha256": "752b285041264273c7c98af25392a1e94cb3977b36277898b7e14bf7ab05199b",
+      "interpretation": "500 g aligns the thrown deployment threshold with simulation; free-space t90 improvement over 80 g is about 10-16 ms, so policy timing remains the primary closure limitation"
+    },
+    "motion_timeout_s": 20.0,
+    "arrival_tolerance_units": 25,
+    "thumb_rotate_validated_realtime_range": [0, 1000],
+    "thumb_preshape_required": true,
+    "six_axis_coupled_closure_commissioned": true,
+    "commissioned_air_closure_targets": [
+      [61, 17, 524, 758, 422, 416]
+    ]
+  },
+  "tool": {
+    "adapter_asset": "../assets/adapter/V7_FR3_RH56_M3_CAPTIVE_NUT_ROT45.stl",
+    "adapter_provenance": "../assets/adapter/V7_FR3_RH56_M3_CAPTIVE_NUT_ROT45.provenance.json",
+    "adapter_disk_diameter_m": 0.07,
+    "adapter_disk_thickness_m": 0.01,
+    "adapter_spigot_diameter_m": 0.0376,
+    "adapter_spigot_protrusion_m": 0.0078,
+    "adapter_total_axial_envelope_m": 0.0178,
+    "fr3_face_to_rh56_seating_plane_m": 0.01,
+    "T_seating_hand_axis_basis": [
+      [0.0, 1.0, 0.0, 0.0],
+      [0.0, 0.0, 1.0, 0.0],
+      [1.0, 0.0, 0.0, 0.0],
+      [0.0, 0.0, 0.0, 1.0]
+    ],
+    "assembled_yaw_rad": -0.7853981633974483,
+    "seating_to_hand_source_origin_m": [0.0, 0.0, 0.0],
+    "source_origin_datum_verified": true,
+    "T_EE_hand": [
+      [0.0, 0.7071067811865476, 0.7071067811865475, 0.0],
+      [0.0, -0.7071067811865475, 0.7071067811865476, 0.0],
+      [1.0, 0.0, 0.0, 0.01],
+      [0.0, 0.0, 0.0, 1.0]
+    ],
+    "mount_transform_commissioned": true,
+    "mount_transform_method": "V7 STEP datum + official AnyDex RH56 source datum + installed right-hand orientation",
+    "installed_on_franka_verified": true,
+    "assembled_yaw_verified": true,
+    "installed_collision_model_verified": false,
+    "material": "PLA",
+    "low_speed_unloaded_commissioning_only": true,
+    "rh56_nominal_mass_kg": 0.54,
+    "rh56_mass_source": "https://www.inspire-robots.com/dexterous%20hands/rh56bfx-series/",
+    "installed_mass_note": "Desk end-effector dynamics use the user-configured complete 0.607 kg assembly; the 540 g value is hand-only nominal mass."
+  },
+  "grasp": {
+    "pregrasp_distance_m": 0.1,
+    "air_retreat_distance_m": 0.08,
+    "air_pregrasp_distance_m": 0.01,
+    "air_audit_observed_scene_margin_m": 0.002,
+    "air_audit_max_scene_age_s": 120.0,
+    "snapshot_hand_pose_already_applies_predicted_depth": true,
+    "extra_final_insertion_m": 0.0,
+    "extra_final_insertion_commissioned": false,
+    "upstream_ur_empirical_insertion_reference_m": 0.014,
+    "require_official_anydex_backend": true,
+    "require_hand_scene_collision_check": true,
+    "allow_diagnostic_plan_only": true
+  }
+}

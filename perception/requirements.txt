@@ -1,0 +1,6 @@
+numpy>=1.23
+opencv-python>=4.8
+pyrealsense2>=2.54
+open3d>=0.17
+PyYAML>=6.0
+pyzmq>=25.0

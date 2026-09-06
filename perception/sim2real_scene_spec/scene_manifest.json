@@ -1,0 +1,618 @@
+{
+  "$schema": "schemas/scene_manifest.schema.json",
+  "schema_version": "1.0.0",
+  "package": {
+    "name": "fr3_d435_real_workcell_scene_spec",
+    "generated_at": "2026-07-17T22:16:00+08:00",
+    "generation_mode": "repository_audit_plus_camera_only_table_survey",
+    "live_camera_accessed": true,
+    "live_robot_accessed": false,
+    "canonical_length_unit": "m",
+    "canonical_angle_unit": "rad",
+    "canonical_time_unit": "s"
+  },
+  "evidence_classes": [
+    "measured",
+    "derived",
+    "configured",
+    "reported",
+    "assumed",
+    "unknown"
+  ],
+  "sources": {
+    "deployment_calibration": {
+      "kind": "packaged_snapshot",
+      "portable_path": "source/calibration/fr3_d435_eye_to_hand.yaml",
+      "original_path": "/home/qiaoguanren/code/franka/perception/configs/calibrations/fr3_d435_eye_to_hand.yaml",
+      "sha256": "aa78c17ebb98d39eeda5b838a458818870d8d4e697f5762d1f5693b94188a1e4",
+      "timestamp": "2026-07-16T17:32:12.940498+00:00"
+    },
+    "calibration_validation": {
+      "kind": "packaged_snapshot",
+      "portable_path": "source/calibration/fr3_d435_eye_to_hand.validation.yaml",
+      "original_path": "/home/qiaoguanren/code/franka/perception/configs/calibrations/fr3_d435_eye_to_hand.validation.yaml",
+      "sha256": "95734187f402f94441508c0744c77d4c5cbafc1f08a809a62d3d0a65d4d68ade",
+      "timestamp": "2026-07-17 Asia/Shanghai"
+    },
+    "calibration_dataset": {
+      "kind": "packaged_snapshot",
+      "portable_path": "source/calibration/fr3_d435_aruco582_final_v2_dataset.yaml",
+      "original_path": "/home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3_d435_aruco582_final_v2_dataset.yaml",
+      "sha256": "2c4ff4b66f624740f5c5f227250d7f6d396409100d1beb66bc0789c53e8abe9e",
+      "timestamp": "2026-07-16T17:19:05.060062+00:00"
+    },
+    "calibration_auto_audit": {
+      "kind": "packaged_snapshot",
+      "portable_path": "source/calibration/fr3_d435_eye_to_hand_v2_auto_audit.yaml",
+      "original_path": "/home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3_d435_eye_to_hand_v2_auto_audit.yaml",
+      "sha256": "07dd8f10e193b457d8cda31228900ab820f9b1d7790dd41e7b95e4c065ab30c6",
+      "timestamp": "2026-07-16T17:26:06.863413+00:00"
+    },
+    "calibration_scene_image": {
+      "kind": "packaged_snapshot",
+      "portable_path": "evidence/final_v2_validation_001.png",
+      "original_path": "/home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/final_v2_validation_001.png",
+      "sha256": "b156e89131b5976fc36dd1887647d2f2f3ee7bbd6257e8a3040f68dbd40c9858",
+      "timestamp": "2026-07-17T01:24:40.755206381+08:00",
+      "note": "Qualitative 848x480 color-frame evidence with ArUco overlay; not a metric scene survey."
+    },
+    "current_scene_color_image": {
+      "kind": "packaged_snapshot",
+      "portable_path": "evidence/current_d435_prompt.jpg",
+      "original_path": "/tmp/current_d435_prompt.jpg",
+      "sha256": "7f5f2a72e379b9310e3d46798de18988ffec2fa5ee70c34a550037c9b4b1e1be",
+      "timestamp": "2026-07-17T20:55:31.460222223+08:00",
+      "note": "Current 848x480 D435 color view. Timestamp is the source file mtime; no embedded camera timestamp, aligned depth, or synchronized robot joint state was available. Qualitative evidence only."
+    },
+    "runtime_config": {
+      "kind": "packaged_snapshot",
+      "portable_path": "source/runtime/d435_default.yaml",
+      "original_path": "/home/qiaoguanren/code/franka/perception/configs/d435_default.yaml",
+      "sha256": "c223fa599b8ff3ee33d4a9e7c2e2bada6ebfb8fa36d60a131e86a0891810729f",
+      "timestamp": "2026-07-17T21:31:17.098861592+08:00",
+      "note": "Snapshot of configured perception and commissioned hover limits; these are not measurements of scene geometry."
+    },
+    "hover_controller_source": {
+      "kind": "external_source_reference",
+      "original_path": "/home/qiaoguanren/code/franka/perception/dynamic_pcd/apps/hover_over_object.py",
+      "sha256": "bc1fda1102398f8faae44e2ff9d7315581b89b6bf058d5449f39da838b055e4d",
+      "timestamp": "2026-07-17T17:43:31.204467280+08:00"
+    },
+    "franka_description_installation": {
+      "kind": "installed_asset_candidate",
+      "package_name": "ros-humble-franka-description",
+      "package_version": "1.0.1-3jammy.20260422.111300",
+      "upstream_model_version": "1.0.1",
+      "package_root": "/opt/ros/humble/share/franka_description",
+      "timestamp": "2025-07-09T23:15:32+08:00",
+      "note": "Local simulator asset candidate only. The physical arm revision has not been matched to fr3 versus fr3v2."
+    },
+    "user_reported_capture_volume": {
+      "kind": "user_report",
+      "timestamp": "2026-07-17 Asia/Shanghai",
+      "note": "User described a 40 cm width, 30 cm height, 40 cm depth volume centered at the then-current EEF. That EEF pose and the volume axis convention were not recorded."
+    },
+    "user_prompt_target": {
+      "kind": "user_report",
+      "timestamp": "2026-07-17 Asia/Shanghai",
+      "note": "Semantic target prompt example: pink cylinder."
+    },
+    "table_plane_roi_lower_center": {
+      "kind": "live_camera_measurement",
+      "portable_path": "measurements/table_plane_roi_lower_center.yaml",
+      "sha256": "6ba152f1be92006b4a10a91a5141db5e84e9191e2d3d20dd1f6c31719447e274",
+      "timestamp": "2026-07-17T22:11:05+08:00",
+      "note": "Read-only D435 measurement; robot API was not imported or contacted."
+    },
+    "table_plane_roi_lower_right": {
+      "kind": "live_camera_measurement",
+      "portable_path": "measurements/table_plane_roi_lower_right.yaml",
+      "sha256": "2cad61809e2f4f4698cfc8db92276fdffa88760711466baa671ae3d1a3451dbd",
+      "timestamp": "2026-07-17T22:11:26+08:00",
+      "note": "Read-only D435 measurement; robot API was not imported or contacted."
+    },
+    "table_plane_roi_upper_left": {
+      "kind": "live_camera_measurement",
+      "portable_path": "measurements/table_plane_roi_upper_left.yaml",
+      "sha256": "edde0ce6dea48acf01332975be678891917ff64b376dea7e3c1fea52cfeb2abf",
+      "timestamp": "2026-07-17T22:12:05+08:00",
+      "note": "Read-only D435 measurement; robot API was not imported or contacted."
+    },
+    "table_plane_summary": {
+      "kind": "derived_measurement_summary",
+      "portable_path": "measurements/table_plane_summary.yaml",
+      "sha256": "c0afa2e752214ae483578512bbce3b5b513fa98929abe7adbfed63e2a4a03287",
+      "timestamp": "2026-07-17T22:16:00+08:00",
+      "note": "Consensus plane through three separated local fitted-plane reference points; provisional for visual and non-contact alignment."
+    }
+  },
+  "coordinate_conventions": {
+    "transform_notation": "T_A_B maps coordinates expressed in frame B into frame A",
+    "matrix_layout": "4x4 row-major nested arrays; points are column vectors conceptually",
+    "robot_base": {
+      "evidence_class": "reported",
+      "frame_name": "robot_base",
+      "source_refs": [
+        "deployment_calibration"
+      ],
+      "note": "Corresponds to the base/O frame used by Franka O_T_EE in this project."
+    },
+    "camera_color_optical_frame": {
+      "evidence_class": "reported",
+      "frame_name": "camera_color_optical_frame",
+      "axes": {
+        "+x": "image right",
+        "+y": "image down",
+        "+z": "forward along optical axis"
+      },
+      "source_refs": [
+        "deployment_calibration"
+      ]
+    },
+    "simulation_world": {
+      "evidence_class": "assumed",
+      "value": "robot_base",
+      "T_world_robot_base": [
+        [1.0, 0.0, 0.0, 0.0],
+        [0.0, 1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "units": {
+        "translation": "m",
+        "angle": "rad"
+      },
+      "note": "A simulation convention, not a measurement of the robot relative to the room or floor."
+    }
+  },
+  "camera": {
+    "identity": {
+      "manufacturer": {
+        "value": "Intel",
+        "evidence_class": "reported"
+      },
+      "model": {
+        "value": "RealSense D435",
+        "evidence_class": "measured"
+      },
+      "serial": {
+        "value": "337322072188",
+        "evidence_class": "measured"
+      },
+      "source_refs": [
+        "deployment_calibration",
+        "calibration_dataset"
+      ]
+    },
+    "stream": {
+      "evidence_class": "measured",
+      "color_format": "BGR8 in application memory",
+      "depth_format": "Z16",
+      "alignment": "depth aligned to color",
+      "projection_frame": "camera_color_optical_frame",
+      "width_px": 848,
+      "height_px": 480,
+      "fps": 30,
+      "source_refs": [
+        "deployment_calibration",
+        "calibration_validation",
+        "runtime_config"
+      ]
+    },
+    "pinhole_intrinsics": {
+      "evidence_class": "measured",
+      "units": "pixel",
+      "K": [
+        [603.7852172851562, 0.0, 435.23577880859375],
+        [0.0, 603.3232421875, 246.64630126953125],
+        [0.0, 0.0, 1.0]
+      ],
+      "fx": 603.7852172851562,
+      "fy": 603.3232421875,
+      "cx": 435.23577880859375,
+      "cy": 246.64630126953125,
+      "distortion_model": "distortion.inverse_brown_conrady",
+      "distortion_coefficients": [0.0, 0.0, 0.0, 0.0, 0.0],
+      "source_refs": [
+        "deployment_calibration",
+        "calibration_dataset"
+      ],
+      "note": "Use an off-axis projection matrix. The principal point is not the geometric image center."
+    },
+    "derived_frustum": {
+      "evidence_class": "derived",
+      "horizontal_fov_deg_symmetric_approx": 70.15586017852266,
+      "vertical_fov_deg_symmetric_approx": 43.3849997888613,
+      "tangent_left": 0.720845370752163,
+      "tangent_right": 0.6819713524005306,
+      "tangent_top_image_down": 0.4088128618669705,
+      "tangent_bottom_image_down": 0.38512306916606104,
+      "derivation": "FOV=2*atan(image_size/(2*focal_length)); asymmetric tangents use cx, cy and pixel bounds [0,width-1] x [0,height-1].",
+      "source_refs": [
+        "deployment_calibration"
+      ]
+    },
+    "depth": {
+      "scale_m_per_unit": {
+        "value": 0.0010000000474974513,
+        "units": "m/raw_unit",
+        "evidence_class": "measured"
+      },
+      "value_semantics": {
+        "value": "z coordinate along camera optical +z after deprojection",
+        "evidence_class": "reported"
+      },
+      "configured_processing_range": {
+        "min": 0.25,
+        "max": 1.2,
+        "units": "m",
+        "evidence_class": "configured",
+        "note": "Perception crop, not the physical sensor's complete range and not necessarily renderer near/far clipping."
+      },
+      "configured_sensor_options": {
+        "evidence_class": "configured",
+        "emitter_enabled": true,
+        "laser_power": 180,
+        "visual_preset": "default",
+        "spatial_filter": false,
+        "temporal_filter": false,
+        "hole_filling_filter": false,
+        "color_auto_exposure": true,
+        "source_refs": [
+          "runtime_config"
+        ]
+      },
+      "single_plane_depth_scale_observation": {
+        "difference_mm": 9.994,
+        "evidence_class": "measured",
+        "source_refs": [
+          "calibration_validation"
+        ],
+        "note": "Marker-center depth versus color-PnP observation only. It is not a calibrated global depth correction."
+      }
+    },
+    "extrinsics": {
+      "evidence_class": "measured",
+      "calibration_id": "eye-to-hand-b722bce10485c8a3",
+      "calibration_type": "eye_to_hand_fixed_camera",
+      "T_base_camera_color_optical": [
+        [-0.4586796860502671, 0.5116787889996631, -0.7264969115506734, 1.2480084212821743],
+        [0.8882808336406767, 0.24205537638961394, -0.39034133184625325, 0.3699026859708365],
+        [-0.023876896604316192, -0.8243749217732913, -0.56554034529804, 0.6403031702928152],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "T_camera_color_optical_base": [
+        [-0.45867968605026666, 0.8882808336406766, -0.02387689660431622, 0.25914709719419404],
+        [0.5116787889996631, 0.24205537638961416, -0.8243749217732916, -0.20026649562191415],
+        [-0.7264969115506732, -0.39034133184625347, -0.5655403452980401, 1.4131798467689223],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "translation_base_m": [1.2480084212821743, 0.3699026859708365, 0.6403031702928152],
+      "rotation_quaternion_xyzw_camera_to_base": [0.46497453770560354, 0.7527076802680309, -0.40344887047884165, -0.23336417090103356],
+      "optical_axes_in_base": {
+        "right_plus_x": [-0.4586796860502671, 0.8882808336406767, -0.023876896604316192],
+        "down_plus_y": [0.5116787889996631, 0.24205537638961394, -0.8243749217732913],
+        "forward_plus_z": [-0.7264969115506734, -0.39034133184625325, -0.56554034529804]
+      },
+      "source_refs": [
+        "deployment_calibration",
+        "calibration_validation"
+      ]
+    },
+    "negative_z_forward_simulator_pose": {
+      "evidence_class": "derived",
+      "simulator_camera_axes": {
+        "+x": "image right",
+        "+y": "image up",
+        "-z": "view direction"
+      },
+      "T_base_camera_sim": [
+        [-0.4586796860502671, -0.5116787889996631, 0.7264969115506734, 1.2480084212821743],
+        [0.8882808336406767, -0.24205537638961394, 0.39034133184625325, 0.3699026859708365],
+        [-0.023876896604316192, 0.8243749217732913, 0.56554034529804, 0.6403031702928152],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "rotation_quaternion_xyzw_camera_sim_to_base": [0.23336417090103356, 0.40344887047884165, 0.7527076802680309, 0.46497453770560354],
+      "rotation_quaternion_wxyz_camera_sim_to_base": [0.46497453770560354, 0.23336417090103356, 0.40344887047884165, 0.7527076802680309],
+      "derivation": "T_base_camera_sim = T_base_camera_color_optical * diag(1,-1,-1,1)",
+      "note": "Suitable only for APIs whose camera local axes are +x right, +y up, -z forward. Verify the target simulator's convention and quaternion ordering."
+    },
+    "physical_body_and_mount": {
+      "evidence_class": "unknown",
+      "camera_body_pose": null,
+      "bracket_geometry": null,
+      "collision_geometry": null,
+      "note": "The optical pose is calibrated and sufficient for rendering. Camera-body collisions and appearance require a D435 body model plus optical-to-body transform and bracket survey."
+    }
+  },
+  "calibration_quality": {
+    "evidence_class": "measured",
+    "solver": "daniilidis",
+    "training_sample_count": 20,
+    "translation_span_m": 0.14705654068712554,
+    "rotation_span_deg": 35.80490748750915,
+    "training_residuals": {
+      "translation_error_p95_m": 0.002653129873264998,
+      "rotation_error_p95_deg": 0.4825747877944064,
+      "reprojection_error_p95_px": 0.16995880752801898
+    },
+    "independent_validation": {
+      "q7_mountcheck_mean_translation_error_mm": 1.723,
+      "q7_mountcheck_mean_rotation_error_deg": 0.172,
+      "post_trajectory_closure_translation_error_mm": 0.905,
+      "post_trajectory_closure_rotation_error_deg": 0.408
+    },
+    "quality_status": "pass",
+    "pose_covariance": {
+      "evidence_class": "unknown",
+      "value": null,
+      "note": "Residuals are not a full 6-DoF covariance and must not be used as one without a defined model."
+    },
+    "source_refs": [
+      "deployment_calibration",
+      "calibration_validation",
+      "calibration_auto_audit"
+    ]
+  },
+  "calibration_target": {
+    "evidence_class": "measured",
+    "type": "aruco",
+    "dictionary": "DICT_ARUCO_ORIGINAL",
+    "marker_id": 582,
+    "configured_outer_black_side_m": 0.1,
+    "T_ee_target_during_calibration": [
+      [-0.7901364893390533, -0.09453046004121966, 0.6055974903674487, 0.046448134532698845],
+      [-0.6053663185575879, -0.03439375962141303, -0.7952035523406178, -0.0404609844020577],
+      [0.09599973214019977, -0.9949276664278167, -0.03004979210427382, 0.02057104704301306],
+      [0.0, 0.0, 0.0, 1.0]
+    ],
+    "operational_scene_asset": false,
+    "note": "This transform belongs only to the temporarily EEF-mounted calibration board. It is not a TCP, gripper, or operational tool transform. The board should not be added to the operational simulation unless it remains physically installed and its collision geometry is surveyed."
+  },
+  "robot": {
+    "identity": {
+      "manufacturer": {
+        "value": "Franka Robotics",
+        "evidence_class": "reported"
+      },
+      "model_family": {
+        "value": "Franka Research 3",
+        "evidence_class": "reported",
+        "source_refs": [
+          "calibration_validation"
+        ]
+      },
+      "physical_serial": {
+        "value": null,
+        "evidence_class": "unknown"
+      },
+      "physical_hardware_revision": {
+        "value": null,
+        "evidence_class": "unknown",
+        "note": "Required to select and validate the fr3 versus fr3v2 inertial/visual asset."
+      }
+    },
+    "simulation_asset_candidate": {
+      "evidence_class": "configured",
+      "ros_package": "franka_description",
+      "ros_package_version": "1.0.1-3jammy.20260422.111300",
+      "xacro_candidate": "robots/fr3/fr3.urdf.xacro",
+      "alternate_xacro_requiring_hardware_check": "robots/fr3v2/fr3v2.urdf.xacro",
+      "default_xacro_arguments_not_accepted_as_real_tooling": {
+        "hand": true,
+        "ee_id": "franka_hand",
+        "tcp_xyz_m": [0.0, 0.0, 0.1034],
+        "tcp_rpy_rad": [0.0, 0.0, 0.0]
+      },
+      "asset_lock_path": "robot/asset_lock.json",
+      "note": "Do not accept the default hand/TCP as the real setup until the actual EEF tool has been identified and measured."
+    },
+    "candidate_description_joint_limits": {
+      "evidence_class": "configured",
+      "units": {
+        "position": "rad",
+        "velocity": "rad/s",
+        "effort": "N*m"
+      },
+      "position_lower": [-2.7437, -1.7837, -2.9007, -3.0421, -2.8065, 0.5445, -3.0159],
+      "position_upper": [2.7437, 1.7837, 2.9007, -0.1518, 2.8065, 4.5169, 3.0159],
+      "velocity": [2.62, 2.62, 2.62, 2.62, 5.26, 4.18, 5.26],
+      "effort": [87.0, 87.0, 87.0, 87.0, 12.0, 12.0, 12.0],
+      "source_refs": [
+        "franka_description_installation"
+      ]
+    },
+    "runtime_motion_gate_joint_limits": {
+      "evidence_class": "configured",
+      "units": "rad",
+      "position_lower": [-2.9007, -1.8361, -2.9007, -3.077, -2.8763, 0.4398, -3.0508],
+      "position_upper": [2.9007, 1.8361, 2.9007, -0.1169, 2.8763, 4.6216, 3.0508],
+      "source_refs": [
+        "hover_controller_source"
+      ],
+      "note": "These software gate constants are wider than the local franka_description candidate on several joints. They are recorded for audit, not endorsed as simulation limits. Use the conservative description limits until semantics and physical revision are reconciled."
+    },
+    "base_pose": {
+      "evidence_class": "assumed",
+      "T_world_robot_base": [
+        [1.0, 0.0, 0.0, 0.0],
+        [0.0, 1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "note": "World is deliberately defined to equal robot_base; the physical base relative to the room/floor/support table remains unknown."
+    },
+    "operational_end_effector": {
+      "evidence_class": "unknown",
+      "type": null,
+      "cad_or_urdf": null,
+      "T_flange_tool": null,
+      "T_flange_tcp": null,
+      "mass_kg": null,
+      "center_of_mass_m": null,
+      "inertia_kg_m2": null,
+      "collision_geometry": null,
+      "current_calibration_board_installed": null,
+      "note": "This is a hard blocker for contact-rich or collision-aware sim2real."
+    },
+    "reference_joint_configuration": {
+      "evidence_class": "unknown",
+      "q_rad": null,
+      "timestamp": null,
+      "note": "Needed to compare a simulated render against a synchronized real image."
+    }
+  },
+  "scene": {
+    "tabletop": {
+      "evidence_class": "measured",
+      "measurement_status": "provisional_black_cloth_surface_plane",
+      "plane_in_robot_base": [-0.0007503140372821853, -0.002711796670329629, 0.9999960415859976, -0.03750271848176338],
+      "height_z_at_reference_xy_m": 0.038013990452949634,
+      "reference_xy_m": [0.6310328740115968, 0.013883294838682836],
+      "normal_robot_base": [-0.0007503140372821853, -0.002711796670329629, 0.9999960415859976],
+      "tilt_from_robot_base_plus_z_deg": 0.16121237667126215,
+      "height_repeatability_sample_std_m": 0.0009766148385418885,
+      "height_repeatability_range_m": 0.00195294146965478,
+      "worst_local_fit_residual_p95_m": 0.004410220316486812,
+      "observed_surface_coverage_robot_base_m": {
+        "min": [0.3908528800139115, -0.537104070429675, 0.027971585297720702],
+        "max": [0.9628147437657857, 0.518705908288891, 0.04731938115054157],
+        "note": "Observed point coverage only; it is not the physical table boundary or an obstacle-free workspace."
+      },
+      "corners_robot_base_m": null,
+      "length_m": null,
+      "width_m": null,
+      "thickness_m": null,
+      "collision_geometry": null,
+      "surface_material": null,
+      "friction": null,
+      "source_refs": [
+        "table_plane_roi_lower_center",
+        "table_plane_roi_lower_right",
+        "table_plane_roi_upper_left",
+        "table_plane_summary"
+      ],
+      "note": "Three separated D435 ROIs measured the black cloth working surface. The consensus plane is appropriate for visual/non-contact alignment, but cloth wrinkles caused up to 1.45 deg local-normal disagreement. Physical corners, size, thickness, support geometry and friction remain unknown; use conservative collision margins."
+    },
+    "robot_support_and_mount": {
+      "evidence_class": "unknown",
+      "geometry": null,
+      "T_robot_base_support": null,
+      "note": "The qualitative image shows a robot support surface distinct from the black working surface, but no metric survey exists."
+    },
+    "floor_and_room": {
+      "evidence_class": "unknown",
+      "floor_plane_in_robot_base": null,
+      "walls": null,
+      "fixed_obstacles": null
+    },
+    "visual_appearance": {
+      "evidence_class": "reported",
+      "qualitative_observation": "Black cloth working surface, bright lab environment, clutter and multiple colored cylindrical objects visible in calibration imagery.",
+      "metric_or_photometric_measurement": false,
+      "source_refs": [
+        "calibration_scene_image",
+        "current_scene_color_image"
+      ],
+      "lighting_parameters": {
+        "evidence_class": "unknown",
+        "value": null
+      }
+    }
+  },
+  "workspace": {
+    "commissioned_hover_safety_envelope": {
+      "evidence_class": "configured",
+      "frame": "robot_base",
+      "units": "m",
+      "object_center_min": [0.505, 0.008, -0.05],
+      "object_center_max": [0.65, 0.104, 0.3],
+      "eef_min_default": [0.48, -0.02, 0.3],
+      "eef_max": [0.66, 0.13, 0.36],
+      "hover_target_z_min": 0.32,
+      "hover_target_z_max": 0.345,
+      "source_refs": [
+        "runtime_config",
+        "hover_controller_source"
+      ],
+      "note": "A conservative software-commissioned motion envelope. It is not a table bounding box, full robot reach set, training distribution, or proof that every point is collision-free."
+    },
+    "user_reported_capture_volume": {
+      "evidence_class": "reported",
+      "dimensions": {
+        "width_m": 0.4,
+        "height_m": 0.3,
+        "depth_m": 0.4
+      },
+      "center_robot_base_m": null,
+      "axis_mapping": null,
+      "source_refs": [
+        "user_reported_capture_volume"
+      ],
+      "note": "The center was described as the then-current EEF, but that pose was not persisted. Do not place this volume until its center and axes are measured."
+    }
+  },
+  "training_target": {
+    "semantic_prompt_example": {
+      "value": "pink cylinder",
+      "evidence_class": "reported",
+      "source_refs": [
+        "user_prompt_target"
+      ]
+    },
+    "physical_instance": {
+      "evidence_class": "unknown",
+      "dimensions_m": null,
+      "mass_kg": null,
+      "center_of_mass_m": null,
+      "inertia_kg_m2": null,
+      "surface_material": null,
+      "friction": null,
+      "cad_mesh": null,
+      "note": "The text prompt defines a semantic category, not a physical dynamics model. Randomized cylinders may be used for generic training, but real instance ranges must be measured."
+    }
+  },
+  "timing_and_sensor_model": {
+    "camera_capture_rate_hz": {
+      "value": 30,
+      "evidence_class": "configured"
+    },
+    "required_object_pointcloud_rate_hz": {
+      "value": 20,
+      "comparison": "at_least",
+      "evidence_class": "reported"
+    },
+    "measured_end_to_end_latency_s": {
+      "value": null,
+      "evidence_class": "unknown"
+    },
+    "measured_timestamp_offset_color_depth_s": {
+      "value": null,
+      "evidence_class": "unknown"
+    },
+    "depth_noise_model": {
+      "value": null,
+      "evidence_class": "unknown"
+    },
+    "control_delay_model": {
+      "value": null,
+      "evidence_class": "unknown"
+    }
+  },
+  "readiness": {
+    "metric_camera_projection": "ready_with_calibrated_profile",
+    "camera_to_robot_registration": "ready_with_passed_eye_to_hand_calibration",
+    "kinematic_arm_prototype": "candidate_asset_available_but_revision_unverified",
+    "collision_accurate_scene": "blocked",
+    "contact_dynamics_sim2real": "blocked",
+    "render_to_real_validation": "blocked",
+    "hard_blockers": [
+      "Survey tabletop physical corners, bounds, thickness and conservative collision margin; a provisional black-cloth surface plane is measured.",
+      "Identify physical FR3 hardware revision and match fr3 versus fr3v2 asset.",
+      "Identify and model the operational EEF/tool, TCP, payload, and collision geometry.",
+      "Capture a synchronized reference joint state plus RGB-D frame after the final scene is fixed.",
+      "Measure object geometry and dynamics ranges used by the real task.",
+      "Measure sensor/control latency and D435 depth noise across the operating range."
+    ]
+  }
+}

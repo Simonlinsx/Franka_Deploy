@@ -1,0 +1,82 @@
+task:
+  family: thrown_object_catch
+  teacher: InspireAdapterV7ThrownRealSandbagCatchV61NaturalPalmCatchTilt50CameraAwareV70FutureMorphologyTeacher
+  control_hz: 20
+  rh56_speed_set: 600
+  contract_version: v61_sixexpert_visualflight_candidate_v1
+
+robot_reset:
+  franka_joint_order: [panda_joint1, panda_joint2, panda_joint3, panda_joint4, panda_joint5, panda_joint6, panda_joint7]
+  franka_joint_position_rad:
+    - 0.6292979717254639
+    - -0.8440930247306824
+    - -0.008244000375270844
+    - -2.096261978149414
+    - -0.40424200892448425
+    - 1.8299169540405273
+    - -1.7469099760055542
+  joint_velocity_rad_s: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  reset_arm_position_noise_rad: 0.0
+  canonical_reset_curriculum_enabled: false
+  rh56_policy_joint_order: [thumb_rotation, thumb_bending, index, middle, ring, little]
+  rh56_policy_joint_position_rad: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  rh56_register_order: [little, ring, middle, index, thumb_bending, thumb_rotation]
+  rh56_speed_set_register_order: [600, 600, 600, 600, 600, 600]
+  rh56_angle_set_open_register_order: [1000, 1000, 1000, 1000, 1000, 1000]
+
+# FK of the packaged V61 q_home and installed V7/RH56 palm convention.
+catch_reference_center_base_m: [0.2600000183, 0.1599998940, 0.7599999351]
+
+# Union of all six experts' packaged target offsets plus their +/-[.06,.06,.02] m
+# reset noise.  The two curricula are intentionally identical: the handoff does
+# not commission a wider alpha=1 envelope.
+alpha_0_5:
+  release_position_box_base_m:
+    x: [1.1, 1.3]
+    y: [-0.12, 0.12]
+    z: [0.45, 0.62]
+  target_position_box_base_m:
+    x: [0.1127331643, 0.4527331643]
+    y: [-0.0274257587, 0.4925742413]
+    z: [0.7399999351, 0.7799999351]
+  target_offset_from_catch_reference_m:
+    x: [-0.1472668540, 0.1927331460]
+    y: [-0.1874256527, 0.3325743473]
+    z: [-0.02, 0.02]
+  target_minimum_offset_norm_m: 0.0
+  flight_time_range_s: [0.56, 0.70]
+
+alpha_1_0:
+  release_position_box_base_m:
+    x: [1.1, 1.3]
+    y: [-0.12, 0.12]
+    z: [0.45, 0.62]
+  target_position_box_base_m:
+    x: [0.1127331643, 0.4527331643]
+    y: [-0.0274257587, 0.4925742413]
+    z: [0.7399999351, 0.7799999351]
+  target_offset_from_catch_reference_m:
+    x: [-0.1472668540, 0.1927331460]
+    y: [-0.1874256527, 0.3325743473]
+    z: [-0.02, 0.02]
+  target_minimum_offset_norm_m: 0.0
+  configured_flight_time_range_s: [0.56, 0.70]
+
+object_contract:
+  sphere60:
+    size_m: [0.06, 0.06, 0.06]
+    nominal_mass_kg: 0.1
+  triangle_sandbag80:
+    size_m: [0.08, 0.07, 0.07]
+    nominal_mass_kg: 0.1
+  cube_sandbag50:
+    size_m: [0.05, 0.05, 0.05]
+    nominal_mass_kg: 0.1
+
+derivation:
+  status: candidate_non_actuated_contract_only
+  source_bundle: thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815
+  q_home_semantics: checkpoint proprioception metadata; not autonomous reset authorization
+  target_box_method: union of six expert target offsets and packaged reset noise around FK palm center
+  automatic_router_runtime_available: false
+  robot_execution_enabled: false

@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Reproducible external assets; fetched by scripts, never committed.
+third_party/AnyDexGrasp/
+weights/logs/
+
+# Captured RGB-D/object data can contain large or sensitive scene content.
+runs/

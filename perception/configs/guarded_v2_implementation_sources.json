@@ -1,0 +1,128 @@
+{
+  "description": "Exact local implementation sources for guarded_v2 real-RGB replay, offline scoring, saved-RGBD validation, and formal policy point-cloud projection. Runtime configs, acceptance manifests, model weights, and this manifest are pinned separately to keep the hash graph acyclic.",
+  "files": [
+    {
+      "path": "perception/dynamic_pcd/apps/sam2_video_service.py",
+      "role": "sam2_service",
+      "sha256": "fd8af5588fbe78a1a03c541dd0a4ab4e2a5127ede4e699f716d78260e8d867e9",
+      "size_bytes": 14304
+    },
+    {
+      "path": "perception/dynamic_pcd/apps/validate_saved_rgbd_npz.py",
+      "role": "saved_rgbd_validator",
+      "sha256": "8669ddd3de4147b81d100c52894fdc2a9d333f051db440b4f1162f79b0b72932",
+      "size_bytes": 114189
+    },
+    {
+      "path": "perception/dynamic_pcd/camera/realsense_camera.py",
+      "role": "rgbd_camera",
+      "sha256": "b431067faaedd2c8b7b460833aa4e0013ccabc114e0232d59d7c60b0383f6bc2",
+      "size_bytes": 72627
+    },
+    {
+      "path": "perception/dynamic_pcd/config.py",
+      "role": "configuration_loader",
+      "sha256": "cf67b7ba8f3d4d3597408c2969826a87a15778c82f82734d8526c6699389500c",
+      "size_bytes": 22514
+    },
+    {
+      "path": "perception/dynamic_pcd/evaluation/guarded_v2_offline.py",
+      "role": "offline_evaluator",
+      "sha256": "16f4dad07ee1cb0cd0ddcf7ea9ac1b9af9c51755619ede73f86e53c6f598903d",
+      "size_bytes": 150279
+    },
+    {
+      "path": "perception/dynamic_pcd/evaluation/guarded_v2_real_rgb_replay.py",
+      "role": "real_rgb_replay",
+      "sha256": "2b85e1139b7280a0b8e2d87a18823cfbf741b83d5f55d45cb8cbdcc48532f38d",
+      "size_bytes": 63563
+    },
+    {
+      "path": "perception/dynamic_pcd/evaluation/guarded_v2_source_provenance.py",
+      "role": "source_provenance_validator",
+      "sha256": "9dceb1d741ec31be05b9837c2ce66daf50fbf5030107f6e75311aecbb24ac4ff",
+      "size_bytes": 14181
+    },
+    {
+      "path": "perception/dynamic_pcd/pointcloud/extractor.py",
+      "role": "pointcloud_extractor",
+      "sha256": "b2e2b6595f67e01b7949f01bee44b336e180415795a0370e21310096a85f3f05",
+      "size_bytes": 16492
+    },
+    {
+      "path": "perception/dynamic_pcd/provider/object_pcd_provider.py",
+      "role": "object_pcd_provider",
+      "sha256": "27b454a05c597b74fb16439ebfa59f8d868b9a490dda3be801e29ab97d0de3a7",
+      "size_bytes": 1167877
+    },
+    {
+      "path": "perception/dynamic_pcd/provider/state.py",
+      "role": "object_pcd_provider_state",
+      "sha256": "b9399867250a15703ca944ad2691ff1f0344dbce69fa32959988df5563b495c1",
+      "size_bytes": 31334
+    },
+    {
+      "path": "perception/dynamic_pcd/segmentation/adaptive_color_depth_tracker.py",
+      "role": "adaptive_tracker",
+      "sha256": "7c3d0d37b0344e08a3917cdf5a8431ffc5e99c3332f431209ce559ac499404e0",
+      "size_bytes": 140961
+    },
+    {
+      "path": "perception/dynamic_pcd/segmentation/sam2_video_backend.py",
+      "role": "sam2_backend",
+      "sha256": "3267bbcb2339918943c65e1bdc57529888e73327571f30445c584ace7fe64a26",
+      "size_bytes": 39768
+    },
+    {
+      "path": "perception/dynamic_pcd/segmentation/sam2_video_client.py",
+      "role": "sam2_client",
+      "sha256": "28a1b0db2b14172acbb5d28941855bf9fc20e582fc1cc211bc8d047709080af8",
+      "size_bytes": 9789
+    },
+    {
+      "path": "perception/dynamic_pcd/segmentation/sam2_video_protocol.py",
+      "role": "sam2_protocol",
+      "sha256": "a85b4a61d8deaf132a0ee36374f9dbf0ea703ead83e7c778bb201cdeab464147",
+      "size_bytes": 17217
+    },
+    {
+      "path": "perception/dynamic_pcd/segmentation/sam2_video_runtime.py",
+      "role": "sam2_runtime",
+      "sha256": "815dd9d8af73e3bee9b62e9256d8ce2246e333b8b48a4a322563958b7acd8d91",
+      "size_bytes": 16751
+    },
+    {
+      "path": "perception/dynamic_pcd/types.py",
+      "role": "perception_types",
+      "sha256": "9de4410da9faae9fe621dd2f1166c28f7792a09b12b999f062cdee88e466d20e",
+      "size_bytes": 4508
+    },
+    {
+      "path": "perception/dynamic_pcd/utils/geometry.py",
+      "role": "geometry",
+      "sha256": "272d8f38d1730764e05d2a2991f76a50933617863598a68aa1ed15f58eecdfe7",
+      "size_bytes": 5257
+    },
+    {
+      "path": "perception/scripts/benchmark_guarded_v2_masks.py",
+      "role": "offline_evaluator_cli",
+      "sha256": "d08987d765ee156180b982718185fa089db3459682f2b6d5783f69be3afe3aaf",
+      "size_bytes": 3204
+    },
+    {
+      "path": "perception/scripts/replay_guarded_v2_real_rgb.py",
+      "role": "real_rgb_replay_cli",
+      "sha256": "b043b773fba061b25d653f5e05cd9ddefe2f170fba8a573d44fdc65e020244d9",
+      "size_bytes": 2848
+    },
+    {
+      "path": "sim2real/observation/model.py",
+      "role": "formal_policy_pointcloud_projector",
+      "sha256": "2b5211d0caa1b6d3fa6f9bca05a7d619868d5bfb92e9679bd40db68daecbaf60",
+      "size_bytes": 57189
+    }
+  ],
+  "schema": "guarded_v2_implementation_sources_v1",
+  "source_set_sha256": "a762bc4aa26eed960f2bad3ef74550488f2b8c692ebea546e8ce810b59741de8",
+  "workspace_root": "."
+}

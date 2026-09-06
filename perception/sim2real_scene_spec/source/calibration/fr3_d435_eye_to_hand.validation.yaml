@@ -1,0 +1,58 @@
+schema_version: 1
+kind: camera_robot_extrinsic_validation
+validated_at: '2026-07-17 Asia/Shanghai'
+calibration_file: fr3_d435_eye_to_hand.yaml
+calibration_id: eye-to-hand-b722bce10485c8a3
+
+hardware:
+  robot: Franka Research 3
+  camera: Intel RealSense D435
+  camera_serial: '337322072188'
+  stream: color-aligned depth, 848x480 at 30 Hz
+  target:
+    type: aruco
+    dictionary: DICT_ARUCO_ORIGINAL
+    marker_id: 582
+    configured_outer_black_side_m: 0.100
+
+mount_rigidity_check:
+  joint_7_command_rad: 0.080
+  robot_relative_rotation_deg: 4.580486
+  marker_relative_rotation_deg: 4.600323
+  absolute_difference_deg: 0.019838
+  status: pass
+
+training_result:
+  method: daniilidis
+  sample_count: 20
+  translation_span_m: 0.147057
+  rotation_span_deg: 35.804907
+  reprojection_error_p95_px: 0.170
+  hand_eye_translation_residual_p95_mm: 2.653
+  hand_eye_rotation_residual_p95_deg: 0.483
+  status: pass
+
+independent_validation:
+  q7_mountcheck_mean_translation_error_mm: 1.723
+  q7_mountcheck_mean_rotation_error_deg: 0.172
+  post_trajectory_closure_translation_error_mm: 0.905
+  post_trajectory_closure_rotation_error_deg: 0.408
+  status: pass
+
+algorithm_selection:
+  auto_selected_method: daniilidis
+  note: >-
+    Auto cross-validation selected Daniilidis. Park, Tsai, Horaud, and
+    Daniilidis agreed within about 10 mm and 0.3 deg after 20 poses. Andreff
+    remained a translation outlier, so the auto audit retains a warning;
+    independent holdout checks also favored Daniilidis. The deployable file
+    was therefore solved explicitly with Daniilidis and passed all residual
+    gates.
+
+depth_observation:
+  marker_center_depth_vs_color_pnp_difference_mm: 9.994
+  note: >-
+    This is a depth-sensor/target-scale consistency observation, not an
+    eye-to-hand closure error. Do not apply a global correction from this one
+    plane. Measure the printed black side more precisely and validate D435
+    depth at several ranges if sub-centimetre absolute depth is required.

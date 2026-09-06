@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "binary_path": "v94_franka_servo",
+  "binary_sha256": "@BINARY_SHA256@",
+  "producer_build_sha256": "@PRODUCER_BUILD_SHA256@",
+  "libfranka_path": "@LIBFRANKA_PATH@",
+  "libfranka_sha256": "@LIBFRANKA_SHA256@",
+  "libfranka_source_commit": "@LIBFRANKA_SOURCE_COMMIT@",
+  "protocol_version": 4,
+  "state_decimation": 16,
+  "safety_limits_schema": 3
+}

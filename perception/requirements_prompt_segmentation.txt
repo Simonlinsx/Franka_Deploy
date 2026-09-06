@@ -1,0 +1,15 @@
+# Optional model-service dependencies only. The camera/client process does not
+# import these packages. This machine's ``foundationpose`` conda environment
+# already contains the native stack, so no install is needed for the default
+# scripts/run_prompt_segmentation_service.sh configuration.
+torch>=2.0
+Pillow>=9.0
+pyzmq>=25.0
+numpy>=1.23
+
+# Native backend: install the original GroundingDINO and segment_anything source
+# checkouts into the service environment (the launcher exposes the existing
+# local checkouts via PYTHONPATH).
+
+# Alternative Transformers detector backend only:
+# transformers>=4.40

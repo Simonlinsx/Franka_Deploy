@@ -1,0 +1,321 @@
+{
+  "schema": "reviewed_sparse_mask_manifest_v1",
+  "description": "Sparse visually reviewed visible-object masks for the five fixed historical 30 Hz RGB cases. Labels are evaluated only on source frames that belong to the benchmark's exact 20 Hz sampling sequence. Hidden object pixels behind RH56 are never filled.",
+  "review_policy": "HSV/SAM/GrabCut candidates were generated first, then every source frame and zoomed overlay was visually checked. Ambiguous non-target appendages were removed conservatively; intrinsically ambiguous hand/object mixtures are replaced by an exact-20Hz separable frame, and empty or fully hidden targets are not labelled. Each record preserves whether it came from prior human confirmation or the current independent visual review.",
+  "cases": [
+    {
+      "name": "fast_green_ball_entry",
+      "sparse_ground_truth": {
+        "schema": "reviewed_visible_object_masks_v1",
+        "source_video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_223026.mp4",
+        "source_video_sha256": "29a1d0f51cfcff6506df2ae9e07f4c3a59d4c26225040df31d65fe1af4bec621",
+        "min_reviewed_frames": 5,
+        "thresholds": {
+          "sparse_gt_reviewed_frames_min": 5,
+          "sparse_gt_iou_p05_min": 0.65,
+          "sparse_gt_recall_p05_min": 0.75,
+          "sparse_gt_precision_p05_min": 0.75,
+          "sparse_gt_contamination_p95_max": 0.25
+        },
+        "records": [
+          {
+            "source_frame": 39,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/fast_green_ball_entry/source_000039.png",
+            "sha256": "fe81e8cc9b967ed779966c1b80d942fcb14cbfc4f68cd10566b95b5ae9c610a9",
+            "review_status": "human_confirmed",
+            "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+            "review_notes": "First clearly detectable entry frame; accepted only the strongly motion-blurred visible green silhouette and excluded the nearby monitor, cup and hand."
+          },
+          {
+            "source_frame": 48,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/fast_green_ball_entry/source_000048.png",
+            "sha256": "b6a35ea01c1bd6cad7f2c75e55ce2d70bdddd89d4226c7318eb2a8590def0c11",
+            "review_status": "human_confirmed",
+            "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+            "review_notes": "Fast diagonal motion with residual blur; contour follows the complete visible ball and contains no background branch."
+          },
+          {
+            "source_frame": 60,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/fast_green_ball_entry/source_000060.png",
+            "sha256": "e15e06a50cfbc81dddea698a346372ed7215eae372318d4d625f6e0539702e4b",
+            "review_status": "human_confirmed",
+            "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+            "review_notes": "Mid-flight isolated ball; reviewed against the original RGB frame at native resolution."
+          },
+          {
+            "source_frame": 75,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/fast_green_ball_entry/source_000075.png",
+            "sha256": "3ab24db441266937bb22e9f0a3c14f018a0ef8686f4ed06a23aebbe30959f9e4",
+            "review_status": "human_confirmed",
+            "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+            "review_notes": "Smaller distant ball after a large displacement; only visible object pixels retained."
+          },
+          {
+            "source_frame": 96,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/fast_green_ball_entry/source_000096.png",
+            "sha256": "43116ed115f27090fc9a94c0c041d474bf831f2cbb234a25090c96a67d7e73b4",
+            "review_status": "human_confirmed",
+            "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+            "review_notes": "Rightward high-speed motion; reviewed for scale and identity continuity."
+          },
+          {
+            "source_frame": 120,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/fast_green_ball_entry/source_000120.png",
+            "sha256": "2ee2b62c34234eb4cbfda5d0e7be5a916962abad8072fa08f2e57ee44fe36068",
+            "review_status": "human_confirmed",
+            "label_method": "manual bounding-box GrabCut candidate plus independent full-frame and zoom review",
+            "review_notes": "Partial exit at the right image boundary; label contains only the still-visible portion and does not extrapolate beyond the image."
+          }
+        ]
+      }
+    },
+    {
+      "name": "rolling_green_ball",
+      "sparse_ground_truth": {
+        "schema": "reviewed_visible_object_masks_v1",
+        "source_video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_221851.mp4",
+        "source_video_sha256": "a004de7194cf497b9cb626b5e545e265c3e8d28b60e05adcc39af34c2e307341",
+        "min_reviewed_frames": 5,
+        "thresholds": {
+          "sparse_gt_reviewed_frames_min": 5,
+          "sparse_gt_iou_p05_min": 0.75,
+          "sparse_gt_recall_p05_min": 0.85,
+          "sparse_gt_precision_p05_min": 0.85,
+          "sparse_gt_contamination_p95_max": 0.15
+        },
+        "records": [
+          {
+            "source_frame": 75,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_green_ball/source_000075.png",
+            "sha256": "d614a9979585166b078246af257930e0e0f7cbd94d67db41fd16fc5655999f8c",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "First selected frame after entry; hand is nearby but entirely excluded."
+          },
+          {
+            "source_frame": 90,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_green_ball/source_000090.png",
+            "sha256": "910d1ff140cd95973af0f126f8be88bb594dcb71608dd53f00a753b213bec1d4",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Rolling ball near image centre-left; target boundary is isolated from the black support."
+          },
+          {
+            "source_frame": 120,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_green_ball/source_000120.png",
+            "sha256": "2c8e515f867788d8b45d91bb0d54a7a68f36723691a07fc591dc4728c80b6c61",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Mid-roll isolated target; reviewed highlight and dark lower contour."
+          },
+          {
+            "source_frame": 150,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_green_ball/source_000150.png",
+            "sha256": "1f03662906ba0aa3710f29766cebd058776628e42cd68d28bf9c3bb596eaa5ed",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Rightward roll with moderate scale change; no table or background pixels retained."
+          },
+          {
+            "source_frame": 180,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_green_ball/source_000180.png",
+            "sha256": "e94a4d9b45b447c600c001c4f2e1ad88d3b35ae99b263a1f0d280a2880e4c468",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Late right-edge roll; the nearby metal pointer is visible but fully excluded."
+          }
+        ]
+      }
+    },
+    {
+      "name": "rolling_red_cylinder",
+      "sparse_ground_truth": {
+        "schema": "reviewed_visible_object_masks_v1",
+        "source_video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_222343.mp4",
+        "source_video_sha256": "4e9587446e9db2902e564b6b73ad1f735c361c535115694866018260706a6706",
+        "min_reviewed_frames": 5,
+        "thresholds": {
+          "sparse_gt_reviewed_frames_min": 5,
+          "sparse_gt_iou_p05_min": 0.72,
+          "sparse_gt_recall_p05_min": 0.82,
+          "sparse_gt_precision_p05_min": 0.82,
+          "sparse_gt_contamination_p95_max": 0.18
+        },
+        "records": [
+          {
+            "source_frame": 102,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_red_cylinder/source_000102.png",
+            "sha256": "912ad7ca241900e852280884a6519d01cc782bab173483a42f21b3c553e34acc",
+            "review_status": "independent_visual_review",
+            "label_method": "Target-only GrabCut inside the isolated cylinder ROI plus conservative subtraction of the residual upper-left finger-overlap wedge",
+            "review_notes": "Exact-20Hz source 102 replaces intrinsically ambiguous source 95. The cylinder is spatially separable from the hand except for a small upper-left overlap, represented as a hole; hidden target pixels are not filled."
+          },
+          {
+            "source_frame": 110,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_red_cylinder/source_000110.png",
+            "sha256": "7372d8300ddfdae37a7e69a11629e5aff1e46fa7ba8f511286d63f75222891d3",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Fast rolling cylinder after release; complete visible silhouette confirmed."
+          },
+          {
+            "source_frame": 125,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_red_cylinder/source_000125.png",
+            "sha256": "772d65f29d8c1845181450dccf78bc5b4687eaea4a6a227d924598ab74b1ccdd",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Mid-roll target with distinct top and body shading; both visible regions retained."
+          },
+          {
+            "source_frame": 140,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_red_cylinder/source_000140.png",
+            "sha256": "443ac6526e1731a55be9e0aec048182ad4ca97e66eaace95f010509bb575e901",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Large rightward displacement; the separate metal pointer remains outside the label."
+          },
+          {
+            "source_frame": 150,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rolling_red_cylinder/source_000150.png",
+            "sha256": "d935c2a8e459a6d0b41afb68d192b81cec016c332e0d358a4f6a41aef8fbb4d8",
+            "review_status": "independent_visual_review",
+            "label_method": "HSV-seeded GrabCut, conservative pointer-stroke subtraction, and native-resolution zoom review",
+            "review_notes": "Metal pointer crosses in front of the cylinder. The pointer and its adjacent triangular background branch are removed; target pixels hidden behind it are deliberately not filled."
+          }
+        ]
+      }
+    },
+    {
+      "name": "static_green_ball_rh56",
+      "sparse_ground_truth": {
+        "schema": "reviewed_visible_object_masks_v1",
+        "source_video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_223222.mp4",
+        "source_video_sha256": "7b7bf4fb8a9c29a6617da7b1d785cc837ebae90bd3a00ffdf3058c3369187ba3",
+        "min_reviewed_frames": 5,
+        "thresholds": {
+          "sparse_gt_reviewed_frames_min": 5,
+          "sparse_gt_iou_p05_min": 0.70,
+          "sparse_gt_recall_p05_min": 0.78,
+          "sparse_gt_precision_p05_min": 0.85,
+          "sparse_gt_contamination_p95_max": 0.15
+        },
+        "records": [
+          {
+            "source_frame": 75,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/static_green_ball_rh56/source_000075.png",
+            "sha256": "9b87d15ca9c4c0837abb33b228176512921325752a40aebc7d1370f1e39a7259",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Clean target beside the open RH56; no finger pixels included."
+          },
+          {
+            "source_frame": 135,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/static_green_ball_rh56/source_000135.png",
+            "sha256": "4d5c22bf76395022c02189c266f9cd69db2f948b5ac2ade173c04381d34cdd43",
+            "review_status": "independent_visual_review",
+            "label_method": "HSV-seeded visible-green candidate plus full-frame and native-resolution occlusion review",
+            "review_notes": "RH56 fingers partially occlude the ball. All white/gray finger pixels and hidden ball regions are removed; only green fragments visibly present between the fingers remain."
+          },
+          {
+            "source_frame": 195,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/static_green_ball_rh56/source_000195.png",
+            "sha256": "87ac61c16452ab94f82f7d9386b1e0183f772e4440095527ba5ab7007baf7d9f",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Ball becomes fully visible again after RH56 motion; identity and boundary confirmed."
+          },
+          {
+            "source_frame": 255,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/static_green_ball_rh56/source_000255.png",
+            "sha256": "efcde932aa108d1e3143e2a97dc88b217a789d93d31a98fd823f4e3757e1bc5b",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Approaching RH56 is adjacent but does not overlap the reviewed ball mask."
+          },
+          {
+            "source_frame": 315,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/static_green_ball_rh56/source_000315.png",
+            "sha256": "9f54c9f9f58075c134e9e6d875beafc19f8bf80224ccf2494f6351f3a212179a",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Heavy partial finger occlusion; hidden green silhouette is not reconstructed."
+          },
+          {
+            "source_frame": 345,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/static_green_ball_rh56/source_000345.png",
+            "sha256": "4d0c9141ba456aa66c75d800a589003b747a70825bf848a42749689c3ba0314e",
+            "review_status": "independent_visual_review",
+            "label_method": "HSV-seeded visible-green candidate plus full-frame and native-resolution boundary review",
+            "review_notes": "Recovery after occlusion; the left-side RH56 finger and anti-aliased boundary contamination are removed from the visible target contour."
+          }
+        ]
+      }
+    },
+    {
+      "name": "rh56_heavy_occlusion",
+      "sparse_ground_truth": {
+        "schema": "reviewed_visible_object_masks_v1",
+        "source_video": "/media/qiaoguanren/SX1 8G/test_videos/session_01/realsense_20260725_223251.mp4",
+        "source_video_sha256": "d443a8abf0386a87c3c544a232306d9f8da44f7ef004ca781851342523f0b360",
+        "min_reviewed_frames": 5,
+        "thresholds": {
+          "sparse_gt_reviewed_frames_min": 5,
+          "sparse_gt_iou_p05_min": 0.60,
+          "sparse_gt_recall_p05_min": 0.65,
+          "sparse_gt_precision_p05_min": 0.85,
+          "sparse_gt_contamination_p95_max": 0.15
+        },
+        "records": [
+          {
+            "source_frame": 32,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rh56_heavy_occlusion/source_000032.png",
+            "sha256": "77abf6024eb6fdb4edff52c3305809a5d24da739fe89367903cc6c0bb2abd20b",
+            "review_status": "human_confirmed",
+            "label_method": "HSV-seeded GrabCut plus manual full-frame and zoom review",
+            "review_notes": "Clean red cylinder before occlusion; establishes visible target scale without including RH56."
+          },
+          {
+            "source_frame": 91,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rh56_heavy_occlusion/source_000091.png",
+            "sha256": "13a305150b7cf0690064aa0a1c136fd6a8b32dc286ab4d49206dcbc8484d3878",
+            "review_status": "independent_visual_review",
+            "label_method": "HSV-seeded visible-red candidate plus full-frame and native-resolution occlusion review",
+            "review_notes": "Initial RH56 overlap; white/gray finger pixels and hidden cylinder regions are removed, retaining only the visible red cylinder portions."
+          },
+          {
+            "source_frame": 121,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rh56_heavy_occlusion/source_000121.png",
+            "sha256": "81a5734cfbf35754dd3b01f411ccf1af73f1c179584c66a64c2c7ffceed993ca",
+            "review_status": "independent_visual_review",
+            "label_method": "HSV-seeded visible-red candidate plus full-frame and native-resolution occlusion review",
+            "review_notes": "Partial side occlusion by white fingers; all finger pixels are removed and hidden cylinder area is not reconstructed."
+          },
+          {
+            "source_frame": 211,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rh56_heavy_occlusion/source_000211.png",
+            "sha256": "56ac8591790c169af15cf942a2ded5d17dadd71df72af7d88b2194770ff821bb",
+            "review_status": "independent_visual_review",
+            "label_method": "HSV-seeded visible-red candidate plus full-frame and native-resolution occlusion review",
+            "review_notes": "Heavy central finger occlusion; finger and palm boundary pixels are removed, retaining only the narrow visible red crescent."
+          },
+          {
+            "source_frame": 271,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rh56_heavy_occlusion/source_000271.png",
+            "sha256": "0ddffdcd9cd88a49126d1b90c99b6fe5f4701dae89fc7513e171b2e1e9dc16f1",
+            "review_status": "independent_visual_review",
+            "label_method": "HSV-seeded visible-red candidate plus full-frame and native-resolution occlusion review",
+            "review_notes": "Heavy partial occlusion with a small visible target crescent; hand-boundary pixels and all fully occluded or inferred regions are excluded."
+          },
+          {
+            "source_frame": 331,
+            "path": "../testdata/guarded_v2_sparse_ground_truth/rh56_heavy_occlusion/source_000331.png",
+            "sha256": "efe93ef400817e570454af71a5b5bebc77750f1f615a3b8d894ca732ad4c9a31",
+            "review_status": "independent_visual_review",
+            "label_method": "HSV-seeded visible-red candidate plus full-frame and native-resolution occlusion review",
+            "review_notes": "Reappearance after heavy occlusion; the black/white RH56 appendage is removed and only the visible red cylinder is labelled."
+          }
+        ]
+      }
+    }
+  ]
+}

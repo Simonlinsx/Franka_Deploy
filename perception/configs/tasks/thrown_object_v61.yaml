@@ -1,0 +1,104 @@
+schema_version: 1
+kind: v94_task_profile
+name: thrown_object_v61
+description: V61 H16 visual-flight six-expert candidate on the dedicated 60 Hz D435.
+base_config: ../d435_default.yaml
+policy_rgbd_resolution: 424x240
+camera_contract_override: true
+commissioning_status: supervised_40_tick_authorized
+robot_execution_enabled: true
+commissioning_scope: sha_bound_single_expert_supervised_40_tick
+maximum_supervised_execute_steps: 40
+supervised_execution_limits:
+  maximum_commanded_policy_ticks: 40
+  require_current_policy_points_inside_processing_depth: true
+  robot_hardware_writes: true
+commissioning_evidence:
+  checkpoint_path: /home/qiaoguanren/code/franka/data/checkpoints/thrown/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/checkpoint.pt
+  checkpoint_sha256: f64c8e7ef9561711f65cde3460aab42934803ff5606133bceca3de05225f9f2c
+  correct_reset_policy_shadow_report:
+    path: /home/qiaoguanren/code/franka/dexgrasp/runs/thrown-v61-base-forward-shadow-20260817-221352_perception_report.json
+    sha256: f62c44b66bdffad5624f2fc87439f1c4e6d7b3241873cc34c97138fa4141e425
+  correct_reset_policy_io:
+    path: /home/qiaoguanren/code/franka/dexgrasp/runs/thrown-v61-base-forward-shadow-20260817-221352_observation_visualization/policy_shadow_io.npz
+    sha256: b2becd614eae6d81ec699887a48839a305c6e33e27cb81a06627cecb851b74ec
+default_object_text: small patterned beanbag toy
+calibration_sha256: 85531549a4050854579ef18cfc40a653274ff38c5618977bc5142e3152ceff47
+simulation_task_contract_file: ../../v61_sixexpert_reset_and_throw_ranges.yaml
+simulation_task_contract_sha256: b4da3c2bdb29904afdf1904b53540e21dd38662a484a11a8514dc8225553f2b1
+simulation_curriculum: alpha_0_5
+candidate_bundle:
+  path: /home/qiaoguanren/code/franka/data/checkpoints/thrown/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815
+  manifest_sha256: 2634743f6ea57f8c0a288f4e4f4abd8758d67bf697aeeae3e0fb4e302d5a676d
+  bundle_contract: inspire_thrown_v61_speed600_xyz_h16_visual_six_expert_v1
+  routing_mode: manual_single_expert
+  automatic_router_used: false
+  runtime_alignment:
+    path: /home/qiaoguanren/code/franka/data/checkpoints/thrown/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/runtime_alignment/runtime_alignment
+    source_manifest_sha256: 211f4fde9bf5fc55b65543e5145b1b98fdd3382bf903eb10cab8d79f792301bf
+    contract: thrown_v61_17d_runtime_alignment_v1
+    reference_source_sha256: 547c570ba93593541e6e1db466463e759b155c683211a007c2de69bc7ed9b956
+  runtime_blockers:
+    - execution remains operator-supervised and hard-capped at 40 commanded ticks
+rollout_trigger:
+  enabled: true
+  mode: object_motion_or_entry
+  maximum_wait_s: 12.0
+  poll_interval_s: 0.001
+  minimum_mask_area_px: 20
+  absent_arm_frames: 3
+  stable_arm_frames: 3
+  stable_max_centroid_speed_px_s: 80.0
+  trigger_min_centroid_speed_px_s: 120.0
+  trigger_min_displacement_px: 6.0
+  minimum_area_ratio: 0.25
+  maximum_area_ratio: 4.0
+config_overrides:
+  camera:
+    serial: '342222071785'
+    width: 424
+    height: 240
+    fps: 60
+    depth_auto_exposure: false
+    depth_exposure: 2000
+    depth_gain: 32
+    laser_power: 360
+    max_color_depth_timestamp_skew_s: 0.007
+    z_min: 0.25
+    z_max: 2.0
+    emitter: true
+    preset: default
+    spatial_filter: false
+    temporal_filter: false
+    hole_filter: false
+  pointcloud:
+    workspace_min: null
+    workspace_max: null
+    support_plane_abcd: null
+    support_plane_min_clearance_m: 0.0
+    center_policy_points: false
+    temporal_fallback: motion_compensated
+    temporal_fallback_max_stale_s: 0.25
+    temporal_fallback_max_stale_steps: 5
+    temporal_fallback_max_image_speed_px_s: 2400.0
+  extrinsics:
+    calibration_file: ../../../data/checkpoints/thrown/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/thrown_v61_sixexpert_visualflight_perceptiondr025_cmp31p9_demo_candidate_20260815/calibration/camera_robot_calibration.yaml
+    require_calibration: true
+    require_quality_pass: true
+    strict_camera_serial: true
+  prompting:
+    boundary_entry_refinement_enabled: true
+    boundary_entry_refinement_max_ticks: 2
+    boundary_entry_refinement_max_center_step_ratio: 0.25
+    boundary_entry_refinement_min_area_ratio: 0.35
+    boundary_entry_refinement_max_area_ratio: 4.0
+    startup_semantic_confirmation_enabled: true
+    startup_semantic_confirmation_max_ticks: 10
+    startup_semantic_confirmation_search_every_ticks: 2
+    startup_semantic_confirmation_min_detector_score: 0.1
+  online_sam2:
+    policy_current_semantic_mask_enabled: true
+  runtime:
+    publish_zmq: false
+    max_packet_hz: 20
+    min_packet_hz: 20

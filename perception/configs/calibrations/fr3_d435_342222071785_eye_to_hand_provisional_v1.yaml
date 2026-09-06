@@ -1,0 +1,81 @@
+schema_version: 1
+kind: camera_robot_extrinsic_calibration
+calibration_id: eye-to-hand-5e3620b789d775b9
+created_at: '2026-08-12T05:18:29.043198+00:00'
+calibration_type: eye_to_hand
+transform_convention: T_A_B maps coordinates from frame B to frame A
+units:
+  translation: m
+  angle: rad
+base_frame: robot_base
+camera_frame: camera_color_optical_frame
+T_base_camera:
+- [-0.9894720680381506, 0.0719278692281475, -0.12558426732916783, 0.8326497964823847]
+- [0.1306012197496566, 0.06989530918478051, -0.9889681325269616, 1.2848981358757239]
+- [-0.062356619313488244, -0.9949578018098366, -0.07855332358042076, 0.9145780861940793]
+- [0.0, 0.0, 0.0, 1.0]
+T_ee_target:
+- [0.02198610486503331, -0.7330801450935592, 0.6797868136868128, 0.026617802592411866]
+- [0.07200579256781942, -0.6770241912320709, -0.7324297989044688, -0.01890289754803709]
+- [0.9971618609982752, 0.06505186666186086, 0.037900891998601034, 0.1762999692149454]
+- [0.0, 0.0, 0.0, 1.0]
+camera:
+  type: Intel RealSense RGB-D
+  name: Intel RealSense D435
+  serial: '342222071785'
+  stream: color (depth aligned to color)
+  depth_scale: 0.0010000000474974513
+  intrinsics:
+    width: 848
+    height: 480
+    fx: 604.7672729492188
+    fy: 604.5005493164062
+    ppx: 421.9147644042969
+    ppy: 246.6291961669922
+    model: distortion.inverse_brown_conrady
+    distortion: [0.0, 0.0, 0.0, 0.0, 0.0]
+target:
+  type: aruco
+  dictionary: DICT_6X6_50
+  marker_id: 42
+  marker_length_m: 0.19
+robot:
+  type: Franka
+  ip: 172.16.0.2
+  pose: O_T_EE
+solver:
+  method: daniilidis
+  sample_count: 15
+  used_sample_indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+  quality:
+    translation_error_m:
+      median: 0.0018745920154044885
+      rms: 0.001806988756408071
+      p95: 0.0025646317128772385
+      max: 0.0025670711876492024
+    rotation_error_deg:
+      median: 0.32621415220632877
+      rms: 0.34557147171868885
+      p95: 0.5689794923700756
+      max: 0.6692340409412663
+    reprojection_error_px:
+      median: 0.2299832969903946
+      rms: 0.25355556350902536
+      p95: 0.3592804874479771
+      max: 0.36134449392557144
+    motion_diversity:
+      translation_span_m: 0.15114020633866798
+      rotation_span_deg: 31.991337389999643
+    warnings: []
+    status: pass
+  method_diagnostics:
+    failures: {}
+    candidates:
+      daniilidis:
+        score: 1.0819058349455233
+        score_source: in_sample
+        translation_p95_m: 0.0025646317128772385
+        rotation_p95_deg: 0.5689794923700756
+        delta_from_selected_m: 2.220446049250313e-16
+        delta_from_selected_deg: 0.0
+source_dataset: /home/qiaoguanren/code/franka/beta/dynamic_object_pcd/calibration_runs/fr3-d435-342222071785-20260812-002810-remount5-training-robust15-v1.yaml

@@ -1,0 +1,2 @@
+pybind11==3.0.1 \
+    --hash=sha256:aa8f0aa6e0a94d3b64adfc38f560f33f15e589be2175e103c0a33c6bce55ee89

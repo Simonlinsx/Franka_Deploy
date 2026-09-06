@@ -1,0 +1,247 @@
+task:
+  family: thrown_object_catch
+  teacher: InspireAdapterV7ThrownRealSandbagCatchV60PalmCatchTilt30TeacherEnvCfg
+  control_hz: 20
+  rh56_speed_set: 600
+  contract_version: v60_palmcatch_tilt30_alpha0p5_candidate_v1
+robot_reset:
+  base_position_m:
+  - 0.0
+  - 0.0
+  - 0.0
+  base_quaternion_wxyz:
+  - 1.0
+  - 0.0
+  - 0.0
+  - 0.0
+  franka_joint_order:
+  - panda_joint1
+  - panda_joint2
+  - panda_joint3
+  - panda_joint4
+  - panda_joint5
+  - panda_joint6
+  - panda_joint7
+  franka_joint_position_rad:
+  - -2.544386888
+  - -1.411713805
+  - -0.049395346
+  - -2.337750525
+  - 1.570796377
+  - 0.464266852
+  - 2.7
+  franka_joint_position_deg:
+  - -145.78263013082568
+  - -80.8852429068545
+  - -2.8301448533884126
+  - -133.94323863699245
+  - 90.00000287654053
+  - 26.600531187424824
+  - 154.6986046853223
+  joint_velocity_rad_s:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  reset_arm_position_noise_rad: 0.0
+  canonical_reset_curriculum_enabled: false
+  rh56_policy_joint_order:
+  - thumb_rotation
+  - thumb_bending
+  - index
+  - middle
+  - ring
+  - little
+  rh56_policy_joint_position_rad:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  rh56_register_order:
+  - little
+  - ring
+  - middle
+  - index
+  - thumb_bending
+  - thumb_rotation
+  rh56_speed_set_register_order:
+  - 600
+  - 600
+  - 600
+  - 600
+  - 600
+  - 600
+  rh56_angle_set_open_register_order:
+  - 1000
+  - 1000
+  - 1000
+  - 1000
+  - 1000
+  - 1000
+  simulator_mimic_follower_position_rad:
+    thumb_intermediate_joint: 0.0
+    thumb_distal_joint: 0.0
+    index_intermediate_joint: -0.0454
+    middle_intermediate_joint: -0.0454
+    ring_intermediate_joint: -0.0454
+    pinky_intermediate_joint: -0.0454
+catch_reference_center_base_m:
+- 0.2943609277
+- -0.093599811
+- 0.6634450674
+alpha_0_5:
+  release_position_box_base_m:
+    x:
+    - 0.95
+    - 1.25
+    y:
+    - -0.2
+    - 0.2
+    z:
+    - 0.35
+    - 0.75
+  target_position_box_base_m:
+    x:
+    - 0.1443609277
+    - 0.4443609277
+    y:
+    - -0.243599811
+    - 0.05640018899999999
+    z:
+    - 0.5134450674
+    - 0.8134450674
+  target_offset_from_catch_reference_m:
+    x:
+    - -0.15
+    - 0.15
+    y:
+    - -0.15
+    - 0.15
+    z:
+    - -0.15
+    - 0.15
+  target_minimum_offset_norm_m: 0.05
+  flight_time_range_s:
+  - 0.585
+  - 0.75
+  initial_euler_xyz_range_rad_each_axis:
+  - -0.5235987756
+  - 0.5235987756
+  initial_euler_xyz_range_deg_each_axis:
+  - -30.0
+  - 30.0
+  initial_angular_speed_magnitude_rad_s:
+  - 0.05
+  - 0.5416666667
+  approximate_axiswise_launch_velocity_envelope_m_s:
+    x:
+    - -2.079
+    - -0.821
+    y:
+    - -0.506
+    - 0.69
+    z:
+    - 2.3
+    - 4.17
+alpha_1_0:
+  release_position_box_base_m:
+    x:
+    - 1.0
+    - 1.4
+    y:
+    - -0.3
+    - 0.3
+    z:
+    - 0.25
+    - 0.85
+  target_position_box_base_m:
+    x:
+    - 0.0443609277
+    - 0.5443609277
+    y:
+    - -0.34359981100000003
+    - 0.156400189
+    z:
+    - 0.4134450674
+    - 0.9134450674
+  target_offset_from_catch_reference_m:
+    x:
+    - -0.25
+    - 0.25
+    y:
+    - -0.25
+    - 0.25
+    z:
+    - -0.25
+    - 0.25
+  target_minimum_offset_norm_m: 0.08
+  configured_flight_time_range_s:
+  - 0.62
+  - 0.82
+  target_reach_reaction_time_s: 0.08
+  target_reach_speed_m_s: 0.6
+  initial_euler_xyz_range_rad_each_axis:
+  - -3.1415926536
+  - 3.1415926536
+  initial_euler_xyz_range_deg_each_axis:
+  - -180.0
+  - 180.0
+  initial_angular_speed_magnitude_rad_s:
+  - 0.05
+  - 2.0
+  approximate_axiswise_launch_velocity_envelope_m_s:
+    x:
+    - -2.364
+    - -0.69
+    y:
+    - -0.8
+    - 0.974
+    z:
+    - 2.18
+    - 4.71
+ballistic_velocity_contract:
+  gravity_base_m_s2:
+  - 0.0
+  - 0.0
+  - -9.81
+  equation: v0 = (target - release - 0.5 * gravity * flight_time^2) / flight_time
+  note: Velocity component envelopes above are conservative axiswise bounds; their
+    extrema are not necessarily jointly attainable. Use the equation with one sampled
+    release, target, and flight time to reproduce a simulator throw.
+object_contract:
+  sphere60:
+    size_m:
+    - 0.06
+    - 0.06
+    - 0.06
+    nominal_mass_kg: 0.004523893
+  triangle_sandbag80:
+    size_m:
+    - 0.08
+    - 0.07
+    - 0.07
+    nominal_mass_kg: 0.1
+  cube_sandbag50:
+    size_m:
+    - 0.05
+    - 0.05
+    - 0.05
+    nominal_mass_kg: 0.1
+  simulated_mass_scale_range:
+  - 0.75
+  - 1.25
+  simulated_nominal_mass_fraction: 0.25
+derivation:
+  status: operator_supervised_full_episode_accepted
+  source_v57_contract: v57_real_test_reset_and_throw_ranges.yaml
+  v60_reset_source: V60 checkpoint DEPLOYMENT.md
+  catch_center_method: rigidly transform the V57 open-hand fingertip midpoint through
+    the exact packaged Adapter V7 URDF from V57 q_home to V60 q_home
+  robot_execution_enabled: true
+  maximum_commanded_policy_ticks: 72
+  full_alpha_0_5_rollout_commissioned: true

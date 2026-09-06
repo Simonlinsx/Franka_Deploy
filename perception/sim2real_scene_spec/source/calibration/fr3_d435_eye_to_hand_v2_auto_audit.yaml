@@ -1,0 +1,219 @@
+schema_version: 1
+kind: camera_robot_extrinsic_calibration
+calibration_id: eye-to-hand-b722bce10485c8a3
+created_at: '2026-07-16T17:26:06.863413+00:00'
+calibration_type: eye_to_hand
+transform_convention: T_A_B maps coordinates from frame B to frame A
+units:
+  translation: m
+  angle: rad
+base_frame: robot_base
+camera_frame: camera_color_optical_frame
+T_base_camera:
+- - -0.4586796860502671
+  - 0.5116787889996631
+  - -0.7264969115506734
+  - 1.2480084212821743
+- - 0.8882808336406767
+  - 0.24205537638961394
+  - -0.39034133184625325
+  - 0.3699026859708365
+- - -0.023876896604316192
+  - -0.8243749217732913
+  - -0.56554034529804
+  - 0.6403031702928152
+- - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+T_ee_target:
+- - -0.7901364893390533
+  - -0.09453046004121966
+  - 0.6055974903674487
+  - 0.046448134532698845
+- - -0.6053663185575879
+  - -0.03439375962141303
+  - -0.7952035523406178
+  - -0.0404609844020577
+- - 0.09599973214019977
+  - -0.9949276664278167
+  - -0.03004979210427382
+  - 0.02057104704301306
+- - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+camera:
+  type: Intel RealSense RGB-D
+  name: Intel RealSense D435
+  serial: '337322072188'
+  stream: color (depth aligned to color)
+  depth_scale: 0.0010000000474974513
+  intrinsics:
+    width: 848
+    height: 480
+    fx: 603.7852172851562
+    fy: 603.3232421875
+    ppx: 435.23577880859375
+    ppy: 246.64630126953125
+    model: distortion.inverse_brown_conrady
+    distortion:
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+target:
+  type: aruco
+  dictionary: DICT_ARUCO_ORIGINAL
+  marker_id: 582
+  marker_length_m: 0.1
+robot:
+  type: Franka
+  ip: 172.16.0.2
+  pose: O_T_EE
+solver:
+  method: daniilidis
+  sample_count: 20
+  used_sample_indices:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  quality:
+    translation_error_m:
+      median: 0.0011429783388851944
+      rms: 0.0014910745366533825
+      p95: 0.002653129873264998
+      max: 0.0027632576454800946
+    rotation_error_deg:
+      median: 0.22751711461052238
+      rms: 0.2775994926645615
+      p95: 0.4825747877944064
+      max: 0.5596568099623942
+    reprojection_error_px:
+      median: 0.13525554537773132
+      rms: 0.1313969696266897
+      p95: 0.16995880752801898
+      max: 0.19422166049480438
+    motion_diversity:
+      translation_span_m: 0.14705654068712554
+      rotation_span_deg: 35.80490748750915
+    warnings:
+    - hand-eye algorithms disagree; collect more diverse, cleaner poses
+    status: warning
+  method_diagnostics:
+    failures: {}
+    candidates:
+      park:
+        score: 1.375498740740632
+        score_source: cross_validation
+        translation_p95_m: 0.0028363768454489156
+        rotation_p95_deg: 0.4777801027277351
+        delta_from_selected_m: 0.009546062611693322
+        delta_from_selected_deg: 0.25953448296726145
+        cross_validation:
+          translation_error_m:
+            median: 0.0012401477843076677
+            rms: 0.002225020485751943
+            p95: 0.004409240110347777
+            max: 0.004508149646689978
+          rotation_error_deg:
+            median: 0.2382353833595374
+            rms: 0.2988413157122038
+            p95: 0.49365071867107674
+            max: 0.6129363271430541
+          folds: 5
+      tsai:
+        score: 1.6584052502730637
+        score_source: cross_validation
+        translation_p95_m: 0.0027818185046772333
+        rotation_p95_deg: 0.4750519348153336
+        delta_from_selected_m: 0.010059825936791243
+        delta_from_selected_deg: 0.14510779319720915
+        cross_validation:
+          translation_error_m:
+            median: 0.0013870241467437154
+            rms: 0.002545174701196746
+            p95: 0.005556993116618982
+            max: 0.005894802800766531
+          rotation_error_deg:
+            median: 0.25755530553804473
+            rms: 0.3286862880373616
+            p95: 0.5470066269492672
+            max: 0.7628802384219445
+          folds: 5
+      horaud:
+        score: 1.3752499258738393
+        score_source: cross_validation
+        translation_p95_m: 0.0028361273057810462
+        rotation_p95_deg: 0.4777829480157232
+        delta_from_selected_m: 0.009543864332545964
+        delta_from_selected_deg: 0.2600916394914201
+        cross_validation:
+          translation_error_m:
+            median: 0.0012405986758476186
+            rms: 0.0022250072926011484
+            p95: 0.004408021369561616
+            max: 0.004508202031912208
+          rotation_error_deg:
+            median: 0.23822001077955168
+            rms: 0.29886060544257587
+            p95: 0.49364565196151616
+            max: 0.6129049481064448
+          folds: 5
+      andreff:
+        score: 5.128261651374899
+        score_source: cross_validation
+        translation_p95_m: 0.023039641877077827
+        rotation_p95_deg: 0.47698453094960663
+        delta_from_selected_m: 0.0793994152398983
+        delta_from_selected_deg: 0.2849661389915352
+        cross_validation:
+          translation_error_m:
+            median: 0.007947585342319227
+            rms: 0.011812751092758571
+            p95: 0.023171091651811925
+            max: 0.023321748121495588
+          rotation_error_deg:
+            median: 0.23872122594337403
+            rms: 0.3000307781582104
+            p95: 0.4940433210125135
+            max: 0.6159666308630362
+          folds: 5
+      daniilidis:
+        score: 1.0724423767086342
+        score_source: cross_validation
+        translation_p95_m: 0.002653129873264998
+        rotation_p95_deg: 0.4825747877944064
+        delta_from_selected_m: 5.551115123125783e-17
+        delta_from_selected_deg: 0.0
+        cross_validation:
+          translation_error_m:
+            median: 0.0014052582178998906
+            rms: 0.0016987598596307516
+            p95: 0.002816213400250233
+            max: 0.0030155290013968074
+          rotation_error_deg:
+            median: 0.24930655354952258
+            rms: 0.3141666112951349
+            p95: 0.5091996966585876
+            max: 0.7228696267137323
+          folds: 5
+source_dataset: /home/qiaoguanren/code/franka/dynamic_object_pcd/calibration_runs/fr3_d435_aruco582_final_v2_dataset.yaml

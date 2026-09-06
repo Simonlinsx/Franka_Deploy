@@ -1,0 +1,222 @@
+{
+  "assumptions": {
+    "F_T_EE": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "adapter_and_fastener_mass_uses_v7_stl_geometric_distribution": true,
+    "canonical_rh56_pose": "URDF q=0 (open-pose fixed EE approximation)",
+    "external_load_mass_kg": 0.0,
+    "urdf_mass_distribution_scaled_uniformly_to_nominal_hand_mass": true
+  },
+  "candidate_end_effector": {
+    "F_x_Cee_m": [
+      -0.0012965011324707156,
+      0.0032182139205845046,
+      0.08731738549256962
+    ],
+    "inertia_kg_m2": [
+      [
+        0.0016245135016537996,
+        -0.00014922504828731762,
+        8.457105958066665e-06
+      ],
+      [
+        -0.00014922504828731762,
+        0.0017011561045775698,
+        -3.0966815244796605e-05
+      ],
+      [
+        8.457105958066665e-06,
+        -3.0966815244796605e-05,
+        0.0005192375035233338
+      ]
+    ],
+    "mass_kg": 0.607
+  },
+  "classification": "offline_cad_urdf_candidate_not_physical_identification",
+  "components": {
+    "rh56": {
+      "F_x_C_m": [
+        -0.0014573633978889776,
+        0.003599235491570183,
+        0.09742417207767295
+      ],
+      "inertia_at_com_kg_m2": [
+        [
+          0.0011007181735919027,
+          -0.00014952490346417104,
+          5.03301592796046e-07
+        ],
+        [
+          -0.00014952490346417107,
+          0.0011776962535349326,
+          -1.2160803138306569e-05
+        ],
+        [
+          5.03301592796046e-07,
+          -1.2160803138306569e-05,
+          0.0004735013888123152
+        ]
+      ],
+      "mass_kg": 0.54
+    },
+    "v7_adapter_and_fasteners": {
+      "F_x_C_m": [
+        7.082137858628479e-10,
+        0.00014729379622231657,
+        0.005859702567856028
+      ],
+      "inertia_at_com_kg_m2": [
+        [
+          2.335690722661454e-05,
+          1.0980250772017334e-13,
+          -3.5320146801093577e-13
+        ],
+        [
+          1.0980250772017334e-13,
+          2.3605078059630064e-05,
+          3.352842382434729e-08
+        ],
+        [
+          -3.5320146801093577e-13,
+          3.352842382434729e-08,
+          4.48992771757646e-05
+        ]
+      ],
+      "mass_kg": 0.06699999999999995
+    }
+  },
+  "desk_column_major": {
+    "center_of_mass_m": [
+      -0.0012965011324707156,
+      0.0032182139205845046,
+      0.08731738549256962
+    ],
+    "inertia_kg_m2": [
+      0.0016245135016537996,
+      -0.00014922504828731762,
+      8.457105958066665e-06,
+      -0.00014922504828731762,
+      0.0017011561045775698,
+      -3.0966815244796605e-05,
+      8.457105958066665e-06,
+      -3.0966815244796605e-05,
+      0.0005192375035233338
+    ],
+    "mass_kg": 0.607,
+    "transformation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "difference_from_current_profile": {
+    "F_x_Cee_l2_m": 0.01183727292971515,
+    "F_x_Cee_m": [
+      -0.0012965011324707156,
+      0.0032182139205845046,
+      0.011317385492569623
+    ],
+    "inertia_kg_m2": [
+      [
+        0.00011451350165379956,
+        -0.00014922504828731762,
+        8.457105958066665e-06
+      ],
+      [
+        -0.00014922504828731762,
+        1.1156104577569707e-05,
+        -3.0966815244796605e-05
+      ],
+      [
+        8.457105958066665e-06,
+        -3.0966815244796605e-05,
+        7.723750352333378e-05
+      ]
+    ],
+    "mass_kg": 0.0
+  },
+  "inputs": {
+    "T_F_hand_source": [
+      [
+        0.0,
+        0.7071067811865476,
+        0.7071067811865475,
+        0.0
+      ],
+      [
+        0.0,
+        -0.7071067811865475,
+        0.7071067811865476,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.01
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "adapter_and_fastener_mass_kg": 0.06699999999999995,
+    "adapter_stl": "/home/qiaoguanren/code/franka/dexgrasp/assets/adapter/V7_FR3_RH56_M3_CAPTIVE_NUT_ROT45.stl",
+    "adapter_stl_sha256": "7fdd3dd06bd8dafed445f6a6910315edd3073bd1b9cd9015a951b6e415b947e1",
+    "adapter_stl_signed_volume_m3": 3.317200348088919e-05,
+    "assembly_mass_kg": 0.607,
+    "nominal_hand_mass_kg": 0.54,
+    "official_source_mesh_offset_m": [
+      0.049030000000000004,
+      0.00804,
+      -0.01796
+    ],
+    "profile": "/home/qiaoguanren/code/franka/dexgrasp/configs/fr3_rh56_v94_commissioning.json",
+    "profile_sha256": "5bb8d4e3756b6020a5d88a1a2e44a6830d09e5e9bfe2d6041fff96e93ae5e0da",
+    "rh56_urdf": "/home/qiaoguanren/code/franka/dexgrasp/third_party/AnyDexGrasp/generate_mesh_and_pointcloud/inspire_urdf/urdf-five3/robots/urdf-five3.urdf",
+    "rh56_urdf_mass_scale": 1.9737299145718679,
+    "rh56_urdf_raw_mass_kg": 0.2735936644690995,
+    "rh56_urdf_sha256": "0bc26c20154bcb5daa0e13fbd05cb7abd895eee3f4289ecfb8df81fdbe17b94f"
+  },
+  "schema_version": 1,
+  "warning": "Do not deploy until the installed assembly mass is confirmed, the values are entered as the selected end effector in Franka Desk, and a stationary read-only RobotState verifies the exact parameters and low residual wrench."
+}
